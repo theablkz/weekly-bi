@@ -1,6 +1,6 @@
 <template>
-  <div class="grid indent-block">
-    <div class="grid-col_1-11">
+  <div>
+    <div class="bottom-slider">
       <client-only>
         <VueSlickCarousel v-bind="settings">
           <div class="apartments-apartment" v-for="item in otherBuilds">
@@ -61,11 +61,12 @@ export default {
     settings: {
       dots: true,
       arrows: true,
-      infinite: false,
+      infinite: true,
       speed: 500,
       slidesToShow: 3,
       slidesToScroll: 4,
       initialSlide: 0,
+
       responsive: [
         {
           breakpoint: 1024,
@@ -82,6 +83,8 @@ export default {
             slidesToShow: 2,
             slidesToScroll: 2,
             initialSlide: 2,
+            dots: false,
+            arrows: false,
           },
         },
         {
@@ -89,6 +92,8 @@ export default {
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
+            dots: false,
+            arrows: false,
           },
         },
       ],
@@ -97,9 +102,18 @@ export default {
 }
 </script>
 <style lang="scss">
+
+.bottom-slider{
+  max-width: 120rem;
+  width: 100%;
+  margin: auto;
+}
+.slider-box-hidden{
+  overflow: hidden;
+}
 .apartments-apartment {
   .apartments-box {
-    margin-right: 3.2rem;
+    margin: 0 1.6rem;
   }
   .apartment-image-box {
     position: relative;

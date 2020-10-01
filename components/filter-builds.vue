@@ -18,7 +18,7 @@
       </h4>
     </div>
     <div class="grid-col_1-11">
-      <buidls-apartments v-for="(item, index) in filteredOffers" :apartments="item" :key="item.name" :name="index" />
+      <buidls-apartments v-for="(item, indexKey, index ) in filteredOffers" :apartments="item" :key="item.name" :name="indexKey" :whatsappView="(index + 1) < Object.keys(filteredOffers).length" />
     </div>
   </div>
 </template>

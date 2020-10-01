@@ -78,16 +78,14 @@ name: "apartments",
         if(this.rooms === 0){
           return true
         }else if(this.rooms === null){
-          console.log('null')
           return (+item.rooms) >= 4
         }else{
-          console.log('this.rooms', item.rooms)
           return (+item.rooms) === (+this.rooms)
         }
       })
       const price = room.filter(item => {
         if(this.price){
-          return item.discountedPriceInt >= (+this.price)
+          return item.price <= (+this.price)
         }else{
           return true
         }
@@ -112,6 +110,7 @@ name: "apartments",
   display: flex;
   align-items: flex-end;
   flex-wrap: wrap;
+  justify-content: space-between;
   grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   gap: 1.6rem;
   @media (max-width: 768px){

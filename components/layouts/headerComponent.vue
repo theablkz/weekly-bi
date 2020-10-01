@@ -84,6 +84,10 @@
     padding: 1rem;
     max-width: 31rem;
     margin: auto;
+    p{
+      font-size: 1.6rem;
+      font-weight: bold;
+    }
     img {
       margin-right: 0.5rem;
     }

@@ -4,36 +4,40 @@
       <h1 class="indent_bottom-h3" :style="{ color: 'white' }">
         Предложение недели
       </h1>
-      <div class="weekly-content">
-        <div @drag="isDragging" class="slider">
-          <div class="slider-sale">
-            {{builds.discount}}
+    </div>
+    <div class="grid-col_1-8" style="max-width: 757px;width: 100%;">
+      <client-only>
+        <VueSlickCarousel v-bind="settings">
+          <div>
+            <img
+              draggable="false"
+              class="slider-image"
+              src="https://www.zastavki.com/pictures/originals/2015/Anime_Anime_Touka_Kirishima_094389_.jpg"
+              alt=""
+            />
           </div>
-          <ul
-            @mousedown="isDraggingStart"
-            @mousemove="isDragging"
-            @mouseup="isDragging"
-            class="slider-ul"
-            ref="slider"
-          >
-            <li v-for="item in builds.images">
-              <img
-                draggable="false"
-                class="weekly-content__image"
-                :src="item"
-                alt=""
-              />
-            </li>
+          <div>
+            <img
+              draggable="false"
+              class="slider-image"
+              src="https://www.zastavki.com/pictures/originals/2015/Anime_Anime_Touka_Kirishima_094389_.jpg"
+              alt=""
+            />
+          </div>
+        </VueSlickCarousel>
+      </client-only>
+    </div>
+    <div class="grid-col_8-11">
 
-          </ul>
-        </div>
+      <div class="weekly-content">
+
         <div>
-          <h2>{{builds.rooms}}-х комнатная квартира,</h2>
-          <h2 class="indent_bottom-h5">в "{{builds.buldName}}"</h2>
+          <h2>{{ builds.rooms }}-х комнатная квартира,</h2>
+          <h2 class="indent_bottom-h5">в "{{ builds.buldName }}"</h2>
           <h1 class="price-discount" :style="{ color: '#E18438' }">
-            {{builds.discountPrice}}
+            {{ builds.discountPrice }}
           </h1>
-          <h4 class="price">{{builds.price}}</h4>
+          <h4 class="price">{{ builds.price }}</h4>
 
           <div class="weekly-content-description">
             <p>
@@ -54,7 +58,7 @@
                     fill="#333333"
                   />
                 </svg> </span
-              >{{builds.name}}
+              >{{ builds.name }}
             </p>
             <p>
               <span
@@ -79,7 +83,7 @@
                   />
                 </svg>
               </span>
-              {{builds.address}}
+              {{ builds.address }}
             </p>
             <p>
               <span
@@ -95,7 +99,7 @@
                     fill="#333333"
                   />
                 </svg> </span
-              >{{builds.area}}
+              >{{ builds.area }}
             </p>
           </div>
           <div class="weekly-content-about">
@@ -120,15 +124,15 @@
               <p class="time-title">Предложение действует всего:</p>
               <div class="countdown">
                 <div class="days">
-                  <h1 >{{timer.days}}</h1>
+                  <h1>{{ timer.days }}</h1>
                 </div>
                 <h1>:</h1>
                 <div class="hours">
-                  <h1 >{{timer.hours}}</h1>
+                  <h1>{{ timer.hours }}</h1>
                 </div>
                 <h1>:</h1>
                 <div class="minutes">
-                  <h1 >{{timer.minutes}}</h1>
+                  <h1>{{ timer.minutes }}</h1>
                 </div>
               </div>
             </div>
@@ -140,13 +144,27 @@
 </template>
 
 <script>
+import VueSlickCarousel from 'vue-slick-carousel'
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+// optional style for arrows & dots
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+
 export default {
   name: 'weekly',
   props: ['builds'],
+  components: { VueSlickCarousel },
   data: () => ({
     isDraggingStartValue: false,
     scrollEl: 0,
-    timer: {}
+    timer: {},
+    settings: {
+      dots: true,
+      edgeFriction: 0.35,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    },
   }),
   computed: {},
   created() {
@@ -154,7 +172,7 @@ export default {
   },
   methods: {
     weekEndTime() {
-      const timeend = new Date('10-11-2020')
+      const timeend = new Date('10/11/2020')
 
       let today = new Date()
       today = Math.floor((timeend - today) / 1000)
@@ -165,42 +183,19 @@ export default {
       today = Math.floor(today / 60)
       if (tmin < 10) tmin = '0' + tmin
       let thour = today % 24
-      if(thour < 10) thour = '0' + thour
+      if (thour < 10) thour = '0' + thour
       today = Math.floor(today / 24)
       return {
         days: today,
         hours: thour,
-        minutes: tmin,
+        minutes: tmin
       }
-    },
-    isDragging(e) {
-      // console.log(e)
-    },
-    isDraggingStart() {
-      const el = this.$refs.slider
-      this.isDraggingStartValue = true
-      console.log(el.scrollWidth - el.scrollWidth / 3)
-      if (this.scrollEl <= Math.floor(el.scrollWidth - el.scrollWidth / 3)) {
-        this.scrollEl = this.scrollEl + el.scrollWidth / 3
-      } else {
-        this.scrollEl = 0
-      }
-
-      el.scrollTo({
-        // left: 879,
-        left: this.scrollEl,
-        behavior: 'smooth',
-      })
-      console.log(el.scrollLeft, el.scrollTop, el.scrollWidth)
-    },
-    isDraggingEnd() {
-      this.isDraggingStartValue = false
     },
   },
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .weekly-container {
   padding-top: 4rem;
 }
@@ -277,9 +272,9 @@ export default {
         grid-template-columns: repeat(5, auto);
         gap: 8px;
         margin-top: 2rem;
-        .days{
+        .days {
           position: relative;
-          :after{
+          :after {
             content: 'Дней';
             position: absolute;
             left: 0;
@@ -289,12 +284,12 @@ export default {
             font-size: 14px;
             line-height: 16px;
             text-align: center;
-            color: #4D4D4D;
+            color: #4d4d4d;
           }
         }
-        .hours{
+        .hours {
           position: relative;
-          :after{
+          :after {
             content: 'Часов';
             position: absolute;
             left: 0;
@@ -304,12 +299,12 @@ export default {
             font-size: 14px;
             line-height: 16px;
             text-align: center;
-            color: #4D4D4D;
+            color: #4d4d4d;
           }
         }
-        .minutes{
+        .minutes {
           position: relative;
-          :after{
+          :after {
             content: 'минут';
             position: absolute;
             left: 0;
@@ -319,7 +314,7 @@ export default {
             font-size: 14px;
             line-height: 16px;
             text-align: center;
-            color: #4D4D4D;
+            color: #4d4d4d;
           }
         }
       }
@@ -329,45 +324,19 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-.slider {
-  -webkit-user-drag: none;
-  user-select: none;
-  position: relative;
+.slider{
+  padding: 0 1.6rem;
+}
+.slider-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-  .slider-sale{
-    position: absolute;
-    z-index: 1;
-    color: white;
-    font-weight: bold;
-    font-size: 32px;
-    padding: 1.6rem 1.6rem 1.6rem 2.4rem;
-    background: #CB4635;
-    border-radius: 8px 0px 0px 8px;
-    top: 2rem;
-    right: 0;
-    @media (max-width: 768px) {
-      font-size: 18px;
-      padding: 8px;
-    }
-  }
-
-  .slider-ul {
-    overflow: auto;
-    position: relative;
-    display: flex;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
-    height: 100%;
-    li {
-      scroll-snap-align: start;
-      flex-shrink: 0;
-      width: 100%;
-    }
-    &::-webkit-scrollbar {
-      display: none;
-    }
-  }
+.slick-next:before {
+  color: #004b94;
+}
+.slick-prev:before{
+  color: black !important;
 }
 </style>

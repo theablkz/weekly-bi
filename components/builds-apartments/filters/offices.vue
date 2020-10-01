@@ -3,16 +3,14 @@
     <label >
       <p class="label-title">город</p>
       <select v-model="city" name="">
-        <option selected value="Нур-Султан">Нур-Султан</option>
-        <option value="Алматы">Алматы</option>
+        <option v-for="item in cities" :value="item">{{item}}</option>
       </select>
     </label>
     <label >
       <p class="label-title">ЖК</p>
       <select v-model="builds" name="">
         <option :value="null">все</option>
-        <option value="President’s Park">President’s Park</option>
-        <option value="Crocus City">Crocus City</option>
+        <option v-for="item in buildings" :value="item">{{item}}</option>
       </select>
     </label>
     <h3 class="project-counts">{{projectsCount.length}} проекта</h3>
@@ -31,19 +29,23 @@ export default {
   }),
   watch: {
     city: function(){
+      this.builds = null
       this.filtering()
     },
     builds: function(){
       this.filtering()
-    },
-    rooms: function(){
-      this.filtering()
-    },
-    price: function(){
-      this.filtering()
     }
   },
   props: ['apartments'],
+  computed: {
+    cities(){
+      const cities = [...new Set(this.apartments.offers.map(item => item.city))]
+      return cities
+    },
+    buildings(){
+      return [...new Set(this.apartments.offers.filter(item => this.city === item.city).map(item => item.buildName))]
+    },
+  },
   methods: {
     filtering(){
       const fill = this.apartments.offers.filter(item => (item.city === this.city) && (this.builds ? this.builds === item.buildName : true))
@@ -53,6 +55,8 @@ export default {
   },
 
   created() {
+    const cities = [...new Set(this.apartments.offers.map(item => item.city))]
+    this.city = cities[0]
     const createdFilter = this.apartments.offers.filter(item => (item.city === this.city))
     this.projectsCount = createdFilter
     this.$emit('filtered', createdFilter)
@@ -62,10 +66,10 @@ export default {
 
 <style lang="scss" scoped>
 .filter-box{
-  display: flex;
+  display: grid;
   align-items: flex-end;
   flex-wrap: wrap;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
   @media (max-width: 768px){
     display: grid;

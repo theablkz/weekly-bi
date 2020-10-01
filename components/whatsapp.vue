@@ -181,6 +181,10 @@ export default {
   padding: 2rem 3rem;
   max-width: 31rem;
   margin: auto;
+  p{
+    font-weight: bold;
+    font-size: 16px;
+  }
   img {
     margin-right: 0.5rem;
   }
