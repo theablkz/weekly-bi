@@ -30,9 +30,13 @@ export default {
   watch: {
     city: function(){
       this.builds = null
+      this.$emit('defaultLimit')
+
       this.filtering()
     },
     builds: function(){
+      this.$emit('defaultLimit')
+
       this.filtering()
     }
   },

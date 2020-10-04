@@ -49,15 +49,20 @@ name: "apartments",
     this.builds = null
     this.rooms = 0
     this.price = null
+    this.$emit('defaultLimit')
     this.filtering()
+
   },
   builds: function(){
+    this.$emit('defaultLimit')
     this.filtering()
   },
   rooms: function(){
+    this.$emit('defaultLimit')
     this.filtering()
   },
     price: function(){
+      this.$emit('defaultLimit')
       this.filtering()
     }
   },
@@ -106,12 +111,18 @@ name: "apartments",
 </script>
 
 <style lang="scss" scoped>
+.label-title{
+  font-weight: 500;
+  font-size: 13px;
+  text-transform: uppercase;
+
+}
 .filter-box{
-  display: flex;
+  display: grid;
   align-items: flex-end;
   flex-wrap: wrap;
   justify-content: space-between;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   gap: 1.6rem;
   @media (max-width: 768px){
     display: grid;

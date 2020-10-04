@@ -5,22 +5,15 @@
         Предложение недели
       </h1>
     </div>
-    <div class="grid-col_1-8" style="max-width: 757px;width: 100%;">
+    <div class="grid-col_1-8 slider-container">
+      <h1 class="slider-container__discount">{{ (100 - 100/(builds.price/builds.minPrice)).toFixed() }}%</h1>
       <client-only>
         <VueSlickCarousel v-bind="settings">
-          <div>
+          <div v-for="image in builds.images">
             <img
               draggable="false"
               class="slider-image"
-              src="https://www.zastavki.com/pictures/originals/2015/Anime_Anime_Touka_Kirishima_094389_.jpg"
-              alt=""
-            />
-          </div>
-          <div>
-            <img
-              draggable="false"
-              class="slider-image"
-              src="https://www.zastavki.com/pictures/originals/2015/Anime_Anime_Touka_Kirishima_094389_.jpg"
+              :src="`http://185.125.46.99:8080/saved/${image}`"
               alt=""
             />
           </div>
@@ -32,12 +25,11 @@
       <div class="weekly-content">
 
         <div>
-          <h2>{{ builds.rooms }}-х комнатная квартира,</h2>
-          <h2 class="indent_bottom-h5">в "{{ builds.buldName }}"</h2>
+          <h2>{{ builds.description }}</h2>
           <h1 class="price-discount" :style="{ color: '#E18438' }">
-            {{ builds.discountPrice }}
+            {{ builds.minPrice | currencyFormat }}
           </h1>
-          <h4 class="price">{{ builds.price }}</h4>
+          <h4 class="price">{{ builds.price | currencyFormat }}</h4>
 
           <div class="weekly-content-description">
             <p>
@@ -99,7 +91,7 @@
                     fill="#333333"
                   />
                 </svg> </span
-              >{{ builds.area }}
+              >{{ builds.square }} м&#178;
             </p>
           </div>
           <div class="weekly-content-about">
@@ -148,7 +140,9 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
-
+const formatterCurrency = new Intl.NumberFormat('ru', {
+  maximumSignificantDigits: 3,
+})
 export default {
   name: 'weekly',
   props: ['builds'],
@@ -172,7 +166,7 @@ export default {
   },
   methods: {
     weekEndTime() {
-      const timeend = new Date('10/11/2020')
+      const timeend = new Date(this.builds.date)
 
       let today = new Date()
       today = Math.floor((timeend - today) / 1000)
@@ -190,6 +184,11 @@ export default {
         hours: thour,
         minutes: tmin
       }
+    },
+  },
+  filters: {
+    currencyFormat(val) {
+      return `${formatterCurrency.format(val)} ₸`
     },
   },
 }
@@ -324,17 +323,34 @@ export default {
     grid-template-columns: 1fr;
   }
 }
+.slider-container{
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+  .slider-container__discount{
+    position: absolute;
+    z-index: 15;
+    background: #CB4635;
+    border-radius: 8px 0px 0px 8px;
+    top: 2rem;
+    right: 0;
+    padding: 1rem 1.6rem 1rem 2.4rem;
+    color: white;
+  }
+}
 .slider{
   padding: 0 1.6rem;
 }
 .slider-image {
+  border-radius: 8px;
+
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
 .slick-next:before {
-  color: #004b94;
+  color: black !important;
 }
 .slick-prev:before{
   color: black !important;
