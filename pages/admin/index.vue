@@ -27,10 +27,12 @@
           <select v-model="discountType" name="discountType" multiple id="discountType">
             <option value="office">офисы</option>
             <option value="flat">квартиры</option>
+            <option value="parking">парковки</option>
+            <option value="storage">кладовые</option>
           </select>
         </label>
         <label for="discountValue">Значение скидки<input v-model="discountValue" id="discountValue" type="text"></label>
-
+        <label for="discountDate">Действует до<input v-model="discountDate" id="discountDate" type="date"></label>
         <button>send form</button>
       </form>
     </div>
@@ -72,6 +74,7 @@ name: "index",
       buildId: null,
       discountType: [],
       discountValue: '',
+      discountDate: '',
       buildName: '',
       buildsName: buildsName,
       discounts
@@ -109,7 +112,8 @@ name: "index",
         guid: this.buildId,
         value: parseInt(this.discountValue),
         types: this.discountType,
-        status: true
+        status: true,
+        date: this.discountDate
       }
       console.log(form)
       const encodedUserPswd = this.$cookies.get('token')

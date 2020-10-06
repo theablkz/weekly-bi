@@ -1,5 +1,10 @@
 <template>
   <div>
+    <div class="grid">
+      <div class="grid-col_1-11">
+        <h2 class="title">Другие предложения компании Bi group</h2>
+      </div>
+    </div>
     <div class="bottom-slider">
       <client-only>
         <VueSlickCarousel v-bind="settings">
@@ -7,42 +12,18 @@
             <div class="apartments-box">
               <div class="apartment-image-box">
                 <img class="apartment-image" :src="item.schemaImage" alt="" />
-                <div class="apartment-image-des">
-                  <p class="apartments-count">{{ item.offersLeft.count }}</p>
-                  <p>{{ item.offersLeft.title }}</p>
-                </div>
               </div>
               <h3 class="apartments-title">{{ item.buildName }}</h3>
-              <p class="apartments-address">{{ item.address }}</p>
-              <div class="price-description">
-                <div>
-                  <h3 :style="{ color: '#E18438' }">
-                    {{ item.priceMWithDiscount }}
-                  </h3>
-                  <small>за м² со скидкой</small>
-                </div>
-                <div>
-                  <h3
-                    :style="{
-                      color: '#999999',
-                      textDecoration: 'line-through',
-                    }"
-                  >
-                    {{ item.priceMWithoutDiscount }}
-                  </h3>
-                  <small>за м² без скидки</small>
-                </div>
-                <div>
-                  <h3 :style="{ color: '#345086' }">
-                    {{ item.endOfStock.value }}
-                  </h3>
-                  <small>{{ item.endOfStock.title }}</small>
-                </div>
-              </div>
+
             </div>
           </div>
         </VueSlickCarousel>
       </client-only>
+    </div>
+    <div class="grid">
+      <div class="grid-col_1-11">
+        <whatsapp />
+      </div>
     </div>
   </div>
 </template>
@@ -52,10 +33,11 @@ import VueSlickCarousel from 'vue-slick-carousel'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 // optional style for arrows & dots
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import Whatsapp from '@/components/whatsapp'
 
 export default {
   name: 'MyComponent',
-  components: { VueSlickCarousel },
+  components: { Whatsapp, VueSlickCarousel },
   props: ['otherBuilds'],
   data: () => ({
     settings: {
@@ -102,11 +84,19 @@ export default {
 }
 </script>
 <style lang="scss">
+.title{
+  font-weight: bold;
+  font-size: 32px;
+  margin-bottom: 2.4rem;
+  @media (max-width: 768px) {
+    font-size: 30px;
 
+  }
+}
 .bottom-slider{
   max-width: 120rem;
   width: 100%;
-  margin: auto;
+  margin: auto auto 7rem auto;
 }
 .slider-box-hidden{
   overflow: hidden;
@@ -117,14 +107,13 @@ export default {
   }
   .apartment-image-box {
     position: relative;
-    height: 208px;
+    height: 350px;
     margin-bottom: 1.4rem;
 
     .apartment-image {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px;
     }
     .apartment-image-des {
       position: absolute;

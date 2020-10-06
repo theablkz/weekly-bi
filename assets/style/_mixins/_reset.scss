@@ -224,10 +224,18 @@ textarea {
 }
 select {
   font-size: 1.6rem;
-
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  background-image: url("~assets/image/icons/down-arrow.svg");
+  background-position:
+    calc(100% - 20px);
+  background-size:
+    1.5rem;
+  background-repeat: no-repeat;
+  &:focus {
+    background-image: url("~assets/image/icons/up-arrow.svg");
+  }
   @media screen and (max-width: 767px) {
     font-size: 1.4rem;
   }

@@ -16,20 +16,22 @@
       </div>
       <div class="apartments">
         <div class="apartments-apartment" v-for="item in limitedView">
-          <div class="apartment-image-box">
-            <img
-              onerror="this.onerror=null; this.src='https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png'"
-              class="apartment-image"
-              :src="`http://185.125.46.99:8080/img/${item.schemaImage}`"
-              alt=""
-            />
+          <nuxt-link :to="`/offer/${item.id}`">
+            <div class="apartment-image-box">
+              <img
+                onerror="this.onerror=null; this.src='https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png'"
+                class="apartment-image"
+                :src="`http://185.125.46.99:8080/img/${item.schemaImage}`"
+                alt=""
+              />
 
-            <!--            <div class="apartment-image-des">-->
-            <!--              <p class="apartments-count">{{item.offersLeft.count}}</p>-->
-            <!--              <p>{{item.offersLeft.title}}</p>-->
-            <!--            </div>-->
-          </div>
-          <h3 class="apartments-title">{{ item.buildName }}</h3>
+              <!--            <div class="apartment-image-des">-->
+              <!--              <p class="apartments-count">{{item.offersLeft.count}}</p>-->
+              <!--              <p>{{item.offersLeft.title}}</p>-->
+              <!--            </div>-->
+            </div>
+            <h3 class="apartments-title">{{ item.buildName }}</h3>
+          </nuxt-link>
           <p class="apartments-address">{{ item.address }}</p>
           <div class="price-description">
             <div>
@@ -93,7 +95,7 @@ export default {
   },
   computed: {
     componentFilter() {
-      return filterComponents[this.name]
+      return filterComponents[this.name] || filterComponents.offices
     },
     limitedView() {
       return this.filteredApartments.slice(0, this.limitView)
@@ -111,19 +113,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.build-apartments{
+.build-apartments {
   position: relative;
-  .build-apartments-name{
+  .build-apartments-name {
     top: 26rem;
     left: -12rem;
 
     position: absolute;
 
-    .build-apartments-name-text{
-      -ms-transform:rotate(180deg); /* IE 9 */
-      -moz-transform:rotate(180deg); /* Firefox */
-      -webkit-transform:rotate(180deg); /* Safari and Chrome */
-      -o-transform:rotate(180deg); /* Opera */
+    .build-apartments-name-text {
+      -ms-transform: rotate(180deg); /* IE 9 */
+      -moz-transform: rotate(180deg); /* Firefox */
+      -webkit-transform: rotate(180deg); /* Safari and Chrome */
+      -o-transform: rotate(180deg); /* Opera */
       transform: rotate(180deg);
       writing-mode: vertical-lr;
       opacity: 0.2;

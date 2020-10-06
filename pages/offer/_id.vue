@@ -1,35 +1,30 @@
 <template>
-  <div class="grid weekly-container" :style="{
-    gridRowGap: '1.6rem'
-  }">
+  <div
+    class="grid weekly-container"
+    :style="{
+      gridRowGap: '1.6rem',
+    }"
+  >
     <div class="grid-col_1-11">
-      <h1 :style="{ color: 'white' }">
-        Предложение недели
-      </h1>
+      <h1 :style="{ color: 'white' }">Предложение недели</h1>
     </div>
     <div class="grid-col_1-8 slider-container">
-      <h1 class="slider-container__discount">{{ (100 - 100/(builds.price/builds.minPrice)).toFixed() }}%</h1>
-      <client-only>
-        <VueSlickCarousel v-bind="settings">
-          <div v-for="image in builds.images">
-            <img
-              draggable="false"
-              class="slider-image"
-              :src="`http://185.125.46.99:8080/saved/${image}`"
-              alt=""
-            />
-          </div>
-        </VueSlickCarousel>
-      </client-only>
+      <h1 class="slider-container__discount">{{ builds.discount }}%</h1>
+      <img
+        draggable="false"
+        class="slider-image"
+        :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"
+        alt=""
+      />
     </div>
     <div class="grid-col_8-11">
-
       <div class="weekly-content">
-
         <div>
-          <h2>{{ builds.description }}</h2>
+          <h2>
+            {{ builds.rooms }} комнатная квартира, в ЖК “{{ builds.buildName }}”
+          </h2>
           <h1 class="price-discount" :style="{ color: '#E18438' }">
-            {{ builds.minPrice | currencyFormat }}
+            {{ builds.discountedPrice | currencyFormat }}
           </h1>
           <h4 class="price">{{ builds.price | currencyFormat }}</h4>
 
@@ -52,7 +47,7 @@
                     fill="#333333"
                   />
                 </svg> </span
-              >{{ builds.name }}
+              >{{ builds.buildName }}
             </p>
             <p>
               <span
@@ -94,6 +89,92 @@
                   />
                 </svg> </span
               >{{ builds.square }} м&#178;
+            </p>
+            <p>
+              <span>
+                <svg
+                  width="13"
+                  height="12"
+                  viewBox="0 0 13 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <line x1="6.5" y1="12" x2="6.5" y2="10" stroke="#333333" />
+                  <line x1="6.5" y1="9" x2="6.5" y2="7" stroke="#333333" />
+                  <line x1="6.5" y1="6" x2="6.5" y2="4" stroke="#333333" />
+                  <line x1="6.5" y1="3" x2="6.5" y2="1" stroke="#333333" />
+                  <line x1="6.5" y1="12" x2="6.5" y2="10" stroke="#333333" />
+                  <line x1="6.5" y1="9" x2="6.5" y2="7" stroke="#333333" />
+                  <line x1="6.5" y1="6" x2="6.5" y2="4" stroke="#333333" />
+                  <line x1="6.5" y1="3" x2="6.5" y2="1" stroke="#333333" />
+                  <line x1="12.5" y1="12" x2="12.5" y2="10" stroke="#333333" />
+                  <line x1="12.5" y1="9" x2="12.5" y2="7" stroke="#333333" />
+                  <line x1="12.5" y1="6" x2="12.5" y2="4" stroke="#333333" />
+                  <line x1="12.5" y1="3" x2="12.5" y2="1" stroke="#333333" />
+                  <line x1="0.5" y1="12" x2="0.5" y2="10" stroke="#333333" />
+                  <line x1="0.5" y1="9" x2="0.5" y2="7" stroke="#333333" />
+                  <line x1="0.5" y1="6" x2="0.5" y2="4" stroke="#333333" />
+                  <line x1="0.5" y1="3" x2="0.5" y2="1" stroke="#333333" />
+                  <line
+                    x1="13"
+                    y1="1"
+                    y2="1"
+                    stroke="#333333"
+                    stroke-width="2"
+                  />
+                </svg> </span
+              >Потолки {{ builds.ceilingHeight }} м
+            </p>
+            <p>
+              <span>
+                <svg
+                  width="16"
+                  height="13"
+                  viewBox="0 0 16 13"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <g clip-path="url(#clip0)">
+                    <path
+                      d="M1.41187 0V13H14.5883V12.6176V3.05882V0H1.41187ZM2.35304 3.82353H7.5345V12.2353H2.35304V3.82353ZM8.47568 3.82353H13.6472V12.2353H8.47568V3.82353ZM2.35304 3.05882V0.764706H13.6472V3.05882H2.35304Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M5.94013 7.09102L4.94261 7.90194L3.94444 7.09094L3.27893 7.63167L4.9428 8.98354L6.60583 7.63159L5.94013 7.09102Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M9.39783 8.4583L10.0635 8.99887L11.061 8.18793L12.0592 8.99895L12.7247 8.45823L11.0608 7.10632L9.39783 8.4583Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M3.76428 1.52942H4.70546V2.29413H3.76428V1.52942Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M5.64709 1.52942H6.58827V2.29413H5.64709V1.52942Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M7.52905 1.52942H8.47023V2.29413H7.52905V1.52942Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M9.41187 1.52942H10.353V2.29413H9.41187V1.52942Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M11.2947 1.52942H12.2359V2.29413H11.2947V1.52942Z"
+                      fill="#333333"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0">
+                      <rect width="16" height="13" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg> </span
+              >Этаж {{ builds.floor }}
             </p>
           </div>
           <div class="weekly-content-about">
@@ -138,37 +219,32 @@
 </template>
 
 <script>
-import VueSlickCarousel from 'vue-slick-carousel'
-import 'vue-slick-carousel/dist/vue-slick-carousel.css'
-// optional style for arrows & dots
-import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 const formatterCurrency = new Intl.NumberFormat('ru', {
   maximumSignificantDigits: 3,
 })
 export default {
-  name: 'weekly',
-  props: ['builds'],
-  components: { VueSlickCarousel },
-  data: () => ({
-    isDraggingStartValue: false,
-    scrollEl: 0,
-    timer: {},
-    settings: {
-      dots: true,
-      edgeFriction: 0.35,
-      infinite: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    },
-  }),
-  computed: {},
+  name: 'offer-id',
+  async asyncData({ app }) {
+    // const buildsName = await app.$axios.$get('http://185.125.46.99:8080/api/projects').then(res => res).catch(() => [])
+    // const discounts = await app.$axios.$get('http://185.125.46.99:8080/api/discount').then(res => res).catch(() => [])
+    const id = app.context.route.params.id
+    const buildData = await app.$axios.$get(
+      `http://185.125.46.99:8080/api/solo/${id}`
+    )
+    return {
+      builds: buildData,
+      isDraggingStartValue: false,
+      scrollEl: 0,
+      timer: {},
+
+    }
+  },
   created() {
     this.timer = this.weekEndTime()
   },
   methods: {
     weekEndTime() {
-      const timeend = new Date(this.builds.date)
+      const timeend = new Date(this.builds.discountDate)
 
       let today = new Date()
       today = Math.floor((timeend - today) / 1000)
@@ -184,7 +260,7 @@ export default {
       return {
         days: today,
         hours: thour,
-        minutes: tmin
+        minutes: tmin,
       }
     },
   },
@@ -199,6 +275,7 @@ export default {
 <style lang="scss">
 .weekly-container {
   padding-top: 4rem;
+  margin-bottom: 7rem;
 }
 .weekly-content {
   display: grid;
@@ -206,7 +283,6 @@ export default {
   gap: 5rem;
   .weekly-content__image {
     border-radius: 8px;
-
     width: 100%;
     height: 100%;
     user-select: none;
@@ -244,7 +320,7 @@ export default {
     &__href {
       background: #004b94;
       border-radius: 8px;
-      padding: 2.4rem;
+      padding: 2.8rem;
       color: white;
       font-weight: bold;
       font-size: 18px;
@@ -325,36 +401,45 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-.slider-container{
+.slider-container {
   position: relative;
   max-width: 800px;
   width: 100%;
-  .slider-container__discount{
+  .slider-container__discount {
     position: absolute;
     z-index: 15;
-    background: #CB4635;
+    background: #cb4635;
     border-radius: 8px 0px 0px 8px;
     top: 2rem;
     right: 0;
     padding: 1rem 1.6rem 1rem 2.4rem;
     color: white;
+    font-size: 32px;
+    @media (max-width: 768px){
+      font-size: 22px;
+      padding: .5rem 1rem .5rem 1.6rem;
+    }
   }
 }
-.slider{
+.slider {
   padding: 0 1.6rem;
 }
 .slider-image {
+  border: 1px solid #F0F0F0;
+  box-sizing: border-box;
   border-radius: 8px;
-
+  border-radius: 8px;
   width: 100%;
   height: 100%;
+  max-height: 550px;
   object-fit: cover;
+  margin: auto;
 }
 
 .slick-next:before {
   color: black !important;
 }
-.slick-prev:before{
+.slick-prev:before {
   color: black !important;
 }
 </style>

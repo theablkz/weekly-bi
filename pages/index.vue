@@ -37,6 +37,13 @@ export default {
         .then((res) => res)
         .catch(() => [])
     )
+    const storages = useAsync(() =>
+      $axios
+        .$get('http://185.125.46.99:8080/api/storages')
+        .then((res) => res)
+        .catch(() => [])
+    )
+    const parkings = useAsync(() => $axios.$get('http://185.125.46.99:8080/api/parkings').then(res => res).catch(() => []))
     const weekly = useAsync( () => $axios.$get('http://185.125.46.99:8080/api/offer').then(res => res).catch(() => ({})) )
     const builds = reactive({
       offerOfTheWeek: weekly,
@@ -48,49 +55,15 @@ export default {
         offices: {
           name: 'Офисы',
           offers: offices,
-          // "offers": [
-          //   {
-          //     "id": "1",
-          //     "city": "Нур-Султан",
-          //     "buildName": "Crocus City",
-          //     "rooms": "3",
-          //     "discountedPriceInt": 45000000,
-          //     "address": "Алматы, пр. Улы Дала, ост. ЖК Кмала-1",
-          //     "offersLeft": {
-          //       "title": "Квартир осталось",
-          //       "count": 4
-          //     },
-          //     "priceMWithDiscount": "от 101 млн ₸",
-          //     "priceMWithoutDiscount": "от 333 млн ₸",
-          //     "endOfStock": {
-          //       "title": "до 25 июля",
-          //       "value": "скидка 10%"
-          //     },
-          //     "schemaImage": "https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg"
-          //
-          //   },
-          //   {
-          //     "id": "2",
-          //     "city": "Алматы",
-          //     "buildName": "Crocus City",
-          //     "rooms": "3",
-          //     "discountedPriceInt": 45000000,
-          //     "address": "Алматы, пр. Улы Дала, ост. ЖК Кмала-1",
-          //     "offersLeft": {
-          //       "title": "Квартир осталось",
-          //       "count": 4
-          //     },
-          //     "priceMWithDiscount": "от 101 млн ₸",
-          //     "priceMWithoutDiscount": "от 333 млн ₸",
-          //     "endOfStock": {
-          //       "title": "до 25 июля",
-          //       "value": "скидка 10%"
-          //     },
-          //     "schemaImage": "https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg"
-          //
-          //   }
-          // ]
         },
+        parkings: {
+          name: 'Паркинги',
+          offers: parkings
+        },
+        storages: {
+          name: 'Кладовые',
+          offers: storages
+        }
       },
     })
     const sliderOtherBuilds = reactive([
@@ -261,6 +234,48 @@ export default {
     }
   },
 }
+// "offers": [
+//   {
+//     "id": "1",
+//     "city": "Нур-Султан",
+//     "buildName": "Crocus City",
+//     "rooms": "3",
+//     "discountedPriceInt": 45000000,
+//     "address": "Алматы, пр. Улы Дала, ост. ЖК Кмала-1",
+//     "offersLeft": {
+//       "title": "Квартир осталось",
+//       "count": 4
+//     },
+//     "priceMWithDiscount": "от 101 млн ₸",
+//     "priceMWithoutDiscount": "от 333 млн ₸",
+//     "endOfStock": {
+//       "title": "до 25 июля",
+//       "value": "скидка 10%"
+//     },
+//     "schemaImage": "https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg"
+//
+//   },
+//   {
+//     "id": "2",
+//     "city": "Алматы",
+//     "buildName": "Crocus City",
+//     "rooms": "3",
+//     "discountedPriceInt": 45000000,
+//     "address": "Алматы, пр. Улы Дала, ост. ЖК Кмала-1",
+//     "offersLeft": {
+//       "title": "Квартир осталось",
+//       "count": 4
+//     },
+//     "priceMWithDiscount": "от 101 млн ₸",
+//     "priceMWithoutDiscount": "от 333 млн ₸",
+//     "endOfStock": {
+//       "title": "до 25 июля",
+//       "value": "скидка 10%"
+//     },
+//     "schemaImage": "https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg"
+//
+//   }
+// ]
 </script>
 
 <style lang="scss">
