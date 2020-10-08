@@ -1,7 +1,8 @@
 <template>
-  <div class="header-component">
+  <div class="header-component-container">
+    <div class="header-component">
     <div class="header-component__main">
-      <img class="logo" src="~assets/image/icons/logo.svg" alt="bi group" />
+      <nuxt-link class="logo-link" to="/"><img class="logo" src="~assets/image/icons/logo.svg" alt="bi group" /></nuxt-link>
       <div class="contacts">
         <a href="tel:360">
           <div class="call-phone">
@@ -37,9 +38,17 @@
       </a>
     </div>
   </div>
+  </div>
 </template>
 
 <style lang="scss">
+.logo-link{
+  display: flex;
+}
+.header-component-container{
+background: #FFFFFF;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+}
 .header-component {
   padding: 0.5rem 0;
   display: grid;
@@ -48,6 +57,7 @@
   max-width: 120rem;
   padding: 0.5rem 1.6rem;
   margin: auto;
+  
   &__main {
     max-width: 120rem;
     display: flex;

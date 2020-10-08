@@ -25,28 +25,29 @@ export default {
       // const requestTwo = axios.get(two);
       // const requestThree = axios.get(three);
 
-      // await axios.all([requestOne, requestTwo]).then(axios.spread((...responses) => {
-      //   const responseOne = responses[0]
-      //   const responseTwo = responses[1]
-      //   const responesThree = responses[2]
-      //   console.log('responses',responses);
-      //   // use/access the results 
-      // })).catch(errors => {
-      //   // react on errors.
-      // })
+      const {apartments, offices, weekly, storages, parkings} = await axios.all([
+        app.$axios.$get('http://185.125.46.99:8080/api/flats'), 
+        app.$axios.$get('http://bilandings.ru:8080/api/offices'),
+        app.$axios.$get('http://bilandings.ru:8080/api/offer'),
+        app.$axios.$get('http://bilandings.ru:8080/api/storages'),
+        app.$axios.$get('http://bilandings.ru:8080/api/parkings')
+        ]).then(axios.spread((...responses) => {
+      
+        return {
+          apartments: responses[0],
+          offices: responses[1],
+          weekly: responses[2],
+          storages: responses[3],
+          parkings: responses[4]
+        }
+        // use/access the results 
+      }))
 
-
-    console.log(1);
-   const apartments = await app.$axios.$get('http://185.125.46.99:8080/api/flats').then((res) => res).catch(() => [])
-    console.log(2);
-    const offices = await app.$axios.$get('http://bilandings.ru:8080/api/offices').then((res) => res).catch(() => [])
-    console.log(3);
-    const weekly = await app.$axios.$get('http://bilandings.ru:8080/api/offer').then(res => res).catch(() => ({}))
-    console.log(4);
-    const storages = await app.$axios.$get('http://bilandings.ru:8080/api/storages').then((res) => res).catch(() => [])
-    console.log(5);    
-    const parkings = await app.$axios.$get('http://bilandings.ru:8080/api/parkings').then(res => res).catch(() => [])   
-    console.log(6);
+      // const apartments = await app.$axios.$get('http://185.125.46.99:8080/api/flats').then((res) => res).catch(() => [])
+      // const offices = await app.$axios.$get('http://bilandings.ru:8080/api/offices').then((res) => res).catch(() => [])
+      // const weekly = await app.$axios.$get('http://bilandings.ru:8080/api/offer').then(res => res).catch(() => ({}))
+      // const storages = await app.$axios.$get('http://bilandings.ru:8080/api/storages').then((res) => res).catch(() => [])
+      // const parkings = await app.$axios.$get('http://bilandings.ru:8080/api/parkings').then(res => res).catch(() => [])   
     const builds = {
       offerOfTheWeek: weekly,
       allOffers: {

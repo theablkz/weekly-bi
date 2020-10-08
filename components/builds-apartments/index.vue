@@ -158,10 +158,12 @@ export default {
       position: relative;
       height: 208px;
       margin-bottom: 1.4rem;
+      background-color: white;
+      border-radius: 8px;
       .apartment-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 8px;
       }
       .apartment-image-des {

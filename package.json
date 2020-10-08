@@ -16,7 +16,9 @@
     "core-js": "^3.6.5",
     "hooper": "^0.3.4",
     "nuxt": "^2.14.5",
-    "vue-slick-carousel": "^1.0.6"
+    "v-viewer": "^1.5.1",
+    "vue-slick-carousel": "^1.0.6",
+    "vue-zoom-on-hover": "^1.0.4"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.11.0",

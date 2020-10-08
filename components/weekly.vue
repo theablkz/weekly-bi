@@ -27,7 +27,7 @@
       <div class="weekly-content">
 
         <div>
-          <h2>{{ builds.description }}</h2>
+          <h2 class="indent_bottom-h5">{{ builds.description }}</h2>
           <h1 class="price-discount" :style="{ color: '#E18438' }">
             {{ builds.minPrice | currencyFormat }}
           </h1>
@@ -219,6 +219,8 @@ export default {
   .price-discount {
     font-weight: bold;
     font-size: 42px;
+    line-height: 56px;
+
   }
   .price {
     font-weight: 500;

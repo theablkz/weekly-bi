@@ -5,22 +5,38 @@
       gridRowGap: '1.6rem',
     }"
   >
+
     <div class="grid-col_1-11">
-      <h1 :style="{ color: 'white' }">Предложение недели</h1>
+      <nuxt-link to="/" style="width: max-content;">
+        <p style="display: grid;grid-template-columns: 30px 90px;font-weight: 500;font-size: 16px;color: #333333;"> <span><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<path d="M0.272364 10.6576L6.22403 16.6092C6.58716 16.9724 7.17608 16.9724 7.53921 16.6092C7.90241 16.246 7.90241 15.6573 7.53921 15.2941L3.17507 10.9299L19.0701 10.9299C19.5836 10.9299 20 10.5135 20 9.99999C20 9.48651 19.5836 9.07004 19.0701 9.07004L3.17507 9.07004L7.53906 4.7059C7.90226 4.3427 7.90226 3.75393 7.53906 3.39073C7.35753 3.20928 7.11947 3.11837 6.88147 3.11837C6.64348 3.11837 6.40549 3.20928 6.22389 3.39073L0.272364 9.3424C-0.0908369 9.7056 -0.0908369 10.2944 0.272364 10.6576Z" fill="#004B94"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="20" height="20" fill="white" transform="translate(20 20) rotate(-180)"/>
+</clipPath>
+</defs>
+</svg>
+</span> На главную</p>
+      </nuxt-link>
     </div>
     <div class="grid-col_1-8 slider-container">
       <h1 class="slider-container__discount">{{ builds.discount }}%</h1>
+      <div class="images" v-viewer>
       <img
         draggable="false"
-        class="slider-image"
+        class="slider-image-id"
         :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"
         alt=""
       />
     </div>
+      
+    </div>
     <div class="grid-col_8-11">
       <div class="weekly-content">
         <div>
-          <h2>
+          <h2 class="indent_bottom-h5">
             {{ builds.rooms }} комнатная квартира, в ЖК “{{ builds.buildName }}”
           </h2>
           <h1 class="price-discount" :style="{ color: '#E18438' }">
@@ -219,6 +235,10 @@
 </template>
 
 <script>
+import 'viewerjs/dist/viewer.css'
+  import Viewer from 'v-viewer'
+  import Vue from 'vue'
+  Vue.use(Viewer)
 const formatterCurrency = new Intl.NumberFormat('ru', {
   maximumSignificantDigits: 3,
 })
@@ -405,6 +425,7 @@ export default {
   position: relative;
   max-width: 800px;
   width: 100%;
+  background-color: #ededed;
   .slider-container__discount {
     position: absolute;
     z-index: 15;
@@ -424,16 +445,17 @@ export default {
 .slider {
   padding: 0 1.6rem;
 }
-.slider-image {
+.slider-image-id {
   border: 1px solid #F0F0F0;
   box-sizing: border-box;
   border-radius: 8px;
   border-radius: 8px;
   width: 100%;
   height: 100%;
-  max-height: 550px;
-  object-fit: cover;
+  max-height: 613px;
+  object-fit: contain;
   margin: auto;
+  cursor: zoom-in;
 }
 
 .slick-next:before {

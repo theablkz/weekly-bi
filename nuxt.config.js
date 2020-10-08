@@ -1,9 +1,6 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
-  server: {
-    host: '0.0.0.0',
-    port: 3001
-  },
+
   head: {
     title: 'weekly-bi',
     meta: [
@@ -21,6 +18,7 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
+    '~/plugins/zoomImage'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

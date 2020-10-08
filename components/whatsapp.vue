@@ -108,7 +108,7 @@ export default {
   padding: 2.4rem;
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 3.2rem;
+  gap: 5rem;
   align-items: center;
   justify-content: space-between;
   .whatsapp-head {
@@ -116,6 +116,8 @@ export default {
     grid-template-columns: auto 1fr;
     align-items: center;
     gap: 1.2rem;
+    border-right: 1px solid #F4F4F4;
+    padding-right: 5rem;
     .whatsapp-content {
       display: flex;
       align-items: center;
@@ -141,6 +143,10 @@ export default {
     }
     .whatsapp-description{
       grid-column: 1 / 3;
+    }
+    @media (max-width: 768px) {
+      border-right: none;
+    padding-right: 0;
     }
   }
   .whatsapp--link {

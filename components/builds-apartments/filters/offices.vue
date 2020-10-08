@@ -11,7 +11,7 @@
         <label >
           <p class="label-title">ЖК</p>
           <select v-model="builds" name="">
-            <option :value="null">все</option>
+            <option :value="null">Все</option>
             <option v-for="item in buildings" :value="item">{{item}}</option>
           </select>
         </label>
@@ -52,7 +52,7 @@
             <label >
               <p class="label-title">ЖК</p>
               <select v-model="builds" name="">
-                <option :value="null">все</option>
+                <option :value="null">Все</option>
                 <option v-for="item in buildings" :value="item">{{item}}</option>
               </select>
             </label>
@@ -168,6 +168,7 @@ export default {
   height: 48px;
   display: flex;
   align-items: center;padding: 0 1.6rem;
+  justify-content: center;
 }
 
 .room-count-box{

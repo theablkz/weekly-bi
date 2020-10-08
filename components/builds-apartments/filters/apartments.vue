@@ -11,16 +11,16 @@
         <label >
           <p class="label-title">ЖК</p>
           <select v-model="builds" name="">
-            <option :value="null">все</option>
+            <option :value="null">Все</option>
             <option v-for="item in buildings" :value="item">{{item}}</option>
           </select>
         </label>
         <div>
           <p class="label-title">количество комнат</p>
           <div class="room-count-box">
-            <button @click="rooms = 1" :class="{'room-count-box__button--active': 1 === rooms}" class="room-count-box__button">1</button>
-            <button @click="rooms = 2" :class="{'room-count-box__button--active': 2 === rooms}" class="room-count-box__button">2</button>
-            <button @click="rooms = 3" :class="{'room-count-box__button--active': 3 === rooms}"  class="room-count-box__button">3</button>
+            <button @click="rooms === 1 ? rooms = 0 : rooms = 1" :class="{'room-count-box__button--active': 1 === rooms}" class="room-count-box__button">1</button>
+            <button @click="rooms === 2 ? rooms = 0 : rooms = 2" :class="{'room-count-box__button--active': 2 === rooms}" class="room-count-box__button">2</button>
+            <button @click="rooms === 3 ? rooms = 0 : rooms = 3" :class="{'room-count-box__button--active': 3 === rooms}"  class="room-count-box__button">3</button>
             <button @click="rooms = null" :class="{'room-count-box__button--active': null === rooms}" class="room-count-box__button">4+</button>
           </div>
         </div>
@@ -67,7 +67,7 @@
             <label >
               <p class="label-title">ЖК</p>
               <select v-model="builds" name="">
-                <option :value="null">все</option>
+                <option :value="null">Все</option>
                 <option v-for="item in buildings" :value="item">{{item}}</option>
               </select>
             </label>
@@ -233,6 +233,7 @@ name: "apartments",
   display: flex;
   align-items: center;padding: 0 1.6rem;
   text-align: center;
+  justify-content: center;
 }
 
 .room-count-box{
