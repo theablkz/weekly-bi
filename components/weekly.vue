@@ -4,11 +4,12 @@
   }">
     <div class="grid-col_1-11">
       <h1 :style="{ color: 'white' }">
-        Предложение недели
+        Приобретайте недвижимость выгодно!
       </h1>
     </div>
     <div class="grid-col_1-8 slider-container">
       <h1 class="slider-container__discount">{{ (100 - 100/(builds.price/builds.minPrice)).toFixed() }}%</h1>
+      <h1 class="slider-container__discount slider-container__discount--left">Предложение недели</h1>
       <client-only>
         <VueSlickCarousel v-bind="settings">
           <div v-for="image in builds.images">
@@ -340,6 +341,22 @@ export default {
     right: 0;
     padding: 1rem 1.6rem 1rem 2.4rem;
     color: white;
+    &.slider-container__discount--left{
+      left: 0;
+      right: auto;
+      padding: 1rem 2.4rem 1rem 1.6rem;
+      border-radius: 0px 8px 8px 0px;
+    }
+    @media (max-width: 768px) {
+      font-size: 18px;
+      padding: 0rem 1rem 0rem 1.2rem;
+      &.slider-container__discount--left{
+        left: 0;
+        right: auto;
+        padding: 0rem 1rem 0rem 1.2rem;
+        border-radius: 0px 8px 8px 0px;
+      }
+    }
   }
 }
 .slider{
@@ -352,11 +369,47 @@ export default {
   height: 100%;
   object-fit: cover;
 }
-
+.slick-next{
+ right: 2px;
+}
+.slick-prev{
+  left: -22px;
+  z-index: 1;
+}
 .slick-next:before {
-  color: black !important;
+  color: #FFFFFF !important;
+  font-size: 4rem;
+  content: url("~assets/image/icons/slider-icon-arrow-right.svg");
 }
 .slick-prev:before{
-  color: black !important;
+  color: #FFFFFF !important;
+  font-size: 4rem;
+  content: url("~assets/image/icons/slider-icon-arrow-left.svg");
+}
+.slick-dots{
+  bottom: 25px;
+
+
+}
+.slick-dots li button:before{
+  font-size: 10px;
+}
+.slick-dots li.slick-active button:before{
+  color: white;
+  opacity: 1;
+}
+.slick-dots li button:before{
+  color: white;
+}
+@media (max-width: 768px) {
+  .slick-next:before {
+    font-size: 2.6rem;
+  }
+  .slick-prev:before{
+    font-size: 2.6rem;
+  }
+  .slick-dots{
+    bottom: 15px;
+  }
 }
 </style>

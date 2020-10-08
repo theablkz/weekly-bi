@@ -50,6 +50,13 @@
 @font-face {
   font-family: 'PT Root UI';
   font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(./fonts/ptRootUi/PTRootUI-Medium.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'PT Root UI';
+  font-style: normal;
   font-weight: bold;
   font-display: swap;
   src: url(./fonts/ptRootUi/PTRootUIBold.woff2) format('woff2');

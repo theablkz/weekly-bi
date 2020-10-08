@@ -15,7 +15,7 @@
             <option v-for="item in buildings" :value="item">{{item}}</option>
           </select>
         </label>
-        <h3 class="project-counts">{{projectsCount.length}} проекта</h3>
+        <h3 class="project-counts">Кол-во объектов: {{projectsCount.length}}</h3>
       </div>
     </div>
     <div class="desktop_none">
@@ -56,7 +56,7 @@
                 <option v-for="item in buildings" :value="item">{{item}}</option>
               </select>
             </label>
-            <h3 class="project-counts">{{projectsCount.length}} проекта</h3>
+            <h3 class="project-counts">Кол-во объектов: {{projectsCount.length}}</h3>
           </div>
         </div>
         <div class="summary-chevron-down">

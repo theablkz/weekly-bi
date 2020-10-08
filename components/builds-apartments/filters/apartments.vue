@@ -30,7 +30,7 @@
           <p class="at">до</p>
           <p class="valuta">₸</p>
         </label>
-        <h3 class="project-counts">{{projectsCount.length}} проекта</h3>
+        <h3 class="project-counts">Кол-во объектов: {{projectsCount.length}}</h3>
       </div>
     </div>
     <div class="desktop_none">
@@ -86,7 +86,7 @@
               <p class="at">до</p>
               <p class="valuta">₸</p>
             </label>
-            <h3 class="project-counts">{{projectsCount.length}} проекта</h3>
+            <h3 class="project-counts">Кол-во объектов: {{projectsCount.length}}</h3>
           </div>
         </div>
         <div class="summary-chevron-down">
