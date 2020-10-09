@@ -392,24 +392,24 @@ export default {
 
 }
 .slick-dots li button:before{
-  font-size: 10px;
+  font-size: 10px !important;
 }
 .slick-dots li.slick-active button:before{
-  color: white;
-  opacity: 1;
+  color: white !important;
+  opacity: 1 !important;
 }
 .slick-dots li button:before{
-  color: white;
+  color: white !important;
 }
 @media (max-width: 768px) {
   .slick-next:before {
-    font-size: 2.6rem;
+    font-size: 2.6rem !important;
   }
   .slick-prev:before{
-    font-size: 2.6rem;
+    font-size: 2.6rem !important;
   }
   .slick-dots{
-    bottom: 15px;
+    bottom: 15px !important;
   }
 }
 </style>
