@@ -224,9 +224,9 @@ name: "apartments",
   }
 }
 .project-counts{
-  background: #004B94;
+  background: white;
   border-radius: 8px;
-  color: white;
+  color: #3d4551;
   font-weight: bold;
   font-size: 16px;
   height: 48px;
@@ -234,6 +234,7 @@ name: "apartments",
   align-items: center;padding: 0 1.6rem;
   text-align: center;
   justify-content: center;
+
 }
 
 .room-count-box{
@@ -247,7 +248,7 @@ name: "apartments",
     border-radius: 8px;
     font-weight: 500;
     font-size: 18px;
-    color: #01152C;
+    color: #3d4551;
     &--active{
       background: #004B94;
       color: white;

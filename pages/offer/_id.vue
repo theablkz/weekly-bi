@@ -6,15 +6,9 @@
     }"
   >
     <div class="grid-col_1-11 indent_bottom-h4">
-      <nuxt-link to="/" style="width: max-content">
+      <nuxt-link class="link-home" to="/" style="width: max-content">
         <p
-          style="
-            display: grid;
-            grid-template-columns: 30px 90px;
-            font-weight: 500;
-            font-size: 16px;
-            color: #333333;
-          "
+
         >
           <span
             ><svg
@@ -218,23 +212,6 @@
             </p>
           </div>
           <div class="weekly-content-about-id">
-            <div class="weekly-content-about__time indent_bottom-h4">
-              <p class="time-title">Предложение действует всего:</p>
-              <div class="countdown">
-                <div class="days">
-                  <h1>{{ timer.days }}</h1>
-                </div>
-                <h1>:</h1>
-                <div class="hours">
-                  <h1>{{ timer.hours }}</h1>
-                </div>
-                <h1>:</h1>
-                <div class="minutes">
-                  <h1>{{ timer.minutes }}</h1>
-                </div>
-              </div>
-            </div>
-
             <button @click="modal = true" class="consulting indent_bottom-h4">
               <span
                 ><svg
@@ -279,7 +256,9 @@
         </div>
       </div>
     </div>
-    <send-modal v-if="modal" @close="modal = false" />
+    <transition name="fade">
+      <send-modal v-if="modal" @close="modal = false" />
+    </transition>
   </div>
 </template>
 
@@ -296,7 +275,7 @@ export default {
   name: 'offer-id',
   components: { SendModal },
   data: () => ({
-    modal: false
+    modal: false,
   }),
   async asyncData({ app }) {
     // const buildsName = await app.$axios.$get('http://185.125.46.99:8080/api/projects').then(res => res).catch(() => [])
@@ -346,6 +325,30 @@ export default {
 </script>
 
 <style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.6s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.link-home{
+  p{
+    display: grid;
+    grid-template-columns: 30px 90px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333333;
+  }
+  &:hover{
+    p{
+      color: #004B94;
+
+
+
+    }
+  }
+}
 .weekly-container {
   padding-top: 4rem;
   margin-bottom: 7rem;

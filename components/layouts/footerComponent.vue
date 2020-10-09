@@ -93,6 +93,15 @@
       grid-template-columns: repeat(5, 3.2rem);
       grid-template-rows: 3.2rem;
       gap: 1.6rem;
+      a{
+
+        &:hover{
+          img{
+            transition: .4s;
+            background-color: #004a94d0;
+          }
+        }
+      }
     }
     @media screen and (max-width: 768px) {
       flex-direction: column;

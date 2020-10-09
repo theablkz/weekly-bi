@@ -160,15 +160,17 @@ export default {
   }
 }
 .project-counts{
-  background: #004B94;
+  background: white;
   border-radius: 8px;
-  color: white;
+  color: #3d4551;
   font-weight: bold;
   font-size: 16px;
   height: 48px;
   display: flex;
   align-items: center;padding: 0 1.6rem;
+  text-align: center;
   justify-content: center;
+
 }
 
 .room-count-box{

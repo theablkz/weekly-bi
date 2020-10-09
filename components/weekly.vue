@@ -1,15 +1,20 @@
 <template>
-  <div class="grid weekly-container" :style="{
-    gridRowGap: '1.6rem'
-  }">
+  <div
+    class="grid weekly-container"
+    :style="{
+      gridRowGap: '1.6rem',
+    }"
+  >
     <div class="grid-col_1-11">
-      <h1 :style="{ color: 'white' }">
-        Приобретайте недвижимость выгодно!
-      </h1>
+      <h1 :style="{ color: 'white' }">Приобретайте недвижимость выгодно!</h1>
     </div>
     <div class="grid-col_1-8 slider-container">
-      <h1 class="slider-container__discount">{{ (100 - 100/(builds.price/builds.minPrice)).toFixed() }}%</h1>
-      <h1 class="slider-container__discount slider-container__discount--left">Предложение недели</h1>
+      <h1 class="slider-container__discount">
+        {{ (100 - 100 / (builds.price / builds.minPrice)).toFixed() }}%
+      </h1>
+      <h1 class="slider-container__discount slider-container__discount--left">
+        Предложение недели
+      </h1>
       <client-only>
         <VueSlickCarousel v-bind="settings">
           <div v-for="image in builds.images">
@@ -24,9 +29,7 @@
       </client-only>
     </div>
     <div class="grid-col_8-11">
-
       <div class="weekly-content">
-
         <div>
           <h2 class="indent_bottom-h5">{{ builds.description }}</h2>
           <h1 class="price-discount" :style="{ color: '#E18438' }">
@@ -165,7 +168,10 @@ export default {
   }),
   computed: {},
   created() {
-    this.timer = this.weekEndTime()
+
+    setInterval(() => {
+      this.timer = this.weekEndTime()
+    }, 1000)
   },
   methods: {
     weekEndTime() {
@@ -185,7 +191,7 @@ export default {
       return {
         days: today,
         hours: thour,
-        minutes: tmin
+        minutes: tmin,
       }
     },
   },
@@ -221,7 +227,6 @@ export default {
     font-weight: bold;
     font-size: 42px;
     line-height: 56px;
-
   }
   .price {
     font-weight: 500;
@@ -328,29 +333,30 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-.slider-container{
+.slider-container {
   position: relative;
   max-width: 800px;
   width: 100%;
-  .slider-container__discount{
+  .slider-container__discount {
+    font-size: 2.6rem;
     position: absolute;
     z-index: 15;
-    background: #CB4635;
+    background: #cb4635;
     border-radius: 8px 0px 0px 8px;
     top: 2rem;
     right: 0;
-    padding: 1rem 1.6rem 1rem 2.4rem;
+    padding: .4rem 1.6rem .4rem 2.4rem;
     color: white;
-    &.slider-container__discount--left{
+    &.slider-container__discount--left {
       left: 0;
       right: auto;
-      padding: 1rem 2.4rem 1rem 1.6rem;
+      padding: .4rem 2.4rem .4rem 1.6rem;
       border-radius: 0px 8px 8px 0px;
     }
     @media (max-width: 768px) {
       font-size: 18px;
       padding: 0rem 1rem 0rem 1.2rem;
-      &.slider-container__discount--left{
+      &.slider-container__discount--left {
         left: 0;
         right: auto;
         padding: 0rem 1rem 0rem 1.2rem;
@@ -359,56 +365,54 @@ export default {
     }
   }
 }
-.slider{
-  padding: 0 1.6rem;
+.slider {
+  padding: 0 1.6rem !important;
 }
 .slider-image {
-  border-radius: 8px;
+  border-radius: 8px !important;
 
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
 }
-.slick-next{
- right: 2px;
+.slick-next {
+  right: 2px !important;
 }
-.slick-prev{
-  left: -22px;
-  z-index: 1;
+.slick-prev {
+  left: -22px !important;
+  z-index: 1 !important;
 }
 .slick-next:before {
-  color: #FFFFFF !important;
-  font-size: 4rem;
-  content: url("~assets/image/icons/slider-icon-arrow-right.svg");
+  color: #ffffff !important;
+  font-size: 4rem !important;
+  content: url('~assets/image/icons/slider-icon-arrow-right.svg') !important;
 }
-.slick-prev:before{
-  color: #FFFFFF !important;
-  font-size: 4rem;
-  content: url("~assets/image/icons/slider-icon-arrow-left.svg");
+.slick-prev:before {
+  color: #ffffff !important;
+  font-size: 4rem !important;
+  content: url('~assets/image/icons/slider-icon-arrow-left.svg') !important;
 }
-.slick-dots{
-  bottom: 25px;
-
-
+.slick-dots {
+  bottom: 25px !important;
 }
-.slick-dots li button:before{
+.slick-dots li button:before {
   font-size: 10px !important;
 }
-.slick-dots li.slick-active button:before{
+.slick-dots li.slick-active button:before {
   color: white !important;
   opacity: 1 !important;
 }
-.slick-dots li button:before{
+.slick-dots li button:before {
   color: white !important;
 }
 @media (max-width: 768px) {
   .slick-next:before {
     font-size: 2.6rem !important;
   }
-  .slick-prev:before{
+  .slick-prev:before {
     font-size: 2.6rem !important;
   }
-  .slick-dots{
+  .slick-dots {
     bottom: 15px !important;
   }
 }

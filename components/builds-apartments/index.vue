@@ -16,7 +16,7 @@
       </div>
       <div class="apartments">
         <div class="apartments-apartment" v-for="item in limitedView">
-          <nuxt-link :to="`/offer/${item.id}`">
+          <nuxt-link class="offer-link" :to="`/offer/${item.id}`">
             <div class="apartment-image-box">
               <img
                 onerror="this.onerror=null; this.src='https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png'"
@@ -135,6 +135,8 @@ export default {
     }
   }
 }
+
+
 .indent-block {
   margin: 3.2rem 0;
   display: flex;
@@ -190,11 +192,22 @@ export default {
         }
       }
     }
-    .apartments-title {
-      font-weight: bold;
-      font-size: 20px;
-      color: #01152c;
+    .offer-link{
+
+      .apartments-title {
+        font-weight: bold;
+        font-size: 20px;
+        color: #01152c;
+      }
+      &:hover{
+        .apartments-title {
+          font-weight: bold;
+          font-size: 20px;
+          color: #004B94;
+        }
+      }
     }
+
     .apartments-address {
       font-size: 14px;
       line-height: 16px;

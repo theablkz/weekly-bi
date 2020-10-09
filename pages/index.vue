@@ -26,13 +26,13 @@ export default {
       // const requestThree = axios.get(three);
 
       const {apartments, offices, weekly, storages, parkings} = await axios.all([
-        app.$axios.$get('http://185.125.46.99:8080/api/flats'), 
+        app.$axios.$get('http://185.125.46.99:8080/api/flats'),
         app.$axios.$get('http://bilandings.ru:8080/api/offices'),
         app.$axios.$get('http://bilandings.ru:8080/api/offer'),
         app.$axios.$get('http://bilandings.ru:8080/api/storages'),
         app.$axios.$get('http://bilandings.ru:8080/api/parkings')
         ]).then(axios.spread((...responses) => {
-      
+
         return {
           apartments: responses[0],
           offices: responses[1],
@@ -40,14 +40,14 @@ export default {
           storages: responses[3],
           parkings: responses[4]
         }
-        // use/access the results 
+        // use/access the results
       }))
 
       // const apartments = await app.$axios.$get('http://185.125.46.99:8080/api/flats').then((res) => res).catch(() => [])
       // const offices = await app.$axios.$get('http://bilandings.ru:8080/api/offices').then((res) => res).catch(() => [])
       // const weekly = await app.$axios.$get('http://bilandings.ru:8080/api/offer').then(res => res).catch(() => ({}))
       // const storages = await app.$axios.$get('http://bilandings.ru:8080/api/storages').then((res) => res).catch(() => [])
-      // const parkings = await app.$axios.$get('http://bilandings.ru:8080/api/parkings').then(res => res).catch(() => [])   
+      // const parkings = await app.$axios.$get('http://bilandings.ru:8080/api/parkings').then(res => res).catch(() => [])
     const builds = {
       offerOfTheWeek: weekly,
       allOffers: {
@@ -257,11 +257,14 @@ export default {
   background-image: url('~assets/image/bg.svg'), url('~assets/image/bg2.svg'),
     url('~assets/image/bg3.svg'), url('~assets/image/bg4.svg'),
     url('~assets/image/bg5.svg'), url('~assets/image/bg6.svg');
-  background-size: auto, 80rem, auto;
+  background-size: auto, 100rem 66rem, auto;
   background-position: top right, top left, top center, 100% 79rem, 0% 135rem, 100% 100%;
   background-repeat: no-repeat;
+  @media (max-width: 1420px) {
+    background-size: 30rem, 71rem, auto;
+  }
   @media (max-width: 900px) {
-    background-size: 30rem, 39rem, auto;
+    background-size: 30rem, 60rem, auto;
   }
   @media (max-width: 400px) {
     background-size: 30rem, 39rem, auto;

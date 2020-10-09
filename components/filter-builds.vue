@@ -68,10 +68,15 @@ export default {
     line-height: 2;
     user-select: none;
     cursor: pointer;
+    transition: background-color .3s;
     &--active {
       color: #004b94;
       font-weight: bold;
       border-bottom: 3px solid #004b94;
+    }
+    &:hover{
+      background-color: #004b94;
+      color: white;
     }
   }
 }
