@@ -44,7 +44,7 @@
       <h1 class="slider-container__discount">{{ builds.discount.value }}%</h1>
       <div class="images" v-viewer>
         <img
-          onerror="this.onerror=null; this.src='https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png'"
+          @error="( e ) => e.target.src = builds.queue.real_estate.photo"
           draggable="false"
           class="slider-image-id"
           :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"

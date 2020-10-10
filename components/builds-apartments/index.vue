@@ -19,7 +19,7 @@
           <nuxt-link class="offer-link" :to="`/offer/${item.id}`">
             <div class="apartment-image-box">
               <img
-                onerror="this.onerror=null; this.src='https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png'"
+                @error="( e ) => e.target.src = item.queue.real_estate.photo"
                 class="apartment-image"
                 :src="`${ name === 'apartments' ? `http://185.125.46.99:8080/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
                 alt=""
