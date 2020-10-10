@@ -36,7 +36,7 @@ export default {
         return {
           apartments: responses[0],
           offices: responses[1],
-          weekly: responses[2],
+          weekly: responses[2][0],
           storages: responses[3],
           parkings: responses[4]
         }
@@ -51,23 +51,32 @@ export default {
     const builds = {
       offerOfTheWeek: weekly,
       allOffers: {
-        apartments: {
-          name: 'Квартиры',
-          offers: apartments,
-        },
-        offices: {
-          name: 'Офисы',
-          offers: offices,
-        },
-        parkings: {
-          name: 'Паркинги',
-          offers: parkings
-        },
-        storages: {
-          name: 'Кладовые',
-          offers: storages
-        }
+
       },
+    }
+    if(apartments){
+      builds.allOffers.apartments =  {
+        name: 'Квартиры',
+        offers: apartments,
+      }
+    }
+    if(offices){
+      builds.allOffers.offices =  {
+        name: 'Офисы',
+        offers: offices,
+      }
+    }
+    if(parkings){
+      builds.allOffers.parkings =  {
+        name: 'Паркинги',
+        offers: parkings
+      }
+    }
+    if(storages){
+      builds.allOffers.storages =  {
+        name: 'Кладовые',
+        offers: storages
+      }
     }
     const sliderOtherBuilds = [
       {

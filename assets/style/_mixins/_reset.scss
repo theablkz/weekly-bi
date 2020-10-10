@@ -439,4 +439,11 @@ select {
   to {
     transform: translateX(0);
   }
+
+}
+.link-build{
+  color: #3d4551;
+  &:hover{
+    color: #004a94d0;
+  }
 }

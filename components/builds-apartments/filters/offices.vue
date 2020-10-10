@@ -2,24 +2,26 @@
   <div>
     <div class="mobile_none">
       <div class="filter-box">
-        <label >
+        <label>
           <p class="label-title">город</p>
           <select v-model="city" name="">
-            <option v-for="item in cities" :value="item">{{item}}</option>
+            <option v-for="item in cities" :value="item">{{ item }}</option>
           </select>
         </label>
-        <label >
+        <label>
           <p class="label-title">ЖК</p>
           <select v-model="builds" name="">
             <option :value="null">Все</option>
-            <option v-for="item in buildings" :value="item">{{item}}</option>
+            <option v-for="item in buildings" :value="item">{{ item }}</option>
           </select>
         </label>
-        <h3 class="project-counts">Кол-во объектов: {{projectsCount.length}}</h3>
+        <h3 class="project-counts">
+          Кол-во объектов: {{ projectsCount.length }}
+        </h3>
       </div>
     </div>
     <div class="desktop_none">
-      <details >
+      <details>
         <summary>
           <span class="summary-title">Фильтры</span>
           <div class="summary-chevron-up">
@@ -43,20 +45,24 @@
 
         <div class="summary-content">
           <div class="filter-box">
-            <label >
+            <label>
               <p class="label-title">город</p>
               <select v-model="city" name="">
-                <option v-for="item in cities" :value="item">{{item}}</option>
+                <option v-for="item in cities" :value="item">{{ item }}</option>
               </select>
             </label>
-            <label >
+            <label>
               <p class="label-title">ЖК</p>
               <select v-model="builds" name="">
                 <option :value="null">Все</option>
-                <option v-for="item in buildings" :value="item">{{item}}</option>
+                <option v-for="item in buildings" :value="item">
+                  {{ item }}
+                </option>
               </select>
             </label>
-            <h3 class="project-counts">Кол-во объектов: {{projectsCount.length}}</h3>
+            <h3 class="project-counts">
+              Кол-во объектов: {{ projectsCount.length }}
+            </h3>
           </div>
         </div>
         <div class="summary-chevron-down">
@@ -82,84 +88,104 @@
 
 <script>
 export default {
-  name: "offices",
+  name: 'offices',
   data: () => ({
     city: 'Нур-Султан',
     builds: null,
     rooms: 0,
     price: null,
-    projectsCount: []
+    projectsCount: [],
   }),
   watch: {
-    city: function(){
+    city: function () {
       this.builds = null
       this.$emit('defaultLimit')
 
       this.filtering()
     },
-    builds: function(){
+    builds: function () {
       this.$emit('defaultLimit')
 
       this.filtering()
-    }
+    },
   },
   props: ['apartments'],
   computed: {
-    cities(){
-      const cities = [...new Set(this.apartments.offers.map(item => item.city))]
+    cities() {
+      const cities = [
+        ...new Set(
+          this.apartments.offers.map((item) => item.queue.real_estate.city)
+        ),
+      ]
       return cities
     },
-    buildings(){
-      return [...new Set(this.apartments.offers.filter(item => this.city === item.city).map(item => item.buildName))]
+    buildings() {
+      return [
+        ...new Set(
+          this.apartments.offers
+            .filter((item) => this.city === item.queue.real_estate.city)
+            .map((item) => item.queue.real_estate.name)
+        ),
+      ]
     },
   },
   methods: {
-    filtering(){
-      const fill = this.apartments.offers.filter(item => (item.city === this.city) && (this.builds ? this.builds === item.buildName : true))
+    filtering() {
+      const fill = this.apartments.offers.filter(
+        (item) =>
+          item.queue.real_estate.city === this.city &&
+          (this.builds ? this.builds === item.queue.real_estate.name : true)
+      )
 
       this.$emit('filtered', fill)
-    }
+    },
   },
 
   created() {
-    const cities = [...new Set(this.apartments.offers.map(item => item.city))]
+    const cities = [
+      ...new Set(
+        this.apartments.offers.map((item) => item.queue.real_estate.city)
+      ),
+    ]
     this.city = cities[0]
-    const createdFilter = this.apartments.offers.filter(item => (item.city === this.city))
+    const createdFilter = this.apartments.offers.filter(
+      (item) => item.queue.real_estate.city === this.city
+    )
     this.projectsCount = createdFilter
     this.$emit('filtered', createdFilter)
-  }
+  },
 }
 </script>
 
 <style lang="scss" scoped>
-.filter-box{
+.filter-box {
   display: grid;
   align-items: flex-end;
   flex-wrap: wrap;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
-  @media (max-width: 768px){
+  @media (max-width: 768px) {
     display: grid;
     grid-template-columns: 1fr;
   }
 }
-.price-label{
+.price-label {
   position: relative;
-  .at{
+  .at {
     position: absolute;
     bottom: 16px;
     left: 16px;
   }
-  .valuta{
+  .valuta {
     position: absolute;
     bottom: 16px;
     right: 16px;
   }
-  input{
+  input {
     padding: 0 4rem;
   }
 }
-.project-counts{
+.project-counts {
   background: white;
   border-radius: 8px;
   color: #3d4551;
@@ -167,31 +193,30 @@ export default {
   font-size: 16px;
   height: 48px;
   display: flex;
-  align-items: center;padding: 0 1.6rem;
+  align-items: center;
+  padding: 0 1.6rem;
   text-align: center;
-  justify-content: center;
-
+  justify-content: flex-start;
 }
 
-.room-count-box{
+.room-count-box {
   display: grid;
   grid-template-columns: repeat(4, 50px);
   gap: 6px;
-  .room-count-box__button{
+  .room-count-box__button {
     height: 48px;
     padding: 0;
-    background: #F4F5F7;
+    background: #f4f5f7;
     border-radius: 8px;
     font-weight: 500;
     font-size: 18px;
-    color: #01152C;
-    &--active{
-      background: #004B94;
+    color: #01152c;
+    &--active {
+      background: #004b94;
       color: white;
     }
   }
 }
-
 
 details {
   font-size: 16px;

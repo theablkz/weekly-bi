@@ -17,14 +17,14 @@
       </h1>
       <client-only>
         <VueSlickCarousel v-bind="settings">
-          <div v-for="image in builds.images">
-            <img
-              draggable="false"
-              class="slider-image"
-              :src="`http://185.125.46.99:8080/saved/${image}`"
-              alt=""
-            />
-          </div>
+          <img
+            v-for="image in builds.images"
+            draggable="false"
+            class="slider-image"
+            :src="`http://185.125.46.99:8080/saved/${image}`"
+            alt=""
+          />
+
         </VueSlickCarousel>
       </client-only>
     </div>
@@ -101,7 +101,7 @@
             </p>
           </div>
           <div class="weekly-content-about">
-            <a class="weekly-content-about__href" href="/"
+            <nuxt-link class="weekly-content-about__href" to="/offer/week"
               >Узнать подробнее
               <svg
                 width="7"
@@ -117,7 +117,7 @@
                   fill="white"
                 />
               </svg>
-            </a>
+            </nuxt-link>
             <div class="weekly-content-about__time">
               <p class="time-title">Предложение действует всего:</p>
               <div class="countdown">
@@ -131,6 +131,10 @@
                 <h1>:</h1>
                 <div class="minutes">
                   <h1>{{ timer.minutes }}</h1>
+                </div>
+                <h1>:</h1>
+                <div class="seconds">
+                  <h1>{{ timer.seconds }}</h1>
                 </div>
               </div>
             </div>
@@ -192,6 +196,7 @@ export default {
         days: today,
         hours: thour,
         minutes: tmin,
+        seconds: tsec
       }
     },
   },
@@ -278,7 +283,7 @@ export default {
       .countdown {
         display: grid;
         align-items: center;
-        grid-template-columns: repeat(5, auto);
+        grid-template-columns: repeat(7, auto);
         gap: 8px;
         margin-top: 2rem;
         .days {
@@ -326,6 +331,21 @@ export default {
             color: #4d4d4d;
           }
         }
+        .seconds {
+          position: relative;
+          :after {
+            content: 'секунд';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1rem;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            color: #4d4d4d;
+          }
+        }
       }
     }
   }
@@ -336,6 +356,8 @@ export default {
 .slider-container {
   position: relative;
   max-width: 800px;
+  height: 100%;
+  max-height: 460px;
   width: 100%;
   .slider-container__discount {
     font-size: 2.6rem;
@@ -368,11 +390,14 @@ export default {
 .slider {
   padding: 0 1.6rem !important;
 }
+.slider-image-box{
+  height: 100%;
+}
 .slider-image {
   border-radius: 8px !important;
-
   width: 100% !important;
-  height: 100% !important;
+  height: auto !important;
+  max-height: 460px;
   object-fit: cover !important;
 }
 .slick-next {

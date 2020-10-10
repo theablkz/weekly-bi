@@ -21,7 +21,7 @@
               <img
                 onerror="this.onerror=null; this.src='https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png'"
                 class="apartment-image"
-                :src="`http://185.125.46.99:8080/img/${item.schemaImage}`"
+                :src="`${ name === 'apartments' ? `http://185.125.46.99:8080/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
                 alt=""
               />
 
@@ -30,9 +30,9 @@
               <!--              <p>{{item.offersLeft.title}}</p>-->
               <!--            </div>-->
             </div>
-            <h3 class="apartments-title">{{ item.buildName }}</h3>
+            <h3 class="apartments-title">{{ item.queue.name }}</h3>
           </nuxt-link>
-          <p class="apartments-address">{{ item.address }}</p>
+          <p class="apartments-address">{{ item.queue.address }}</p>
           <div class="price-description">
             <div>
               <h3 :style="{ color: '#E18438' }">
@@ -47,7 +47,7 @@
               <small>за м² без скидки</small>
             </div>
             <div>
-              <h3 :style="{ color: '#345086' }">скидка {{ item.discount }}%</h3>
+              <h3 :style="{ color: '#345086' }">скидка {{ item.discount.value }}%</h3>
               <small>до 25 июля</small>
             </div>
           </div>
@@ -165,7 +165,7 @@ export default {
       .apartment-image {
         width: 100%;
         height: 100%;
-        object-fit: contain;
+        object-fit: cover;
         border-radius: 8px;
       }
       .apartment-image-des {

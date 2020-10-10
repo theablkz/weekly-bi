@@ -5,65 +5,40 @@
       gridRowGap: '1.6rem',
     }"
   >
-    <div class="grid-col_1-11 indent_bottom-h4">
-      <nuxt-link class="link-home" to="/" style="width: max-content">
-        <p
-
-        >
-          <span
-            ><svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0)">
-                <path
-                  d="M0.272364 10.6576L6.22403 16.6092C6.58716 16.9724 7.17608 16.9724 7.53921 16.6092C7.90241 16.246 7.90241 15.6573 7.53921 15.2941L3.17507 10.9299L19.0701 10.9299C19.5836 10.9299 20 10.5135 20 9.99999C20 9.48651 19.5836 9.07004 19.0701 9.07004L3.17507 9.07004L7.53906 4.7059C7.90226 4.3427 7.90226 3.75393 7.53906 3.39073C7.35753 3.20928 7.11947 3.11837 6.88147 3.11837C6.64348 3.11837 6.40549 3.20928 6.22389 3.39073L0.272364 9.3424C-0.0908369 9.7056 -0.0908369 10.2944 0.272364 10.6576Z"
-                  fill="#004B94"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0">
-                  <rect
-                    width="20"
-                    height="20"
-                    fill="white"
-                    transform="translate(20 20) rotate(-180)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
-          На главную
-        </p>
-      </nuxt-link>
+    <div class="grid-col_1-11">
+      <h1 :style="{ color: 'white' }">Приобретайте недвижимость выгодно!</h1>
     </div>
-    <div class="grid-col_1-8 slider-container-id">
-      <h1 class="slider-container__discount">{{ builds.discount.value }}%</h1>
-      <div class="images" v-viewer>
-        <img
-          draggable="false"
-          class="slider-image-id"
-          :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"
-          alt=""
-        />
-      </div>
+    <div class="grid-col_1-8 slider-container">
+      <h1 class="slider-container__discount">
+        {{ (100 - 100 / (builds.price / builds.minPrice)).toFixed() }}%
+      </h1>
+      <h1 class="slider-container__discount slider-container__discount--left">
+        Предложение недели
+      </h1>
+      <client-only>
+        <VueSlickCarousel v-bind="settings">
+          <img
+            v-for="image in builds.images"
+            draggable="false"
+            class="slider-image"
+            :src="`http://185.125.46.99:8080/saved/${image}`"
+            alt=""
+          />
+
+        </VueSlickCarousel>
+      </client-only>
     </div>
     <div class="grid-col_8-11">
       <div class="weekly-content">
         <div>
-          <h2 class="indent_bottom-h5">
-            {{ builds.rooms }} комнатная квартира, в ЖК “{{ builds.queue.real_estate.name }}”
-          </h2>
+          <h2 class="indent_bottom-h5">{{ builds.description }}</h2>
           <h1 class="price-discount" :style="{ color: '#E18438' }">
-            {{ builds.discountedPrice | currencyFormat }}
+            {{ builds.minPrice | currencyFormat }}
           </h1>
           <h4 class="price">{{ builds.price | currencyFormat }}</h4>
 
           <div class="weekly-content-description">
-            <a target="_blank" class="link-build" :href="builds.queue.real_estate.website">
+            <a target="_blank" class="link-build" :href="builds.buildLink">
               <p>
               <span
               ><svg
@@ -82,18 +57,18 @@
                     fill="#333333"
                   />
                 </svg> </span
-              >{{ builds.queue.real_estate.name }}
+              >{{ builds.name }}
               </p>
             </a>
             <p>
               <span
-                ><svg
-                  width="13"
-                  height="16"
-                  viewBox="0 0 13 16"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+              ><svg
+                width="13"
+                height="16"
+                viewBox="0 0 13 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
@@ -108,17 +83,17 @@
                   />
                 </svg>
               </span>
-              {{ builds.queue.address }}
+              {{ builds.address }}
             </p>
             <p>
               <span
-                ><svg
-                  width="13"
-                  height="14"
-                  viewBox="0 0 13 14"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+              ><svg
+                width="13"
+                height="14"
+                viewBox="0 0 13 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                   <path
                     d="M12.6139 2.98953L6.7639 0.389561C6.68072 0.352596 6.5907 0.333496 6.49967 0.333496C6.40865 0.333496 6.31863 0.352596 6.23545 0.389561L0.38545 2.98953C0.37245 2.99538 0.36335 3.00513 0.35035 3.01228C0.33215 3.02138 0.31265 3.02723 0.29575 3.03828C0.28145 3.04803 0.2704 3.06038 0.25675 3.07078C0.209237 3.10609 0.167563 3.14864 0.13325 3.19688C0.12025 3.21508 0.1066 3.23132 0.0948999 3.24952C0.0755538 3.28388 0.0590327 3.31974 0.0455 3.35677C0.03965 3.37432 0.03055 3.39057 0.02535 3.40812C0.00902558 3.46521 0.000498255 3.52425 0 3.58362V10.0835C0 10.3409 0.1508 10.573 0.3861 10.6776L6.2361 13.2776C6.3206 13.3153 6.4103 13.3335 6.5 13.3335C6.5905 13.3312 6.67951 13.3099 6.7613 13.2711L6.7639 13.2776L12.6139 10.6776C12.7289 10.6266 12.8266 10.5433 12.8951 10.4379C12.9637 10.3324 13.0001 10.2093 13 10.0835V3.58362C13.0001 3.45784 12.9637 3.33474 12.8951 3.22927C12.8266 3.12381 12.7289 3.04052 12.6139 2.98953ZM6.5 1.69539L10.7497 3.58362L6.5 5.47185L5.6498 5.0942L2.25095 3.58362L6.5 1.69539ZM1.3 9.66169V4.58396L5.85 6.60608V11.6832L1.3 9.66169ZM7.15 11.6832V6.60608L11.7 4.58396V9.66169L7.15 11.6832Z"
                     fill="#333333"
@@ -126,103 +101,17 @@
                 </svg> </span
               >{{ builds.square }} м&#178;
             </p>
-            <p>
-              <span>
-                <svg
-                  width="13"
-                  height="12"
-                  viewBox="0 0 13 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <line x1="6.5" y1="12" x2="6.5" y2="10" stroke="#333333" />
-                  <line x1="6.5" y1="9" x2="6.5" y2="7" stroke="#333333" />
-                  <line x1="6.5" y1="6" x2="6.5" y2="4" stroke="#333333" />
-                  <line x1="6.5" y1="3" x2="6.5" y2="1" stroke="#333333" />
-                  <line x1="6.5" y1="12" x2="6.5" y2="10" stroke="#333333" />
-                  <line x1="6.5" y1="9" x2="6.5" y2="7" stroke="#333333" />
-                  <line x1="6.5" y1="6" x2="6.5" y2="4" stroke="#333333" />
-                  <line x1="6.5" y1="3" x2="6.5" y2="1" stroke="#333333" />
-                  <line x1="12.5" y1="12" x2="12.5" y2="10" stroke="#333333" />
-                  <line x1="12.5" y1="9" x2="12.5" y2="7" stroke="#333333" />
-                  <line x1="12.5" y1="6" x2="12.5" y2="4" stroke="#333333" />
-                  <line x1="12.5" y1="3" x2="12.5" y2="1" stroke="#333333" />
-                  <line x1="0.5" y1="12" x2="0.5" y2="10" stroke="#333333" />
-                  <line x1="0.5" y1="9" x2="0.5" y2="7" stroke="#333333" />
-                  <line x1="0.5" y1="6" x2="0.5" y2="4" stroke="#333333" />
-                  <line x1="0.5" y1="3" x2="0.5" y2="1" stroke="#333333" />
-                  <line
-                    x1="13"
-                    y1="1"
-                    y2="1"
-                    stroke="#333333"
-                    stroke-width="2"
-                  />
-                </svg> </span
-              >Потолки {{ builds.ceilingHeight }} м
-            </p>
-            <p>
-              <span>
-                <svg
-                  width="16"
-                  height="13"
-                  viewBox="0 0 16 13"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <g clip-path="url(#clip0)">
-                    <path
-                      d="M1.41187 0V13H14.5883V12.6176V3.05882V0H1.41187ZM2.35304 3.82353H7.5345V12.2353H2.35304V3.82353ZM8.47568 3.82353H13.6472V12.2353H8.47568V3.82353ZM2.35304 3.05882V0.764706H13.6472V3.05882H2.35304Z"
-                      fill="#333333"
-                    />
-                    <path
-                      d="M5.94013 7.09102L4.94261 7.90194L3.94444 7.09094L3.27893 7.63167L4.9428 8.98354L6.60583 7.63159L5.94013 7.09102Z"
-                      fill="#333333"
-                    />
-                    <path
-                      d="M9.39783 8.4583L10.0635 8.99887L11.061 8.18793L12.0592 8.99895L12.7247 8.45823L11.0608 7.10632L9.39783 8.4583Z"
-                      fill="#333333"
-                    />
-                    <path
-                      d="M3.76428 1.52942H4.70546V2.29413H3.76428V1.52942Z"
-                      fill="#333333"
-                    />
-                    <path
-                      d="M5.64709 1.52942H6.58827V2.29413H5.64709V1.52942Z"
-                      fill="#333333"
-                    />
-                    <path
-                      d="M7.52905 1.52942H8.47023V2.29413H7.52905V1.52942Z"
-                      fill="#333333"
-                    />
-                    <path
-                      d="M9.41187 1.52942H10.353V2.29413H9.41187V1.52942Z"
-                      fill="#333333"
-                    />
-                    <path
-                      d="M11.2947 1.52942H12.2359V2.29413H11.2947V1.52942Z"
-                      fill="#333333"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0">
-                      <rect width="16" height="13" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg> </span
-              >Этаж {{ builds.floor }}
-            </p>
           </div>
           <div class="weekly-content-about-id">
             <button @click="modal = true" class="consulting indent_bottom-h4">
               <span
-                ><svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
                   <path
                     d="M10.9167 6.33333C11.646 6.33333 12.3455 6.62306 12.8612 7.13879C13.3769 7.65451 13.6667 8.35399 13.6667 9.08333C13.6667 9.32645 13.7632 9.55961 13.9352 9.73151C14.1071 9.90342 14.3402 10 14.5833 10C14.8264 10 15.0596 9.90342 15.2315 9.73151C15.4034 9.55961 15.5 9.32645 15.5 9.08333C15.5 7.86776 15.0171 6.70197 14.1576 5.84243C13.298 4.98289 12.1322 4.5 10.9167 4.5C10.6736 4.5 10.4404 4.59658 10.2685 4.76849C10.0966 4.94039 10 5.17355 10 5.41667C10 5.65978 10.0966 5.89294 10.2685 6.06485C10.4404 6.23676 10.6736 6.33333 10.9167 6.33333Z"
                     fill="white"
@@ -265,59 +154,49 @@
 </template>
 
 <script>
-import 'viewerjs/dist/viewer.css'
-import Viewer from 'v-viewer'
-import Vue from 'vue'
+import VueSlickCarousel from 'vue-slick-carousel'
 import SendModal from '~/components/send-modal'
-Vue.use(Viewer)
+import 'vue-slick-carousel/dist/vue-slick-carousel.css'
+// optional style for arrows & dots
+import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
 const formatterCurrency = new Intl.NumberFormat('ru', {
   maximumSignificantDigits: 3,
 })
 export default {
-  name: 'offer-id',
-  components: { SendModal },
-  data: () => ({
-    modal: false,
-  }),
+  name: 'weekly',
+  components: { VueSlickCarousel, SendModal },
+
   async asyncData({ app }) {
     // const buildsName = await app.$axios.$get('http://185.125.46.99:8080/api/projects').then(res => res).catch(() => [])
     // const discounts = await app.$axios.$get('http://185.125.46.99:8080/api/discount').then(res => res).catch(() => [])
-    const id = app.context.route.params.id
 
     const buildData = await app.$axios.$get(
-      `http://185.125.46.99:8080/api/solo/${id}`
-    )
+      `http://bilandings.ru:8080/api/offer`
+    ).then(res => res[0])
     return {
-      builds: buildData,
-      isDraggingStartValue: false,
-      scrollEl: 0,
-      timer: {},
+      builds: buildData
     }
   },
+  data: () => ({
+    isDraggingStartValue: false,
+    scrollEl: 0,
+    timer: {},
+    modal: false,
+    settings: {
+      dots: true,
+      edgeFriction: 0.35,
+      infinite: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    },
+  }),
+  computed: {},
   created() {
-    this.timer = this.weekEndTime()
+
   },
   methods: {
-    weekEndTime() {
-      const timeend = new Date(this.builds.discountDate)
 
-      let today = new Date()
-      today = Math.floor((timeend - today) / 1000)
-      let tsec = today % 60
-      today = Math.floor(today / 60)
-      if (tsec < 10) tsec = '0' + tsec
-      let tmin = today % 60
-      today = Math.floor(today / 60)
-      if (tmin < 10) tmin = '0' + tmin
-      let thour = today % 24
-      if (thour < 10) thour = '0' + thour
-      today = Math.floor(today / 24)
-      return {
-        days: today,
-        hours: thour,
-        minutes: tmin,
-      }
-    },
   },
   filters: {
     currencyFormat(val) {
@@ -328,33 +207,8 @@ export default {
 </script>
 
 <style lang="scss">
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.6s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-}
-.link-home{
-  p{
-    display: grid;
-    grid-template-columns: 30px 90px;
-    font-weight: 500;
-    font-size: 16px;
-    color: #333333;
-  }
-  &:hover{
-    p{
-      color: #004B94;
-
-
-
-    }
-  }
-}
 .weekly-container {
   padding-top: 4rem;
-  margin-bottom: 7rem;
 }
 .weekly-content {
   display: grid;
@@ -362,6 +216,7 @@ export default {
   gap: 5rem;
   .weekly-content__image {
     border-radius: 8px;
+
     width: 100%;
     height: 100%;
     user-select: none;
@@ -374,6 +229,7 @@ export default {
   .price-discount {
     font-weight: bold;
     font-size: 42px;
+    line-height: 56px;
   }
   .price {
     font-weight: 500;
@@ -392,13 +248,14 @@ export default {
       }
     }
   }
-  .weekly-content-about-id {
+  .weekly-content-about {
+    background: #ededed;
     border-radius: 8px;
     margin-top: 2.8rem;
     &__href {
       background: #004b94;
       border-radius: 8px;
-      padding: 2.8rem;
+      padding: 2.4rem;
       color: white;
       font-weight: bold;
       font-size: 18px;
@@ -411,8 +268,6 @@ export default {
       }
     }
     .weekly-content-about__time {
-      border-radius: 8px;
-      background: #ededed;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -426,7 +281,7 @@ export default {
       .countdown {
         display: grid;
         align-items: center;
-        grid-template-columns: repeat(5, auto);
+        grid-template-columns: repeat(7, auto);
         gap: 8px;
         margin-top: 2rem;
         .days {
@@ -474,6 +329,21 @@ export default {
             color: #4d4d4d;
           }
         }
+        .seconds {
+          position: relative;
+          :after {
+            content: 'секунд';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -1rem;
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            text-align: center;
+            color: #4d4d4d;
+          }
+        }
       }
     }
   }
@@ -481,41 +351,24 @@ export default {
     grid-template-columns: 1fr;
   }
 }
-.slider-container-id {
-  position: relative;
-  max-width: 800px;
-  width: 100%;
-  background-color: #ededed;
-  .slider-container__discount {
-    position: absolute;
-    z-index: 15;
-    background: #cb4635;
-    border-radius: 8px 0px 0px 8px;
-    top: 2rem;
-    right: 0;
-    padding: 1rem 1.6rem 1rem 2.4rem;
+.weekly-content-about-id {
+  border-radius: 8px;
+  margin-top: 2.8rem;
+  &__href {
+    background: #004b94;
+    border-radius: 8px;
+    padding: 2.8rem;
     color: white;
-    font-size: 32px;
-    @media (max-width: 768px) {
-      font-size: 22px;
-      padding: 0.5rem 1rem 0.5rem 1.6rem;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-left: 1.6rem;
     }
   }
-}
-.slider {
-  padding: 0 1.6rem;
-}
-.slider-image-id {
-  border: 1px solid #f0f0f0;
-  box-sizing: border-box;
-  border-radius: 8px;
-  border-radius: 8px;
-  width: 100%;
-  height: 100%;
-  max-height: 613px;
-  object-fit: contain;
-  margin: auto;
-  cursor: zoom-in;
 }
 .consulting {
   display: flex;
@@ -526,7 +379,6 @@ export default {
     margin-right: 1.2rem;
   }
 }
-
 .send-whatsapp {
   background: #58bd54;
   border-radius: 8px;
@@ -563,11 +415,92 @@ export default {
     display: none;
   }
 }
-
+.slider-container {
+  position: relative;
+  max-width: 800px;
+  height: 100%;
+  max-height: 460px;
+  width: 100%;
+  .slider-container__discount {
+    font-size: 2.6rem;
+    position: absolute;
+    z-index: 15;
+    background: #cb4635;
+    border-radius: 8px 0px 0px 8px;
+    top: 2rem;
+    right: 0;
+    padding: .4rem 1.6rem .4rem 2.4rem;
+    color: white;
+    &.slider-container__discount--left {
+      left: 0;
+      right: auto;
+      padding: .4rem 2.4rem .4rem 1.6rem;
+      border-radius: 0px 8px 8px 0px;
+    }
+    @media (max-width: 768px) {
+      font-size: 18px;
+      padding: 0rem 1rem 0rem 1.2rem;
+      &.slider-container__discount--left {
+        left: 0;
+        right: auto;
+        padding: 0rem 1rem 0rem 1.2rem;
+        border-radius: 0px 8px 8px 0px;
+      }
+    }
+  }
+}
+.slider {
+  padding: 0 1.6rem !important;
+}
+.slider-image-box{
+  height: 100%;
+}
+.slider-image {
+  border-radius: 8px !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 460px;
+  object-fit: cover !important;
+}
+.slick-next {
+  right: 2px !important;
+}
+.slick-prev {
+  left: -22px !important;
+  z-index: 1 !important;
+}
 .slick-next:before {
-  color: black !important;
+  color: #ffffff !important;
+  font-size: 4rem !important;
+  content: url('~assets/image/icons/slider-icon-arrow-right.svg') !important;
 }
 .slick-prev:before {
-  color: black !important;
+  color: #ffffff !important;
+  font-size: 4rem !important;
+  content: url('~assets/image/icons/slider-icon-arrow-left.svg') !important;
+}
+.slick-dots {
+  bottom: 25px !important;
+}
+.slick-dots li button:before {
+  font-size: 10px !important;
+}
+.slick-dots li.slick-active button:before {
+  color: white !important;
+  opacity: 1 !important;
+}
+.slick-dots li button:before {
+  color: white !important;
+}
+@media (max-width: 768px) {
+  .slick-next:before {
+    font-size: 2.6rem !important;
+  }
+  .slick-prev:before {
+    font-size: 2.6rem !important;
+  }
+  .slick-dots {
+    bottom: 15px !important;
+  }
 }
 </style>

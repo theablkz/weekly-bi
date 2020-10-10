@@ -57,7 +57,7 @@ background: #FFFFFF;
   max-width: 120rem;
   padding: 0.5rem 1.6rem;
   margin: auto;
-  
+
   &__main {
     max-width: 120rem;
     display: flex;
@@ -65,6 +65,8 @@ background: #FFFFFF;
   }
 
   .contacts {
+    display: flex;
+    align-items: center;
     .call-phone {
       .phone {
         color: #004b94;
