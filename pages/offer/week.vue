@@ -138,6 +138,26 @@
             </p>
           </div>
           <div class="weekly-content-about-id">
+            <div class="weekly-content-about__time">
+              <p class="time-title">Предложение действует всего:</p>
+              <div class="countdown">
+                <div class="days">
+                  <h1>{{ timer.days }}</h1>
+                </div>
+                <h1>:</h1>
+                <div class="hours">
+                  <h1>{{ timer.hours }}</h1>
+                </div>
+                <h1>:</h1>
+                <div class="minutes">
+                  <h1>{{ timer.minutes }}</h1>
+                </div>
+                <h1>:</h1>
+                <div class="seconds">
+                  <h1>{{ timer.seconds }}</h1>
+                </div>
+              </div>
+            </div>
             <button @click="modal = true" class="consulting indent_bottom-h4">
               <span
               ><svg
@@ -198,6 +218,11 @@ const formatterCurrency = new Intl.NumberFormat('ru', {
   maximumSignificantDigits: 3,
 })
 export default {
+  head() {
+    return {
+      title: this.builds.description
+    }
+  },
   scrollToTop: true,
   name: 'weekly',
   components: { VueSlickCarousel, SendModal },
@@ -230,9 +255,32 @@ export default {
   computed: {},
   created() {
 
+    setInterval(() => {
+      this.timer = this.weekEndTime()
+    }, 1000)
   },
   methods: {
+    weekEndTime() {
+      const timeend = new Date(this.builds.date)
 
+      let today = new Date()
+      today = Math.floor((timeend - today) / 1000)
+      let tsec = today % 60
+      today = Math.floor(today / 60)
+      if (tsec < 10) tsec = '0' + tsec
+      let tmin = today % 60
+      today = Math.floor(today / 60)
+      if (tmin < 10) tmin = '0' + tmin
+      let thour = today % 24
+      if (thour < 10) thour = '0' + thour
+      today = Math.floor(today / 24)
+      return {
+        days: today,
+        hours: thour,
+        minutes: tmin,
+        seconds: tsec
+      }
+    },
   },
   filters: {
     currencyFormat(val) {
@@ -243,6 +291,86 @@ export default {
 </script>
 
 <style lang="scss">
+.weekly-content-about__time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 1.2rem 2rem 1.2rem;
+  background: #ededed;
+  .time-title {
+    font-weight: bold;
+    font-size: 16px;
+    color: #4c4c4c;
+  }
+  .countdown {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(7, auto);
+    gap: 8px;
+    margin-top: 2rem;
+    .days {
+      position: relative;
+      :after {
+        content: 'Дней';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1rem;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #4d4d4d;
+      }
+    }
+    .hours {
+      position: relative;
+      :after {
+        content: 'Часов';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1rem;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #4d4d4d;
+      }
+    }
+    .minutes {
+      position: relative;
+      :after {
+        content: 'минут';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1rem;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #4d4d4d;
+      }
+    }
+    .seconds {
+      position: relative;
+      :after {
+        content: 'секунд';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1rem;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        color: #4d4d4d;
+      }
+    }
+  }
+}
 .weekly-container {
   padding-top: 4rem;
 }
@@ -425,7 +553,7 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0.8rem 1.6rem;
-  max-width: 31rem;
+  max-width: 100%;
   margin: auto;
 
   p {

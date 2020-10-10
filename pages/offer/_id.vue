@@ -55,9 +55,10 @@
     <div class="grid-col_8-11">
       <div class="weekly-content">
         <div>
-          <h2 class="indent_bottom-h5">
-            {{ builds.rooms }} комнатная квартира, в ЖК “{{ builds.queue.real_estate.name }}”
-          </h2>
+          <div  v-html="titleText">
+
+          </div>
+
           <h1 class="price-discount" :style="{ color: '#E18438' }">
             {{ builds.discountedPrice | currencyFormat }}
           </h1>
@@ -238,7 +239,7 @@
             <a
               target="_blank"
               class="whatsapp_mobile"
-              href="https://wa.me/77783603366?text=Добрый день, меня интересует скидка для клиентов Сбербанка"
+              :href="`https://wa.me/77783603366?text=${whatsappLinkText}`"
             >
               <div class="send-whatsapp">
                 <img src="~assets/image/icons/whatsapp.svg" alt />
@@ -248,7 +249,7 @@
             <a
               target="_blank"
               class="whatsap_desktop"
-              href="https://web.whatsapp.com/send?phone=77783603366&text=Добрый день, меня интересует скидка для клиентов Сбербанка&source=&data="
+              :href="`https://web.whatsapp.com/send?phone=77783603366&text=${whatsappLinkText}&source=&data=`"
             >
               <div class="send-whatsapp">
                 <img src="~assets/image/icons/whatsapp.svg" alt />
@@ -277,6 +278,11 @@ const formatterCurrency = new Intl.NumberFormat('ru', {
 export default {
   scrollToTop: true,
   name: 'offer-id',
+  head() {
+    return {
+      title: this.builds.queue.name
+    }
+  },
   components: { SendModal },
   data: () => ({
     modal: false,
@@ -294,6 +300,22 @@ export default {
       isDraggingStartValue: false,
       scrollEl: 0,
       timer: {},
+    }
+  },
+  computed: {
+    titleText(){
+      const titleText = {
+        flat: `${ this.builds.rooms } комнатная квартира, в ЖК ${ this.builds.queue.real_estate.name }`,
+        office: `${this.builds.square} м&#178 офис в ЖК ${ this.builds.queue.real_estate.name }`,
+        parking: `${this.builds.queue.name} в ЖК ${ this.builds.queue.real_estate.name }`,
+        storage: `${this.builds.queue.name} в ЖК ${ this.builds.queue.real_estate.name }`,
+      }
+      return `<h2 class="indent_bottom-h5" >
+              ${titleText[this.builds.flatType] || ''}
+            </h2>`
+    },
+    whatsappLinkText(){
+      return `Здравствуйте! Меня интересует специальное предложение на ${this.builds.queue.name} в ЖК ${ this.builds.queue.real_estate.name }`
     }
   },
   filters: {
@@ -335,7 +357,7 @@ export default {
 }
 .weekly-content {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   gap: 5rem;
   .weekly-content__image {
     border-radius: 8px;
@@ -385,72 +407,6 @@ export default {
       justify-content: center;
       svg {
         margin-left: 1.6rem;
-      }
-    }
-    .weekly-content-about__time {
-      border-radius: 8px;
-      background: #ededed;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.2rem 1.2rem 2rem 1.2rem;
-      .time-title {
-        font-weight: bold;
-        font-size: 16px;
-        color: #4c4c4c;
-      }
-      .countdown {
-        display: grid;
-        align-items: center;
-        grid-template-columns: repeat(5, auto);
-        gap: 8px;
-        margin-top: 2rem;
-        .days {
-          position: relative;
-          :after {
-            content: 'Дней';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1rem;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #4d4d4d;
-          }
-        }
-        .hours {
-          position: relative;
-          :after {
-            content: 'Часов';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1rem;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #4d4d4d;
-          }
-        }
-        .minutes {
-          position: relative;
-          :after {
-            content: 'минут';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1rem;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #4d4d4d;
-          }
-        }
       }
     }
   }
@@ -514,8 +470,8 @@ export default {
   align-items: center;
   justify-content: center;
   padding: 0.8rem 1.6rem;
-  max-width: 31rem;
   margin: auto;
+  max-width: 100%;
 
   p {
     line-height: 2;

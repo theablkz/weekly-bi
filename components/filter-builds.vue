@@ -75,8 +75,7 @@ export default {
       border-bottom: 3px solid #004b94;
     }
     &:hover{
-      background-color: #004b94;
-      color: white;
+      color: #004b94;
     }
   }
 }

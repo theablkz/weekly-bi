@@ -216,7 +216,7 @@ export default {
 }
 .weekly-content {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   gap: 5rem;
   .weekly-content__image {
     border-radius: 8px;

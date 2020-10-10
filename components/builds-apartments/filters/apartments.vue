@@ -133,7 +133,7 @@
               </div>
             </div>
             <label class="price-label">
-              <p class="label-title">Стоимость со скдикой</p>
+              <p class="label-title">Стоимость со скидкой</p>
               <input v-model="price" class="price-input" type="tel" />
               <p class="at">до</p>
               <p class="valuta">₸</p>

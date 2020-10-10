@@ -8,12 +8,11 @@
 
 <script>
 import Weekly from '~/components/weekly'
-import FilterBuilds from '@/components/filter-builds'
 import axios from 'axios'
 export default {
   scrollToTop: true,
   components: {
-    FilterBuilds,
+    FilterBuilds: () => import('@/components/filter-builds'),
     Weekly,
     SlickCar: () => import('~/components/slick-car'),
   },
