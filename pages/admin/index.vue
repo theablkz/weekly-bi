@@ -77,6 +77,7 @@
 
 <script>
 export default {
+  scrollToTop: true,
   middleware: 'auth',
 name: "index",
 

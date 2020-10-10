@@ -44,6 +44,7 @@
       <h1 class="slider-container__discount">{{ builds.discount.value }}%</h1>
       <div class="images" v-viewer>
         <img
+          onerror="this.onerror=null; this.src='https://www.macedonrangeshalls.com.au/wp-content/uploads/2017/10/image-not-found.png'"
           draggable="false"
           class="slider-image-id"
           :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"
@@ -274,6 +275,7 @@ const formatterCurrency = new Intl.NumberFormat('ru', {
   maximumSignificantDigits: 3,
 })
 export default {
+  scrollToTop: true,
   name: 'offer-id',
   components: { SendModal },
   data: () => ({
@@ -294,36 +296,11 @@ export default {
       timer: {},
     }
   },
-  created() {
-    this.timer = this.weekEndTime()
-  },
-  methods: {
-    weekEndTime() {
-      const timeend = new Date(this.builds.discountDate)
-
-      let today = new Date()
-      today = Math.floor((timeend - today) / 1000)
-      let tsec = today % 60
-      today = Math.floor(today / 60)
-      if (tsec < 10) tsec = '0' + tsec
-      let tmin = today % 60
-      today = Math.floor(today / 60)
-      if (tmin < 10) tmin = '0' + tmin
-      let thour = today % 24
-      if (thour < 10) thour = '0' + thour
-      today = Math.floor(today / 24)
-      return {
-        days: today,
-        hours: thour,
-        minutes: tmin,
-      }
-    },
-  },
   filters: {
     currencyFormat(val) {
       return `${formatterCurrency.format(val)} ₸`
     },
-  },
+  }
 }
 </script>
 

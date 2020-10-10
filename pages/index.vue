@@ -11,6 +11,7 @@ import Weekly from '~/components/weekly'
 import FilterBuilds from '@/components/filter-builds'
 import axios from 'axios'
 export default {
+  scrollToTop: true,
   components: {
     FilterBuilds,
     Weekly,
@@ -266,17 +267,17 @@ export default {
   background-image: url('~assets/image/bg.svg'), url('~assets/image/bg2.svg'),
     url('~assets/image/bg3.svg'), url('~assets/image/bg4.svg'),
     url('~assets/image/bg5.svg'), url('~assets/image/bg6.svg');
-  background-size: auto, 100rem 66rem, auto;
+  background-size: auto, 100rem 62rem, auto;
   background-position: top right, top left, top center, 100% 79rem, 0% 135rem, 100% 100%;
   background-repeat: no-repeat;
   @media (max-width: 1420px) {
     background-size: 30rem, 71rem, auto;
   }
   @media (max-width: 900px) {
-    background-size: 30rem, 60rem, auto;
+    background-size: 30rem, 56rem, auto;
   }
   @media (max-width: 400px) {
-    background-size: 30rem, 39rem, auto;
+    background-size: 30rem, 36rem, auto;
   }
 }
 .block-indent {

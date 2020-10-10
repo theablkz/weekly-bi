@@ -5,8 +5,43 @@
       gridRowGap: '1.6rem',
     }"
   >
+    <div class="grid-col_1-11 indent_bottom-h4">
+      <nuxt-link class="link-home" to="/" style="width: max-content">
+        <p
+
+        >
+          <span
+          ><svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+              <g clip-path="url(#clip0)">
+                <path
+                  d="M0.272364 10.6576L6.22403 16.6092C6.58716 16.9724 7.17608 16.9724 7.53921 16.6092C7.90241 16.246 7.90241 15.6573 7.53921 15.2941L3.17507 10.9299L19.0701 10.9299C19.5836 10.9299 20 10.5135 20 9.99999C20 9.48651 19.5836 9.07004 19.0701 9.07004L3.17507 9.07004L7.53906 4.7059C7.90226 4.3427 7.90226 3.75393 7.53906 3.39073C7.35753 3.20928 7.11947 3.11837 6.88147 3.11837C6.64348 3.11837 6.40549 3.20928 6.22389 3.39073L0.272364 9.3424C-0.0908369 9.7056 -0.0908369 10.2944 0.272364 10.6576Z"
+                  fill="#004B94"
+                />
+              </g>
+              <defs>
+                <clipPath id="clip0">
+                  <rect
+                    width="20"
+                    height="20"
+                    fill="white"
+                    transform="translate(20 20) rotate(-180)"
+                  />
+                </clipPath>
+              </defs>
+            </svg>
+          </span>
+          На главную
+        </p>
+      </nuxt-link>
+    </div>
     <div class="grid-col_1-11">
-      <h1 :style="{ color: 'white' }">Приобретайте недвижимость выгодно!</h1>
+      <h1 :style="{ color: '#3d4551' }">Приобретайте недвижимость выгодно!</h1>
     </div>
     <div class="grid-col_1-8 slider-container">
       <h1 class="slider-container__discount">
@@ -163,6 +198,7 @@ const formatterCurrency = new Intl.NumberFormat('ru', {
   maximumSignificantDigits: 3,
 })
 export default {
+  scrollToTop: true,
   name: 'weekly',
   components: { VueSlickCarousel, SendModal },
 
@@ -501,6 +537,23 @@ export default {
   }
   .slick-dots {
     bottom: 15px !important;
+  }
+}
+.link-home{
+  p{
+    display: grid;
+    grid-template-columns: 30px 90px;
+    font-weight: 500;
+    font-size: 16px;
+    color: #333333;
+  }
+  &:hover{
+    p{
+      color: #004B94;
+
+
+
+    }
   }
 }
 </style>
