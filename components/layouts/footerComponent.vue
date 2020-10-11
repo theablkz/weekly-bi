@@ -98,7 +98,7 @@
         &:hover{
           img{
             transition: .4s;
-            background-color: #004a94d0;
+            background-color: rgba(219, 231, 243, 0.82);
           }
         }
       }
