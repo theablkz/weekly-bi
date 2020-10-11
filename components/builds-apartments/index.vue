@@ -24,11 +24,10 @@
                 :src="`${ name === 'apartments' ? `http://185.125.46.99:8080/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
                 alt=""
               />
-
-              <!--            <div class="apartment-image-des">-->
-              <!--              <p class="apartments-count">{{item.offersLeft.count}}</p>-->
-              <!--              <p>{{item.offersLeft.title}}</p>-->
-              <!--            </div>-->
+              <div v-if="item.count" class="apartment-image-des">
+                <p class="apartments-count">{{item.count}}</p>
+                <p style="color: #4F4F4F;">{{leftCountsText(item.flatType)}}</p>
+              </div>
             </div>
             <h3 class="apartments-title">{{ item.queue.name }}</h3>
           </nuxt-link>
@@ -108,6 +107,15 @@ export default {
     viewMore() {
       this.limitView += 6
     },
+    leftCountsText(type){
+      const titleText = {
+        flat: `Квартир осталось`,
+        office: `Офисов осталось`,
+        parking: `Парковок осталось`,
+        storage: `Кладовок осталось`,
+      }
+      return titleText[type]
+    }
   },
 }
 </script>

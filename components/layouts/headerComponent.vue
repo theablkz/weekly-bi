@@ -19,7 +19,7 @@
       <a
         target="_blank"
         class="whatsapp_mobile"
-        href="https://wa.me/77783603366?text=Добрый день, меня интересует скидка для клиентов Сбербанка"
+        href="https://wa.me/77783603366?text=Здравствуйте! Меня интересуют специальные предложения от BI Group"
       >
         <div class="send-whatsapp">
           <img src="~assets/image/icons/whatsapp.svg" alt />
@@ -29,7 +29,7 @@
       <a
         target="_blank"
         class="whatsap_desktop"
-        href="https://web.whatsapp.com/send?phone=77783603366&text=Добрый день, меня интересует скидка для клиентов Сбербанка&source=&data="
+        href="https://web.whatsapp.com/send?phone=77783603366&text=Здравствуйте! Меня интересуют специальные предложения от BI Group&source=&data="
       >
         <div class="send-whatsapp">
           <img src="~assets/image/icons/whatsapp.svg" alt />

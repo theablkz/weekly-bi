@@ -7,17 +7,15 @@
   >
     <div class="grid-col_1-11 indent_bottom-h4">
       <nuxt-link class="link-home" to="/" style="width: max-content">
-        <p
-
-        >
+        <p>
           <span
-          ><svg
-            width="20"
-            height="20"
-            viewBox="0 0 20 20"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            ><svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
               <g clip-path="url(#clip0)">
                 <path
                   d="M0.272364 10.6576L6.22403 16.6092C6.58716 16.9724 7.17608 16.9724 7.53921 16.6092C7.90241 16.246 7.90241 15.6573 7.53921 15.2941L3.17507 10.9299L19.0701 10.9299C19.5836 10.9299 20 10.5135 20 9.99999C20 9.48651 19.5836 9.07004 19.0701 9.07004L3.17507 9.07004L7.53906 4.7059C7.90226 4.3427 7.90226 3.75393 7.53906 3.39073C7.35753 3.20928 7.11947 3.11837 6.88147 3.11837C6.64348 3.11837 6.40549 3.20928 6.22389 3.39073L0.272364 9.3424C-0.0908369 9.7056 -0.0908369 10.2944 0.272364 10.6576Z"
@@ -40,9 +38,6 @@
         </p>
       </nuxt-link>
     </div>
-    <div class="grid-col_1-11">
-      <h1 :style="{ color: '#3d4551' }">Приобретайте недвижимость выгодно!</h1>
-    </div>
     <div class="grid-col_1-8 slider-container">
       <h1 class="slider-container__discount">
         {{ (100 - 100 / (builds.price / builds.minPrice)).toFixed() }}%
@@ -59,7 +54,6 @@
             :src="`http://185.125.46.99:8080/saved/${image}`"
             alt=""
           />
-
         </VueSlickCarousel>
       </client-only>
     </div>
@@ -75,35 +69,35 @@
           <div class="weekly-content-description">
             <a target="_blank" class="link-build" :href="builds.buildLink">
               <p>
-              <span
-              ><svg
-                width="13"
-                height="15"
-                viewBox="0 0 13 15"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                  <path
-                    d="M10.25 4.37499H7.12498V3.64295C7.85327 3.38561 8.37499 2.69156 8.37499 1.875C8.37499 0.839209 7.53578 0 6.49999 0C5.4642 0 4.62499 0.839209 4.62499 1.875C4.62499 2.69156 5.14671 3.38561 5.875 3.64295V4.37499H2.74999C1.3692 4.37499 0.25 5.49419 0.25 6.87498C0.25 8.25577 1.3692 9.375 2.74999 9.375H5.875V13.75H4C3.65482 13.75 3.37501 14.0298 3.37501 14.375C3.37501 14.7202 3.65482 15 4 15H9.00001C9.34519 15 9.625 14.7202 9.625 14.375C9.625 14.0298 9.34519 13.75 9.00001 13.75H7.12501V9.375H10.25C11.6308 9.375 12.75 8.2558 12.75 6.87501C12.75 5.49422 11.6308 4.37499 10.25 4.37499ZM6.49999 1.25001C6.84543 1.25001 7.12498 1.52956 7.12498 1.875C7.12498 2.22044 6.84543 2.49999 6.49999 2.49999C6.15455 2.49999 5.875 2.22044 5.875 1.875C5.875 1.52956 6.15455 1.25001 6.49999 1.25001ZM10.25 8.12499H2.74999C2.05955 8.12499 1.49998 7.56545 1.49998 6.87498C1.49998 6.18451 2.05955 5.625 2.74999 5.625H10.25C10.9404 5.625 11.5 6.18454 11.5 6.87501C11.5 7.56548 10.9404 8.12499 10.25 8.12499Z"
-                    fill="#333333"
-                  />
-                  <path
-                    d="M8.37498 6.25H4.62499C4.27981 6.25 4 6.52981 4 6.87499C4 7.22017 4.27981 7.49998 4.62499 7.49998H8.37498C8.72015 7.49998 8.99997 7.22017 8.99997 6.87499C8.99997 6.52984 8.72015 6.25 8.37498 6.25Z"
-                    fill="#333333"
-                  />
-                </svg> </span
-              >{{ builds.name }}
+                <span
+                  ><svg
+                    width="13"
+                    height="15"
+                    viewBox="0 0 13 15"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10.25 4.37499H7.12498V3.64295C7.85327 3.38561 8.37499 2.69156 8.37499 1.875C8.37499 0.839209 7.53578 0 6.49999 0C5.4642 0 4.62499 0.839209 4.62499 1.875C4.62499 2.69156 5.14671 3.38561 5.875 3.64295V4.37499H2.74999C1.3692 4.37499 0.25 5.49419 0.25 6.87498C0.25 8.25577 1.3692 9.375 2.74999 9.375H5.875V13.75H4C3.65482 13.75 3.37501 14.0298 3.37501 14.375C3.37501 14.7202 3.65482 15 4 15H9.00001C9.34519 15 9.625 14.7202 9.625 14.375C9.625 14.0298 9.34519 13.75 9.00001 13.75H7.12501V9.375H10.25C11.6308 9.375 12.75 8.2558 12.75 6.87501C12.75 5.49422 11.6308 4.37499 10.25 4.37499ZM6.49999 1.25001C6.84543 1.25001 7.12498 1.52956 7.12498 1.875C7.12498 2.22044 6.84543 2.49999 6.49999 2.49999C6.15455 2.49999 5.875 2.22044 5.875 1.875C5.875 1.52956 6.15455 1.25001 6.49999 1.25001ZM10.25 8.12499H2.74999C2.05955 8.12499 1.49998 7.56545 1.49998 6.87498C1.49998 6.18451 2.05955 5.625 2.74999 5.625H10.25C10.9404 5.625 11.5 6.18454 11.5 6.87501C11.5 7.56548 10.9404 8.12499 10.25 8.12499Z"
+                      fill="#333333"
+                    />
+                    <path
+                      d="M8.37498 6.25H4.62499C4.27981 6.25 4 6.52981 4 6.87499C4 7.22017 4.27981 7.49998 4.62499 7.49998H8.37498C8.72015 7.49998 8.99997 7.22017 8.99997 6.87499C8.99997 6.52984 8.72015 6.25 8.37498 6.25Z"
+                      fill="#333333"
+                    />
+                  </svg> </span
+                >{{ builds.name }}
               </p>
             </a>
             <p>
               <span
-              ><svg
-                width="13"
-                height="16"
-                viewBox="0 0 13 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                ><svg
+                  width="13"
+                  height="16"
+                  viewBox="0 0 13 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     fill-rule="evenodd"
                     clip-rule="evenodd"
@@ -122,13 +116,13 @@
             </p>
             <p>
               <span
-              ><svg
-                width="13"
-                height="14"
-                viewBox="0 0 13 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                ><svg
+                  width="13"
+                  height="14"
+                  viewBox="0 0 13 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M12.6139 2.98953L6.7639 0.389561C6.68072 0.352596 6.5907 0.333496 6.49967 0.333496C6.40865 0.333496 6.31863 0.352596 6.23545 0.389561L0.38545 2.98953C0.37245 2.99538 0.36335 3.00513 0.35035 3.01228C0.33215 3.02138 0.31265 3.02723 0.29575 3.03828C0.28145 3.04803 0.2704 3.06038 0.25675 3.07078C0.209237 3.10609 0.167563 3.14864 0.13325 3.19688C0.12025 3.21508 0.1066 3.23132 0.0948999 3.24952C0.0755538 3.28388 0.0590327 3.31974 0.0455 3.35677C0.03965 3.37432 0.03055 3.39057 0.02535 3.40812C0.00902558 3.46521 0.000498255 3.52425 0 3.58362V10.0835C0 10.3409 0.1508 10.573 0.3861 10.6776L6.2361 13.2776C6.3206 13.3153 6.4103 13.3335 6.5 13.3335C6.5905 13.3312 6.67951 13.3099 6.7613 13.2711L6.7639 13.2776L12.6139 10.6776C12.7289 10.6266 12.8266 10.5433 12.8951 10.4379C12.9637 10.3324 13.0001 10.2093 13 10.0835V3.58362C13.0001 3.45784 12.9637 3.33474 12.8951 3.22927C12.8266 3.12381 12.7289 3.04052 12.6139 2.98953ZM6.5 1.69539L10.7497 3.58362L6.5 5.47185L5.6498 5.0942L2.25095 3.58362L6.5 1.69539ZM1.3 9.66169V4.58396L5.85 6.60608V11.6832L1.3 9.66169ZM7.15 11.6832V6.60608L11.7 4.58396V9.66169L7.15 11.6832Z"
                     fill="#333333"
@@ -138,7 +132,7 @@
             </p>
           </div>
           <div class="weekly-content-about-id">
-            <div class="weekly-content-about__time">
+            <div class="weekly-content-about__time indent_bottom-h3">
               <p class="time-title">Предложение действует всего:</p>
               <div class="countdown">
                 <div class="days">
@@ -160,13 +154,13 @@
             </div>
             <button @click="modal = true" class="consulting indent_bottom-h4">
               <span
-              ><svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
+                ><svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
                   <path
                     d="M10.9167 6.33333C11.646 6.33333 12.3455 6.62306 12.8612 7.13879C13.3769 7.65451 13.6667 8.35399 13.6667 9.08333C13.6667 9.32645 13.7632 9.55961 13.9352 9.73151C14.1071 9.90342 14.3402 10 14.5833 10C14.8264 10 15.0596 9.90342 15.2315 9.73151C15.4034 9.55961 15.5 9.32645 15.5 9.08333C15.5 7.86776 15.0171 6.70197 14.1576 5.84243C13.298 4.98289 12.1322 4.5 10.9167 4.5C10.6736 4.5 10.4404 4.59658 10.2685 4.76849C10.0966 4.94039 10 5.17355 10 5.41667C10 5.65978 10.0966 5.89294 10.2685 6.06485C10.4404 6.23676 10.6736 6.33333 10.9167 6.33333Z"
                     fill="white"
@@ -181,7 +175,7 @@
             <a
               target="_blank"
               class="whatsapp_mobile"
-              href="https://wa.me/77783603366?text=Добрый день, меня интересует скидка для клиентов Сбербанка"
+              href="https://wa.me/77783603366?text=Здравствуйте! Меня интересуют специальные предложения от BI Group"
             >
               <div class="send-whatsapp">
                 <img src="~assets/image/icons/whatsapp.svg" alt />
@@ -191,7 +185,7 @@
             <a
               target="_blank"
               class="whatsap_desktop"
-              href="https://web.whatsapp.com/send?phone=77783603366&text=Добрый день, меня интересует скидка для клиентов Сбербанка&source=&data="
+              href="https://web.whatsapp.com/send?phone=77783603366&text=Здравствуйте! Меня интересуют специальные предложения от BI Group&source=&data="
             >
               <div class="send-whatsapp">
                 <img src="~assets/image/icons/whatsapp.svg" alt />
@@ -220,7 +214,7 @@ const formatterCurrency = new Intl.NumberFormat('ru', {
 export default {
   head() {
     return {
-      title: this.builds.description
+      title: this.builds.description,
     }
   },
   scrollToTop: true,
@@ -231,11 +225,11 @@ export default {
     // const buildsName = await app.$axios.$get('http://185.125.46.99:8080/api/projects').then(res => res).catch(() => [])
     // const discounts = await app.$axios.$get('http://185.125.46.99:8080/api/discount').then(res => res).catch(() => [])
 
-    const buildData = await app.$axios.$get(
-      `http://bilandings.ru:8080/api/offer`
-    ).then(res => res[0])
+    const buildData = await app.$axios
+      .$get(`http://bilandings.ru:8080/api/offer`)
+      .then((res) => res[0])
     return {
-      builds: buildData
+      builds: buildData,
     }
   },
   data: () => ({
@@ -254,7 +248,6 @@ export default {
   }),
   computed: {},
   created() {
-
     setInterval(() => {
       this.timer = this.weekEndTime()
     }, 1000)
@@ -278,7 +271,7 @@ export default {
         days: today,
         hours: thour,
         minutes: tmin,
-        seconds: tsec
+        seconds: tsec,
       }
     },
   },
@@ -298,6 +291,7 @@ export default {
   justify-content: center;
   padding: 1.2rem 1.2rem 2rem 1.2rem;
   background: #ededed;
+  border-radius: 8px;
   .time-title {
     font-weight: bold;
     font-size: 16px;
@@ -431,85 +425,6 @@ export default {
         margin-left: 1.6rem;
       }
     }
-    .weekly-content-about__time {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 1.2rem 1.2rem 2rem 1.2rem;
-      .time-title {
-        font-weight: bold;
-        font-size: 16px;
-        color: #4c4c4c;
-      }
-      .countdown {
-        display: grid;
-        align-items: center;
-        grid-template-columns: repeat(7, auto);
-        gap: 8px;
-        margin-top: 2rem;
-        .days {
-          position: relative;
-          :after {
-            content: 'Дней';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1rem;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #4d4d4d;
-          }
-        }
-        .hours {
-          position: relative;
-          :after {
-            content: 'Часов';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1rem;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #4d4d4d;
-          }
-        }
-        .minutes {
-          position: relative;
-          :after {
-            content: 'минут';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1rem;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #4d4d4d;
-          }
-        }
-        .seconds {
-          position: relative;
-          :after {
-            content: 'секунд';
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: -1rem;
-            font-weight: normal;
-            font-size: 14px;
-            line-height: 16px;
-            text-align: center;
-            color: #4d4d4d;
-          }
-        }
-      }
-    }
   }
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -593,12 +508,12 @@ export default {
     border-radius: 8px 0px 0px 8px;
     top: 2rem;
     right: 0;
-    padding: .4rem 1.6rem .4rem 2.4rem;
+    padding: 0.4rem 1.6rem 0.4rem 2.4rem;
     color: white;
     &.slider-container__discount--left {
       left: 0;
       right: auto;
-      padding: .4rem 2.4rem .4rem 1.6rem;
+      padding: 0.4rem 2.4rem 0.4rem 1.6rem;
       border-radius: 0px 8px 8px 0px;
     }
     @media (max-width: 768px) {
@@ -616,7 +531,7 @@ export default {
 .slider {
   padding: 0 1.6rem !important;
 }
-.slider-image-box{
+.slider-image-box {
   height: 100%;
 }
 .slider-image {
@@ -667,20 +582,17 @@ export default {
     bottom: 15px !important;
   }
 }
-.link-home{
-  p{
+.link-home {
+  p {
     display: grid;
     grid-template-columns: 30px 90px;
     font-weight: 500;
     font-size: 16px;
     color: #333333;
   }
-  &:hover{
-    p{
-      color: #004B94;
-
-
-
+  &:hover {
+    p {
+      color: #004b94;
     }
   }
 }

@@ -270,6 +270,9 @@ export default {
       svg {
         margin-left: 1.6rem;
       }
+      &:hover{
+        background-color: #004a94d0;
+      }
     }
     .weekly-content-about__time {
       display: flex;
