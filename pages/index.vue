@@ -81,44 +81,46 @@ export default {
     const sliderOtherBuilds = [
       {
         id: '1',
-        city: 'Нур-Султан',
-        buildName: 'Crocus City',
-        rooms: '3',
-        discountedPriceInt: 45000000,
-        address: 'astana, пр. Улы Дала, ост. ЖК Кмала-1',
-        offersLeft: {
-          title: 'Квартир осталось',
-          count: 4,
-        },
-        priceMWithDiscount: 'от 101 млн ₸',
-        priceMWithoutDiscount: 'от 333 млн ₸',
-        endOfStock: {
-          title: 'до 25 июля',
-          value: 'скидка 10%',
-        },
-        schemaImage:
-          'https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg',
+        buildName: 'ALA Park',
+        link: 'https://bi.group/ru/project/ala-park',
+        schemaImage:require('~/assets/image/build-images/Ala park.png')
       },
       {
         id: '2',
-        city: 'Алматы',
-        buildName: 'Crocus Citysss',
-        rooms: '3',
-        discountedPriceInt: 45000000,
-        address: 'Алматы, пр. Улы Дала, ост. ЖК Кмала-1',
-        offersLeft: {
-          title: 'Квартир осталось',
-          count: 4,
-        },
-        priceMWithDiscount: 'от 101 млн ₸',
-        priceMWithoutDiscount: 'от 333 млн ₸',
-        endOfStock: {
-          title: 'до 25 июля',
-          value: 'скидка 10%',
-        },
-        schemaImage:
-          'https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg',
-      }
+        buildName: 'Besterek',
+        link: 'https://bi.group/ru/project/besterek',
+        schemaImage:require('~/assets/image/build-images/Besterek.png')
+      },{
+        id: '3',
+        buildName: 'BI Village Deluxe',
+        link: 'https://cottage.bi.group/',
+        schemaImage:require('~/assets/image/build-images/bi village deluxe.png')
+      },{
+        id: '4',
+        buildName: 'Grand Opera',
+        link: 'https://grandopera.bi.group/',
+        schemaImage:require('~/assets/image/build-images/grand opera.png')
+      },{
+        id: '5',
+        buildName: 'Headliner',
+        link: 'https://bi.group/ru/project/headliner',
+        schemaImage:require('~/assets/image/build-images/Headliner.png')
+      },{
+        id: '6',
+        buildName: 'Nura Esil',
+        link: 'https://nura-esil.bi-group.org/',
+        schemaImage:require('~/assets/image/build-images/nura esil.png')
+      },{
+        id: '7',
+        buildName: 'President\'s Park',
+        link: 'https://presidents-park.bi.group/',
+        schemaImage:require('~/assets/image/build-images/President\'s Park.png')
+      },{
+        id: '8',
+        buildName: 'Vela Village',
+        link: 'https://bi.group/ru/project/vela-village',
+        schemaImage:require('~/assets/image/build-images/velavillage.png')
+      },
     ]
     // console.log(builds);
     return {

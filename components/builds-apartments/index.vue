@@ -37,15 +37,15 @@
               <h3 :style="{ color: '#E18438' }">
                 {{ item.discountedPrice || item.price | currencyFormat }}
               </h3>
-              <small>за м² со скидкой</small>
+              <small> {{item.discountedPrice ? 'за м² со скидкой' : 'за м²'}}</small>
             </div>
-            <div>
+            <div v-if="item.discountedPrice">
               <h3 :style="{ color: '#999999', textDecoration: 'line-through' }">
                 {{ item.price | currencyFormat }}
               </h3>
               <small>за м² без скидки</small>
             </div>
-            <div>
+            <div v-if="item.discountedPrice">
               <h3 :style="{ color: '#345086' }">скидка {{ item.discount.value }}%</h3>
               <small>до 25 июля</small>
             </div>

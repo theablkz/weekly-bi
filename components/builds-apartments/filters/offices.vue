@@ -5,7 +5,7 @@
         <label>
           <p class="label-title">город</p>
           <select v-model="city" name="">
-            <option v-for="item in cities" :value="item">{{ item }}</option>
+            <option v-for="item in cities" :value="item">{{ item | cityFilter }}</option>
           </select>
         </label>
         <label>
@@ -110,6 +110,14 @@ export default {
     },
   },
   props: ['apartments'],
+  filters: {
+    cityFilter(val){
+      if (val === 'Астана'){
+        return 'Нур-Султан'
+      }
+      return val
+    }
+  },
   computed: {
     cities() {
       const cities = [

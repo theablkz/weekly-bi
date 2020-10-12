@@ -8,15 +8,17 @@
     <div class="bottom-slider">
       <client-only>
         <VueSlickCarousel v-bind="settings">
-          <div class="apartments-apartment" v-for="item in otherBuilds">
-            <div class="apartments-box">
-              <div class="apartment-image-box">
-                <img class="apartment-image" :src="item.schemaImage" alt="" />
-              </div>
-              <h3 class="apartments-title">{{ item.buildName }}</h3>
+          <nuxt-link v-for="item in otherBuilds" :to="item.link" :key="item.id">
+            <div class="apartments-apartment-carusel" >
+              <div class="apartments-box">
+                <div class="apartment-image-box">
+                  <img class="apartment-image" :src="item.schemaImage" alt="" />
+                </div>
+                <h3 class="apartments-title">{{ item.buildName }}</h3>
 
+              </div>
             </div>
-          </div>
+          </nuxt-link>
         </VueSlickCarousel>
       </client-only>
     </div>
@@ -46,7 +48,7 @@ export default {
       infinite: true,
       speed: 500,
       slidesToShow: 3,
-      slidesToScroll: 4,
+      slidesToScroll: 3,
       initialSlide: 0,
 
       responsive: [
@@ -65,8 +67,8 @@ export default {
             slidesToShow: 2,
             slidesToScroll: 2,
             initialSlide: 2,
-            dots: false,
-            arrows: false,
+            dots: true,
+            arrows: true,
           },
         },
         {
@@ -74,8 +76,8 @@ export default {
           settings: {
             slidesToShow: 1,
             slidesToScroll: 1,
-            dots: false,
-            arrows: false,
+            dots: true,
+            arrows: true,
           },
         },
       ],
@@ -101,7 +103,7 @@ export default {
 .slider-box-hidden{
   overflow: hidden;
 }
-.apartments-apartment {
+.apartments-apartment-carusel {
   .apartments-box {
     margin: 0 1.6rem;
   }
@@ -116,58 +118,22 @@ export default {
       object-fit: cover;
       border-radius: 8px;
     }
-    .apartment-image-des {
-      position: absolute;
-      top: 1.6rem;
-      left: 1.6rem;
-      background: #ffffff;
-      border-radius: 28px;
-      display: flex;
-      align-items: center;
-      padding: 0 1rem 0 0;
 
-      .apartments-count {
-        background: #363636;
-        border: 1px solid #ffffff;
-        box-sizing: border-box;
-        border-radius: 28px;
-        width: 3.5rem;
-        line-height: 2;
-        color: white;
-        font-size: 14px;
-        margin-right: 8px;
-        text-align: center;
-      }
-    }
   }
   .apartments-title {
     font-weight: bold;
     font-size: 20px;
     color: #01152c;
   }
-  .apartments-address {
-    font-size: 14px;
-    line-height: 16px;
-    color: #4f4f4f;
-    margin-bottom: 1.6rem;
-  }
-  .price-description {
-    display: grid;
-    grid-template-columns: auto auto auto;
-    gap: 1rem;
-  }
-}
-@media (max-width: 768px) {
-  grid-template-columns: 1fr 1fr;
-  .apartments-apartment {
-    .price-description {
-      grid-template-columns: auto auto;
+  &:hover{
+    .apartments-title {
+      color: #004b94;
     }
   }
+
 }
-@media (max-width: 500px) {
-  grid-template-columns: 1fr;
-}
+
+
 .slick-prev:before,
 .slick-next:before {
   color: #004b94;

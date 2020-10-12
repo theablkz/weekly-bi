@@ -120,7 +120,7 @@ export default {
         const oktell = `number=${phoneNumber}&name=${this.name.replace(
           /\s/g,
           ''
-        )}&site=bizhssb&company=BIGroup`
+        )}&site=weekly&company=BIGroup`
         let data = new FormData()
 
         data.append('form', oktell)
