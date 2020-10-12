@@ -73,9 +73,22 @@ export default {
       }
     }
     if(storages){
+      let buildsNames = [
+        ...new Set(
+          storages
+            .map((item) => item.queue.real_estate.name)
+        ),
+      ]
+      let newStorages = []
+      buildsNames.forEach(item => {
+        let storagesByName = storages.filter(name => name.queue.real_estate.name === item)
+        let minStorage = storagesByName.find(fMin => fMin.price === Math.min(...storagesByName.map(item => item.price)))
+        minStorage.count = storagesByName.reduce((a,b) => a+b.count, 0)
+        newStorages = [...newStorages, minStorage]
+      })
       builds.allOffers.storages =  {
         name: 'Кладовые',
-        offers: storages
+        offers: newStorages
       }
     }
     const sliderOtherBuilds = [
@@ -122,7 +135,6 @@ export default {
         schemaImage:require('~/assets/image/build-images/velavillage.jpg')
       },
     ]
-    // console.log(builds);
     return {
      builds,
      sliderOtherBuilds

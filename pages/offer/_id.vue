@@ -43,13 +43,16 @@
     <div class="grid-col_1-8 slider-container-id">
       <h1 v-if="builds.discount.value" class="slider-container__discount">{{ builds.discount.value }}%</h1>
       <div class="images" v-viewer>
-        <img
-          @error="( e ) => e.target.src = builds.queue.real_estate.photo"
-          draggable="false"
-          class="slider-image-id"
-          :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"
-          alt=""
-        />
+        <div style="background-color: white;">
+          <img
+            @error="( e ) => e.target.src = builds.queue.real_estate.photo"
+            draggable="false"
+            class="slider-image-id"
+            :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"
+            alt=""
+            style="background-color: white;"
+          />
+        </div>
       </div>
     </div>
     <div class="grid-col_8-11">
@@ -327,6 +330,9 @@ export default {
 </script>
 
 <style lang="scss">
+  .viewer-container img{
+    background-color: white !important;
+  }
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.6s;
@@ -418,6 +424,7 @@ export default {
   position: relative;
   max-width: 800px;
   width: 100%;
+  background-color: white;
   .slider-container__discount {
     position: absolute;
     z-index: 15;
@@ -438,6 +445,7 @@ export default {
   padding: 0 1.6rem;
 }
 .slider-image-id {
+  background-color: white;
   border: 1px solid #f0f0f0;
   box-sizing: border-box;
   border-radius: 8px;

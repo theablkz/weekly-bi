@@ -22,6 +22,7 @@
                 @error="( e ) => e.target.src = item.queue.real_estate.photo"
                 class="apartment-image"
                 :src="`${ name === 'apartments' ? `http://185.125.46.99:8080/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
+                :style="{objectFit: name === 'apartments' ? 'contain' : 'cover'}"
                 alt=""
               />
               <div v-if="item.count" class="apartment-image-des">
@@ -89,7 +90,11 @@ export default {
   }),
   filters: {
     currencyFormat(val) {
-      return `от ${formatterCurrency.format(val / 1000000)} млн ₸`
+      if(val > 999999){
+        return `от ${formatterCurrency.format(val / 1000000)} млн ₸`
+      }else{
+        return `от ${formatterCurrency.format(val / 1000)} тыс ₸`
+      }
     },
   },
   computed: {
@@ -173,7 +178,7 @@ export default {
       .apartment-image {
         width: 100%;
         height: 100%;
-        object-fit: cover;
+        object-fit: contain;
         border-radius: 8px;
       }
       .apartment-image-des {
