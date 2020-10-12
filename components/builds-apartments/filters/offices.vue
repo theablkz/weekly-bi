@@ -5,6 +5,7 @@
         <label>
           <p class="label-title">город</p>
           <select v-model="city" name="">
+            <option :value="null">Все</option>
             <option v-for="item in cities" :value="item">{{ item | cityFilter }}</option>
           </select>
         </label>
@@ -90,7 +91,7 @@
 export default {
   name: 'offices',
   data: () => ({
-    city: 'Нур-Султан',
+    city: null,
     builds: null,
     rooms: 0,
     price: null,
@@ -131,7 +132,7 @@ export default {
       return [
         ...new Set(
           this.apartments.offers
-            .filter((item) => this.city === item.queue.real_estate.city)
+            .filter((item) => this.city ? item.queue.real_estate.city === this.city : true)
             .map((item) => item.queue.real_estate.name)
         ),
       ]
@@ -141,7 +142,7 @@ export default {
     filtering() {
       const fill = this.apartments.offers.filter(
         (item) =>
-          item.queue.real_estate.city === this.city &&
+          (this.city ? item.queue.real_estate.city === this.city : true) &&
           (this.builds ? this.builds === item.queue.real_estate.name : true)
       )
 
@@ -150,14 +151,9 @@ export default {
   },
 
   created() {
-    const cities = [
-      ...new Set(
-        this.apartments.offers.map((item) => item.queue.real_estate.city)
-      ),
-    ]
-    this.city = cities[0]
+
     const createdFilter = this.apartments.offers.filter(
-      (item) => item.queue.real_estate.city === this.city
+      (item) => this.city ? item.queue.real_estate.city === this.city : true
     )
     this.projectsCount = createdFilter
     this.$emit('filtered', createdFilter)
