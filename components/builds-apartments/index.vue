@@ -116,7 +116,7 @@ export default {
       const titleText = {
         flat: `Квартир осталось`,
         office: `Офисов осталось`,
-        parking: `Парковок осталось`,
+        parking: `Паркингов  осталось`,
         storage: `Кладовок осталось`,
       }
       return titleText[type]
