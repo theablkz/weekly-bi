@@ -44,7 +44,7 @@ export default {
   data: () => ({
     settings: {
       dots: true,
-      arrows: true,
+      arrows: false,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
@@ -68,7 +68,6 @@ export default {
             slidesToScroll: 2,
             initialSlide: 2,
             dots: true,
-            arrows: true,
           },
         },
         {
@@ -77,7 +76,6 @@ export default {
             slidesToShow: 1,
             slidesToScroll: 1,
             dots: true,
-            arrows: true,
           },
         },
       ],

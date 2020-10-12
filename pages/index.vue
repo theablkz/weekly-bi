@@ -83,43 +83,43 @@ export default {
         id: '1',
         buildName: 'ALA Park',
         link: 'https://bi.group/ru/project/ala-park',
-        schemaImage:require('~/assets/image/build-images/Ala park.png')
+        schemaImage:require('~/assets/image/build-images/Ala-park.jpg')
       },
       {
         id: '2',
         buildName: 'Besterek',
         link: 'https://bi.group/ru/project/besterek',
-        schemaImage:require('~/assets/image/build-images/Besterek.png')
+        schemaImage:require('~/assets/image/build-images/Besterek.jpg')
       },{
         id: '3',
         buildName: 'BI Village Deluxe',
         link: 'https://cottage.bi.group/',
-        schemaImage:require('~/assets/image/build-images/bi village deluxe.png')
+        schemaImage:require('~/assets/image/build-images/bi-village-deluxe.jpg')
       },{
         id: '4',
         buildName: 'Grand Opera',
         link: 'https://grandopera.bi.group/',
-        schemaImage:require('~/assets/image/build-images/grand opera.png')
+        schemaImage:require('~/assets/image/build-images/grand-opera.jpg')
       },{
         id: '5',
         buildName: 'Headliner',
         link: 'https://bi.group/ru/project/headliner',
-        schemaImage:require('~/assets/image/build-images/Headliner.png')
+        schemaImage:require('~/assets/image/build-images/Headliner.jpg')
       },{
         id: '6',
         buildName: 'Nura Esil',
         link: 'https://nura-esil.bi-group.org/',
-        schemaImage:require('~/assets/image/build-images/nura esil.png')
+        schemaImage:require('~/assets/image/build-images/nura-esil.jpg')
       },{
         id: '7',
         buildName: 'President\'s Park',
         link: 'https://presidents-park.bi.group/',
-        schemaImage:require('~/assets/image/build-images/President\'s Park.png')
+        schemaImage:require("~/assets/image/build-images/President's-Park.jpg")
       },{
         id: '8',
         buildName: 'Vela Village',
         link: 'https://bi.group/ru/project/vela-village',
-        schemaImage:require('~/assets/image/build-images/velavillage.png')
+        schemaImage:require('~/assets/image/build-images/velavillage.jpg')
       },
     ]
     // console.log(builds);
