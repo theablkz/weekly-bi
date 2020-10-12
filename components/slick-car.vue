@@ -94,6 +94,10 @@ export default {
   max-width: 120rem;
   width: 100%;
   margin: auto auto 7rem auto;
+  @media (max-width: 768px) {
+    width: auto;
+    padding: 0 1.6rem;
+  }
 }
 .slider-box-hidden{
   overflow: hidden;
@@ -101,6 +105,9 @@ export default {
 .apartments-apartment-carusel {
   .apartments-box {
     margin: 0 1.6rem;
+    @media (max-width: 768px) {
+      margin: 0;
+    }
   }
   .apartment-image-box {
     position: relative;
@@ -127,7 +134,6 @@ export default {
   }
 
 }
-
 
 .slick-prev:before,
 .slick-next:before {

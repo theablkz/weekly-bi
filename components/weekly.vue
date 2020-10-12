@@ -409,7 +409,7 @@ export default {
   right: 2px !important;
 }
 .slick-prev {
-  left: -22px !important;
+  left: -17px !important;
   z-index: 1 !important;
 }
 .slick-next:before {

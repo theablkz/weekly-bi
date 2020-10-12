@@ -326,6 +326,12 @@ export default {
     currencyFormat(val, flatType) {
       return `${flatType === 'parking' || flatType === 'parking' ? 'от ' : ''} ${formatterCurrency.format(val)} ₸`
     },
+  },
+  mounted() {
+    document.getElementsByClassName("layout")[0].scroll({
+      top: 0,
+      left: 0,
+    });
   }
 }
 </script>
