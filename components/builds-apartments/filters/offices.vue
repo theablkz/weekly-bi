@@ -49,6 +49,7 @@
             <label>
               <p class="label-title">город</p>
               <select v-model="city" name="">
+                <option :value="null">Все</option>
                 <option v-for="item in cities" :value="item">{{ item }}</option>
               </select>
             </label>

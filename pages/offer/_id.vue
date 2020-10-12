@@ -42,7 +42,7 @@
     </div>
     <div class="grid-col_1-8 slider-container-id">
       <h1 v-if="builds.discount.value" class="slider-container__discount">{{ builds.discount.value }}%</h1>
-      <div class="images" v-viewer>
+      <div class="images indent_bottom-h4" v-viewer>
         <div style="background-color: white;">
           <img
             @error="( e ) => e.target.src = builds.queue.real_estate.photo"
@@ -54,6 +54,7 @@
           />
         </div>
       </div>
+      <a target="_blank" class="build-about-link" :href="builds.queue.real_estate.website">Узнать подробнее о ЖК →</a>
     </div>
     <div class="grid-col_8-11">
       <div class="weekly-content">
@@ -63,7 +64,7 @@
           </div>
 
           <h1 class="price-discount" :style="{ color: '#E18438' }">
-            {{ builds.discountedPrice || builds.price | currencyFormat }}
+            {{ builds.discountedPrice || builds.price | currencyFormat(builds.flatType) }}
           </h1>
           <h4 class="price" v-if="builds.discountedPrice">{{ builds.price | currencyFormat }}</h4>
 
@@ -131,7 +132,7 @@
                 </svg> </span
               >{{ builds.square }} м&#178;
             </p>
-            <p>
+            <p v-if="builds.flatType !== 'parking' && builds.flatType !== 'storage'">
               <span>
                 <svg
                   width="13"
@@ -166,7 +167,7 @@
                 </svg> </span
               >Потолки {{ builds.ceilingHeight }} м
             </p>
-            <p>
+            <p v-if="builds.flatType !== 'parking'">
               <span>
                 <svg
                   width="16"
@@ -322,8 +323,8 @@ export default {
     }
   },
   filters: {
-    currencyFormat(val) {
-      return `${formatterCurrency.format(val)} ₸`
+    currencyFormat(val, flatType) {
+      return `${flatType === 'parking' || flatType === 'parking' ? 'от ' : ''} ${formatterCurrency.format(val)} ₸`
     },
   }
 }
@@ -356,6 +357,13 @@ export default {
 
     }
   }
+}
+.build-about-link{
+  width: max-content;
+  padding: .5rem 2.2rem;
+  color: #004B94;
+  border: 1px solid #EAEAEA;
+  border-radius: 6px;
 }
 .weekly-container {
   padding-top: 4rem;
