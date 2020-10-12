@@ -35,18 +35,32 @@
     position: fixed;
     top: 0;
     left: 0;
+    bottom: 0;
+    right: 0;
     width: 100%;
     height: 100%;
     background: white;
     text-align: center;
-    padding-top: 200px;
+
     font-size: 30px;
     font-family: sans-serif;
     z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     .loading-icon{
       margin: auto;
       width: 10rem;
       height: 10rem;
+      animation: 1s 0.2s ball-jump infinite ease-in-out;
     }
+  }
+
+  @keyframes ball-jump{
+    0%  {height: 100px;}
+    20% {height: 120px;}
+    50% {transform: translateY(-50%); border-radius: 50%;}
+    95% {height: 120px;}
+    100%{height: 100px;}
   }
 </style>

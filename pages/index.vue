@@ -60,13 +60,13 @@ export default {
     if(parkings){
       let buildsNames = [
         ...new Set(
-          storages
+          parkings
             .map((item) => item.queue.real_estate.name)
         ),
       ]
       let newParkings = []
       buildsNames.forEach(item => {
-        let storagesByName = storages.filter(name => name.queue.real_estate.name === item)
+        let storagesByName = parkings.filter(name => name.queue.real_estate.name === item)
         let minStorage = storagesByName.find(fMin => fMin.price === Math.min(...storagesByName.map(item => item.price)))
         minStorage.count = storagesByName.reduce((a,b) => a+b.count, 0)
         newParkings = [...newParkings, minStorage]
