@@ -8,7 +8,7 @@
     <div class="bottom-slider">
       <client-only>
         <VueSlickCarousel v-bind="settings">
-          <nuxt-link v-for="item in otherBuilds" :to="item.link" :key="item.id">
+          <a v-for="item in otherBuilds" :href="item.link" target="_blank" :key="item.id">
             <div class="apartments-apartment-carusel" >
               <div class="apartments-box">
                 <div class="apartment-image-box">
@@ -18,7 +18,7 @@
 
               </div>
             </div>
-          </nuxt-link>
+          </a>
         </VueSlickCarousel>
       </client-only>
     </div>
