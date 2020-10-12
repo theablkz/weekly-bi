@@ -43,8 +43,8 @@ export default {
   props: ['otherBuilds'],
   data: () => ({
     settings: {
-      dots: true,
-      arrows: false,
+      dots: false,
+      arrows: true,
       infinite: true,
       speed: 500,
       slidesToShow: 3,
@@ -58,7 +58,6 @@ export default {
             slidesToShow: 3,
             slidesToScroll: 3,
             infinite: true,
-            dots: true,
           },
         },
         {
@@ -67,15 +66,13 @@ export default {
             slidesToShow: 2,
             slidesToScroll: 2,
             initialSlide: 2,
-            dots: true,
           },
         },
         {
           breakpoint: 480,
           settings: {
             slidesToShow: 1,
-            slidesToScroll: 1,
-            dots: true,
+            slidesToScroll: 1
           },
         },
       ],
