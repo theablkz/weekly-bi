@@ -56,6 +56,7 @@
           />
         </VueSlickCarousel>
       </client-only>
+      <a target="_blank" class="build-about-link" :href="builds.buildLink">Узнать подробнее о ЖК →</a>
     </div>
     <div class="grid-col_8-11">
       <div class="weekly-content">
@@ -284,6 +285,14 @@ export default {
 </script>
 
 <style lang="scss">
+  .build-about-link{
+    width: max-content;
+    padding: .5rem 2.2rem;
+    color: #004B94;
+    border: 1px solid #EAEAEA;
+    border-radius: 6px;
+    margin-top: 1.2rem;
+  }
 .weekly-content-about__time {
   display: flex;
   flex-direction: column;
