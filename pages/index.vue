@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <loading v-if="loading" />
     <weekly :builds="builds.offerOfTheWeek" class="block-indent" />
     <filter-builds :builds="builds" class="block-indent" />
     <slick-car class="block-indent" :otherBuilds="sliderOtherBuilds" />
@@ -9,22 +10,19 @@
 <script>
 import Weekly from '~/components/weekly'
 import axios from 'axios'
+import Loading from '~/components/loading'
 export default {
   scrollToTop: true,
   components: {
+    Loading,
     FilterBuilds: () => import('@/components/filter-builds'),
     Weekly,
     SlickCar: () => import('~/components/slick-car'),
   },
+  data: () => ({
+    loading: true
+  }),
   async asyncData({ app }) {
-      // let one = "http://185.125.46.99:8080/api/flats"
-      // let two = "http://185.125.46.99:8080/api/offices"
-      // let three = "http://185.125.46.99:8080/api/storages"
-
-      // const requestOne = axios.get(one);
-      // const requestTwo = axios.get(two);
-      // const requestThree = axios.get(three);
-
       const {apartments, offices, weekly, storages, parkings} = await axios.all([
         app.$axios.$get('http://185.125.46.99:8080/api/flats'),
         app.$axios.$get('http://bilandings.ru:8080/api/offices'),
@@ -40,14 +38,7 @@ export default {
           storages: responses[3],
           parkings: responses[4]
         }
-        // use/access the results
       }))
-
-      // const apartments = await app.$axios.$get('http://185.125.46.99:8080/api/flats').then((res) => res).catch(() => [])
-      // const offices = await app.$axios.$get('http://bilandings.ru:8080/api/offices').then((res) => res).catch(() => [])
-      // const weekly = await app.$axios.$get('http://bilandings.ru:8080/api/offer').then(res => res).catch(() => ({}))
-      // const storages = await app.$axios.$get('http://bilandings.ru:8080/api/storages').then((res) => res).catch(() => [])
-      // const parkings = await app.$axios.$get('http://bilandings.ru:8080/api/parkings').then(res => res).catch(() => [])
     const builds = {
       offerOfTheWeek: weekly,
       allOffers: {
@@ -67,9 +58,22 @@ export default {
       }
     }
     if(parkings){
+      let buildsNames = [
+        ...new Set(
+          storages
+            .map((item) => item.queue.real_estate.name)
+        ),
+      ]
+      let newParkings = []
+      buildsNames.forEach(item => {
+        let storagesByName = storages.filter(name => name.queue.real_estate.name === item)
+        let minStorage = storagesByName.find(fMin => fMin.price === Math.min(...storagesByName.map(item => item.price)))
+        minStorage.count = storagesByName.reduce((a,b) => a+b.count, 0)
+        newParkings = [...newParkings, minStorage]
+      })
       builds.allOffers.parkings =  {
         name: 'Паркинги',
-        offers: parkings
+        offers: newParkings
       }
     }
     if(storages){
@@ -140,139 +144,11 @@ export default {
      sliderOtherBuilds
     }
   },
-  // setup() {
-  //   const { $axios } = useContext()
-  //   const apartments = useAsync(() =>
-  //     $axios
-  //       .$get('http://185.125.46.99:8080/api/flats')
-  //       .then((res) => res)
-  //       .catch(() => [])
-  //   )
-  //   const offices = useAsync(() =>
-  //     $axios
-  //       .$get('http://185.125.46.99:8080/api/offices')
-  //       .then((res) => res)
-  //       .catch(() => [])
-  //   )
-  //   const storages = useAsync(() =>
-  //     $axios
-  //       .$get('http://185.125.46.99:8080/api/storages')
-  //       .then((res) => res)
-  //       .catch(() => [])
-  //   )
-  //   const parkings = useAsync(() => $axios.$get('http://185.125.46.99:8080/api/parkings').then(res => res).catch(() => []))
-  //   const weekly = useAsync( () => $axios.$get('http://185.125.46.99:8080/api/offer').then(res => res).catch(() => ({})) )
-  //   const builds = reactive({
-  //     offerOfTheWeek: weekly,
-  //     allOffers: {
-  //       apartments: {
-  //         name: 'Квартиры',
-  //         offers: apartments,
-  //       },
-  //       offices: {
-  //         name: 'Офисы',
-  //         offers: offices,
-  //       },
-  //       parkings: {
-  //         name: 'Паркинги',
-  //         offers: parkings
-  //       },
-  //       storages: {
-  //         name: 'Кладовые',
-  //         offers: storages
-  //       }
-  //     },
-  //   })
-  //   const sliderOtherBuilds = reactive([
-  //     {
-  //       id: '1',
-  //       city: 'Нур-Султан',
-  //       buildName: 'Crocus City',
-  //       rooms: '3',
-  //       discountedPriceInt: 45000000,
-  //       address: 'astana, пр. Улы Дала, ост. ЖК Кмала-1',
-  //       offersLeft: {
-  //         title: 'Квартир осталось',
-  //         count: 4,
-  //       },
-  //       priceMWithDiscount: 'от 101 млн ₸',
-  //       priceMWithoutDiscount: 'от 333 млн ₸',
-  //       endOfStock: {
-  //         title: 'до 25 июля',
-  //         value: 'скидка 10%',
-  //       },
-  //       schemaImage:
-  //         'https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg',
-  //     },
-  //     {
-  //       id: '2',
-  //       city: 'Алматы',
-  //       buildName: 'Crocus Citysss',
-  //       rooms: '3',
-  //       discountedPriceInt: 45000000,
-  //       address: 'Алматы, пр. Улы Дала, ост. ЖК Кмала-1',
-  //       offersLeft: {
-  //         title: 'Квартир осталось',
-  //         count: 4,
-  //       },
-  //       priceMWithDiscount: 'от 101 млн ₸',
-  //       priceMWithoutDiscount: 'от 333 млн ₸',
-  //       endOfStock: {
-  //         title: 'до 25 июля',
-  //         value: 'скидка 10%',
-  //       },
-  //       schemaImage:
-  //         'https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg',
-  //     }
-  //   ])
-  //   return {
-  //     builds,
-  //     sliderOtherBuilds,
-  //   }
-  // },
+  mounted() {
+    setTimeout(() => this.loading = false, 1000)
+  }
 }
-// "offers": [
-//   {
-//     "id": "1",
-//     "city": "Нур-Султан",
-//     "buildName": "Crocus City",
-//     "rooms": "3",
-//     "discountedPriceInt": 45000000,
-//     "address": "Алматы, пр. Улы Дала, ост. ЖК Кмала-1",
-//     "offersLeft": {
-//       "title": "Квартир осталось",
-//       "count": 4
-//     },
-//     "priceMWithDiscount": "от 101 млн ₸",
-//     "priceMWithoutDiscount": "от 333 млн ₸",
-//     "endOfStock": {
-//       "title": "до 25 июля",
-//       "value": "скидка 10%"
-//     },
-//     "schemaImage": "https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg"
-//
-//   },
-//   {
-//     "id": "2",
-//     "city": "Алматы",
-//     "buildName": "Crocus City",
-//     "rooms": "3",
-//     "discountedPriceInt": 45000000,
-//     "address": "Алматы, пр. Улы Дала, ост. ЖК Кмала-1",
-//     "offersLeft": {
-//       "title": "Квартир осталось",
-//       "count": 4
-//     },
-//     "priceMWithDiscount": "от 101 млн ₸",
-//     "priceMWithoutDiscount": "от 333 млн ₸",
-//     "endOfStock": {
-//       "title": "до 25 июля",
-//       "value": "скидка 10%"
-//     },
-//     "schemaImage": "https://i.pinimg.com/originals/0e/5e/ef/0e5eef0e5d7bb8219b38c7e45b732c32.jpg"
-//
-//   }
-// ]
+
 </script>
 
 <style lang="scss">
