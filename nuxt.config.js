@@ -1,6 +1,8 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
-
+  server: {
+    host: '0.0.0.0'
+  },
   head: {
     title: 'Приобретайте недвижимость выгодно!',
     meta: [

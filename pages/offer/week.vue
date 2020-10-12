@@ -550,47 +550,6 @@ export default {
   max-height: 460px;
   object-fit: cover !important;
 }
-.slick-next {
-  right: 2px !important;
-}
-.slick-prev {
-  left: -22px !important;
-  z-index: 1 !important;
-}
-.slick-next:before {
-  color: #ffffff !important;
-  font-size: 4rem !important;
-  content: url('~assets/image/icons/slider-icon-arrow-right.svg') !important;
-}
-.slick-prev:before {
-  color: #ffffff !important;
-  font-size: 4rem !important;
-  content: url('~assets/image/icons/slider-icon-arrow-left.svg') !important;
-}
-.slick-dots {
-  bottom: 25px !important;
-}
-.slick-dots li button:before {
-  font-size: 10px !important;
-}
-.slick-dots li.slick-active button:before {
-  color: white !important;
-  opacity: 1 !important;
-}
-.slick-dots li button:before {
-  color: white !important;
-}
-@media (max-width: 768px) {
-  .slick-next:before {
-    font-size: 2.6rem !important;
-  }
-  .slick-prev:before {
-    font-size: 2.6rem !important;
-  }
-  .slick-dots {
-    bottom: 15px !important;
-  }
-}
 .link-home {
   p {
     display: grid;

@@ -406,11 +406,15 @@ export default {
   object-fit: cover !important;
 }
 .slick-next {
-  right: 2px !important;
+  right: 0px !important;
+  width: 4rem;
+  height: 4rem;
 }
 .slick-prev {
-  left: -17px !important;
+  left: 0px !important;
   z-index: 1 !important;
+  width: 4rem;
+  height: 4rem;
 }
 .slick-next:before {
   color: #ffffff !important;
