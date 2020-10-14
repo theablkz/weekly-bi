@@ -324,7 +324,7 @@ export default {
   },
   filters: {
     currencyFormat(val, flatType) {
-      return `${flatType === 'parking' || flatType === 'parking' ? 'от ' : ''} ${formatterCurrency.format(val)} ₸`
+      return `${flatType === 'parking' || flatType === 'storage' ? 'от ' : ''} ${formatterCurrency.format(val)} ₸`
     },
   },
   mounted() {

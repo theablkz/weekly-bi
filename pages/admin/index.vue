@@ -75,7 +75,27 @@
           <input class="build-view-input" type="checkbox" v-model="item.view.storage">
         </div>
       </div>
-      <button @click="saveViewBuilds">Сохранить</button>
+      <button class="indent_bottom-h3" @click="saveViewBuilds">Сохранить</button>
+      <button @click="() => {
+        buildView.forEach(item => {
+          item.view = {
+            flat:false,
+            office:false,
+            parking:false,
+            storage:false
+          }
+        })
+      }" style="background-color: #cb4635">удалить все скидки</button>
+      <button @click="() => {
+        buildView.forEach(item => {
+          item.view = {
+            flat:true,
+            office:true,
+            parking:true,
+            storage:true
+          }
+        })
+      }" style="background-color: #8fc030">добавить все скидки</button>
 
     </div>
   </div>
