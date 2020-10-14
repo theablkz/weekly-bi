@@ -19,7 +19,7 @@
           <nuxt-link class="offer-link" :to="`/offer/${item.id}`">
             <div class="apartment-image-box">
               <img
-                @error="( e ) => e.target.src = item.queue.real_estate.photo"
+                @error="( e ) => e.target.src = 'https://lamcdn.net/lookatme.ru/post_image-image/sIaRmaFSMfrw8QJIBAa8mA-small.png'"
                 class="apartment-image"
                 :src="`${ name === 'apartments' ? `http://185.125.46.99:8080/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
                 :style="{objectFit: name === 'apartments' ? 'contain' : 'cover'}"
@@ -48,7 +48,7 @@
             </div>
             <div v-if="item.discountedPrice">
               <h3 :style="{ color: '#345086' }">скидка {{ item.discount.value }}%</h3>
-              <small>до 25 июля</small>
+              <small>до {{item.discount.date | discountDate}}</small>
             </div>
           </div>
         </div>
@@ -96,6 +96,13 @@ export default {
         return `от ${formatterCurrency.format(val / 1000)} тыс ₸`
       }
     },
+    discountDate(date){
+      console.log(date)
+      return new Intl.DateTimeFormat('ru', {
+        day: 'numeric',
+        month: 'long'
+      }).format(new Date(date))
+    },
   },
   computed: {
     componentFilter() {
@@ -106,6 +113,23 @@ export default {
     },
   },
   methods: {
+    async getDefaultImg(link){
+      return await new Promise((resolve, reject) => {
+        let img = new Image()
+        img.src = link
+        img.onload = () => resolve(img.link)
+        img.onerror = resolve("https://lamcdn.net/lookatme.ru/post_image-image/sIaRmaFSMfrw8QJIBAa8mA-small.png")
+      })
+
+
+      // let img = new Image();
+      // img.src = link;
+      // img.onerror = () => {
+      //   img.src = "https://lamcdn.net/lookatme.ru/post_image-image/sIaRmaFSMfrw8QJIBAa8mA-small.png"
+      // };
+      //
+      // return img.src
+    },
     filtered(val) {
       this.filteredApartments = val
     },
