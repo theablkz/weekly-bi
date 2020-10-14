@@ -42,7 +42,7 @@
         <h3>скидка</h3>
       </div>
       <div v-for="item in discounts" class="discounts-delete-box">
-        <p>{{buildsName.find(build => build.guid === item.guid).name}}</p>
+        <p>{{buildsName.find(build => build.guid === item.guid) ? buildsName.find(build => build.guid === item.guid).name : ''}}</p>
         <div>
           <p v-for="offer in item.types">{{offer}}</p>
         </div>
