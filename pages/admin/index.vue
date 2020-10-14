@@ -18,7 +18,7 @@
     </div>
     <div class="grid-col_6-11">
       <h2>форма добавления скидок</h2>
-      <form @submit.prevent="sendDiscount">
+      <form class="indent_bottom-h3" @submit.prevent="sendDiscount">
         <label for="buildId">buildId
           <select v-model="buildId" name="buildId" id="buildId">
             <option v-for="item in buildsName" :value="item.guid">{{item.name}}</option>
@@ -36,8 +36,6 @@
         <label for="discountDate">Действует до<input v-model="discountDate" id="discountDate" type="date"></label>
         <button>send form</button>
       </form>
-    </div>
-    <div class="grid-col_1-6">
       <div class="discounts-delete-box">
         <h3>имя жк</h3>
         <h3>для...</h3>
@@ -52,21 +50,29 @@
         <button @click="sendDeleteDiscount(item.id)" class="delete-button">удалить</button>
       </div>
     </div>
+    <div class="grid-col_1-6">
+
+    </div>
     <div class="grid-col_6-11">
 
-      <button @click="buildView.forEach(item => {item.view = true})">добавить все записи</button>
-      <button @click="buildView.forEach(item => {item.view = false})">убрать все записи</button>
+
       <div class="views-table-box">
 
         <div class="views-table">
           <p>name</p>
-          <p>status</p>
+          <p>flat</p>
+          <p>office</p>
+          <p>parking</p>
+          <p>storage</p>
         </div>
         <div
           v-for="item in buildView"
           class="views-table">
           <h3>{{ item.name }}</h3>
-          <input type="checkbox" v-model="item.view">
+          <input class="build-view-input" type="checkbox" v-model="item.view.flat">
+          <input class="build-view-input" type="checkbox" v-model="item.view.office">
+          <input class="build-view-input" type="checkbox" v-model="item.view.parking">
+          <input class="build-view-input" type="checkbox" v-model="item.view.storage">
         </div>
       </div>
       <button @click="saveViewBuilds">Сохранить</button>
@@ -176,11 +182,13 @@ name: "index",
       })
     },
     saveViewBuilds(){
-      const viewBuilds = this.buildView.filter(item => item.view).map(item => item.guid)
+      const viewBuilds = this.buildView.filter(item => item.view.flat || item.view.office || item.view.parking || item.view.storage).map(item => ({
+        guid: item.guid,
+        types: item.view
+      }))
+      console.log('viewBuilds', viewBuilds)
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$post(`http://185.125.46.99:8080/admin/view`, {
-        guids: viewBuilds
-      },{
+      this.$axios.$post(`http://185.125.46.99:8080/admin/view`, viewBuilds,{
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
@@ -222,12 +230,19 @@ name: "index",
 }
 .views-table{
   display: grid;
-  grid-template-columns: 1fr 40px;
+  grid-template-columns: 1fr 40px 40px 40px 50px;
   gap: 1.6rem;
   margin-bottom: 1.2rem;
   align-items: center;
   &:hover{
-    background: #6a98c5;
+    background: #9ec1e5;
   }
 }
+  .build-view-input{
+    width: 3rem;
+    height: 3rem;
+    &:hover{
+      cursor: pointer;
+    }
+  }
 </style>
