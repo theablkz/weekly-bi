@@ -85,7 +85,7 @@
             storage:false
           }
         })
-      }" style="background-color: #cb4635">удалить все скидки</button>
+      }" style="background-color: #cb4635">убрать отметку на всех</button>
       <button @click="() => {
         buildView.forEach(item => {
           item.view = {
@@ -95,7 +95,7 @@
             storage:true
           }
         })
-      }" style="background-color: #8fc030">добавить все скидки</button>
+      }" style="background-color: #8fc030">добавить отметку на всех</button>
 
     </div>
   </div>
