@@ -163,7 +163,10 @@ export default {
     background-size: 30rem, 71rem, auto;
   }
   @media (max-width: 900px) {
-    background-size: 30rem, 56rem, auto;
+    background-size: 30rem, 60rem, auto;
+  }
+  @media (max-width: 500px) {
+    background-size: 30rem, 46rem, auto;
   }
   @media (max-width: 400px) {
     background-size: 30rem, 36rem, auto;

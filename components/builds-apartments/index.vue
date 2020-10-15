@@ -19,7 +19,7 @@
           <nuxt-link class="offer-link" :to="`/offer/${item.id}`">
             <div class="apartment-image-box">
               <img
-                @error="( e ) => e.target.src = item.queue.real_estate.photo"
+                @error="( e ) => e.target.src = 'https://lamcdn.net/lookatme.ru/post_image-image/sIaRmaFSMfrw8QJIBAa8mA-small.png'"
                 class="apartment-image"
                 :src="`${ name === 'apartments' ? `http://185.125.46.99:8080/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
                 :style="{objectFit: name === 'apartments' ? 'contain' : 'cover'}"
