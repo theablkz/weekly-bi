@@ -1,6 +1,6 @@
 <template>
   <div class="modal">
-    <div class="modal__box">
+    <div v-if="!dataSended" class="modal__box">
       <svg
         class="modal__close"
         @click="$emit('close')"
@@ -76,6 +76,11 @@
         </div>
       </div>
     </div>
+    <div v-if="dataSended" class="modal__box modal__box-success">
+      <img class="indent_bottom-h3" style="width: 12rem; height: 12rem" src="~assets/image/icons/yes.svg" alt="">
+      <h1 class="indent_bottom-h2" style="text-align: center">Спасибо за заявку! Наши специалисты свяжутся с Вами в ближайшее время</h1>
+      <button @click="$emit('close')">Закрыть</button>
+    </div>
   </div>
 </template>
 
@@ -89,6 +94,7 @@ export default {
     phone: '',
     nameError: false,
     phoneError: false,
+    dataSended: false
   }),
   watch: {
     name: function () {
@@ -136,7 +142,7 @@ export default {
           clientInfo: userData,
           referralProgramName: 'SBERBANK',
         }
-        this.$emit('close')
+        this.dataSended = true
       }
     },
   },
@@ -144,6 +150,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+  .modal__box-success{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 2.4rem 1.6rem;
+  }
 .modal {
   position: fixed;
   z-index: 20;
