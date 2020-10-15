@@ -278,7 +278,7 @@ export default {
   },
   filters: {
     currencyFormat(val) {
-      return `${formatterCurrency.format(val)} ₸`
+      return `от ${formatterCurrency.format(val)} ₸`
     },
   },
 }
