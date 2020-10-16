@@ -109,9 +109,9 @@ name: "index",
 
   async asyncData({ app }) {
     const encodedUserPswd = app.$cookies.get('token')
-    const buildsName = await app.$axios.$get('http://185.125.46.99:8080/api/projects').then(res => res).catch(() => [])
-    const discounts = await app.$axios.$get('http://185.125.46.99:8080/api/discount').then(res => res).catch(() => [])
-    const buildView = await app.$axios.$get('http://185.125.46.99:8080/admin/view', {
+    const buildsName = await app.$axios.$get('http://offersapi.bi.group/api/projects').then(res => res).catch(() => [])
+    const discounts = await app.$axios.$get('http://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
+    const buildView = await app.$axios.$get('http://offersapi.bi.group/admin/view', {
       headers: {
         Authorization: `Basic ${encodedUserPswd}`
       }
@@ -154,7 +154,7 @@ name: "index",
       })
       console.log(formData)
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$post('http://185.125.46.99:8080/admin/offer', formData, {
+      this.$axios.$post('http://offersapi.bi.group/admin/offer', formData, {
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
@@ -174,13 +174,13 @@ name: "index",
       }
       console.log(form)
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$post('http://185.125.46.99:8080/admin/discount', form, {
+      this.$axios.$post('http://offersapi.bi.group/admin/discount', form, {
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
       }).then(async res => {
         console.log(res)
-        const discounts = await this.$axios.$get('http://185.125.46.99:8080/api/discount').then(res => res).catch(() => [])
+        const discounts = await this.$axios.$get('http://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
         this.discounts = discounts
       }).catch(err => {
         console.log(err)
@@ -189,13 +189,13 @@ name: "index",
     },
     sendDeleteDiscount(id){
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$delete(`http://185.125.46.99:8080/admin/discount/${id}`, {
+      this.$axios.$delete(`http://offersapi.bi.group/admin/discount/${id}`, {
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
       }).then(async res => {
         console.log(res)
-        const discounts = await this.$axios.$get('http://185.125.46.99:8080/api/discount').then(res => res).catch(() => [])
+        const discounts = await this.$axios.$get('http://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
         this.discounts = discounts
       }).catch(err => {
         console.log(err)
@@ -208,13 +208,13 @@ name: "index",
       }))
       console.log('viewBuilds', viewBuilds)
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$post(`http://185.125.46.99:8080/admin/view`, viewBuilds,{
+      this.$axios.$post(`http://offersapi.bi.group/admin/view`, viewBuilds,{
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
       }).then(async res => {
         console.log(res)
-        this.buildView = await this.$axios.$get('http://185.125.46.99:8080/admin/view', {
+        this.buildView = await this.$axios.$get('http://offersapi.bi.group/admin/view', {
           headers: {
             Authorization: `Basic ${encodedUserPswd}`
           }

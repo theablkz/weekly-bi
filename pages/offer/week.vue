@@ -51,7 +51,7 @@
             v-for="image in builds.images"
             draggable="false"
             class="slider-image"
-            :src="`http://185.125.46.99:8080/saved/${image}`"
+            :src="`http://offersapi.bi.group/saved/${image}`"
             alt=""
           />
         </VueSlickCarousel>

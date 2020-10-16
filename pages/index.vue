@@ -24,11 +24,11 @@ export default {
   }),
   async asyncData({ app }) {
       const {apartments, offices, weekly, storages, parkings} = await axios.all([
-        app.$axios.$get('http://185.125.46.99:8080/api/flats'),
-        app.$axios.$get('http://bilandings.ru:8080/api/offices'),
-        app.$axios.$get('http://bilandings.ru:8080/api/offer'),
-        app.$axios.$get('http://bilandings.ru:8080/api/storages'),
-        app.$axios.$get('http://bilandings.ru:8080/api/parkings')
+        app.$axios.$get('http://offersapi.bi.group/api/flats'),
+        app.$axios.$get('http://offersapi.bi.group/api/offices'),
+        app.$axios.$get('http://offersapi.bi.group/api/offer'),
+        app.$axios.$get('http://offersapi.bi.group/api/storages'),
+        app.$axios.$get('http://offersapi.bi.group/api/parkings')
         ]).then(axios.spread((...responses) => {
 
         return {

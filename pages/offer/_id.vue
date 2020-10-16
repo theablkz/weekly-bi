@@ -48,7 +48,7 @@
             @error="( e ) => e.target.src = builds.queue.real_estate.photo"
             draggable="false"
             class="slider-image-id"
-            :src="`http://185.125.46.99:8080/img/${builds.schemaImage}`"
+            :src="`http://offersapi.bi.group/img/${builds.schemaImage}`"
             alt=""
             style="background-color: white;"
           />
@@ -297,7 +297,7 @@ export default {
     const id = app.context.route.params.id
 
     const buildData = await app.$axios.$get(
-      `http://185.125.46.99:8080/api/solo/${id}`
+      `http://offersapi.bi.group/api/solo/${id}`
     )
     return {
       builds: buildData,
