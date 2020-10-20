@@ -109,9 +109,9 @@ name: "index",
 
   async asyncData({ app }) {
     const encodedUserPswd = app.$cookies.get('token')
-    const buildsName = await app.$axios.$get('http://offersapi.bi.group/api/projects').then(res => res).catch(() => [])
-    const discounts = await app.$axios.$get('http://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
-    const buildView = await app.$axios.$get('http://offersapi.bi.group/admin/view', {
+    const buildsName = await app.$axios.$get('https://offersapi.bi.group/api/projects').then(res => res).catch(() => [])
+    const discounts = await app.$axios.$get('https://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
+    const buildView = await app.$axios.$get('https://offersapi.bi.group/admin/view', {
       headers: {
         Authorization: `Basic ${encodedUserPswd}`
       }
@@ -154,7 +154,7 @@ name: "index",
       })
       console.log(formData)
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$post('http://offersapi.bi.group/admin/offer', formData, {
+      this.$axios.$post('https://offersapi.bi.group/admin/offer', formData, {
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
@@ -174,13 +174,13 @@ name: "index",
       }
       console.log(form)
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$post('http://offersapi.bi.group/admin/discount', form, {
+      this.$axios.$post('https://offersapi.bi.group/admin/discount', form, {
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
       }).then(async res => {
         console.log(res)
-        const discounts = await this.$axios.$get('http://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
+        const discounts = await this.$axios.$get('https://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
         this.discounts = discounts
       }).catch(err => {
         console.log(err)
@@ -189,13 +189,13 @@ name: "index",
     },
     sendDeleteDiscount(id){
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$delete(`http://offersapi.bi.group/admin/discount/${id}`, {
+      this.$axios.$delete(`https://offersapi.bi.group/admin/discount/${id}`, {
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
       }).then(async res => {
         console.log(res)
-        const discounts = await this.$axios.$get('http://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
+        const discounts = await this.$axios.$get('https://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
         this.discounts = discounts
       }).catch(err => {
         console.log(err)
@@ -208,13 +208,13 @@ name: "index",
       }))
       console.log('viewBuilds', viewBuilds)
       const encodedUserPswd = this.$cookies.get('token')
-      this.$axios.$post(`http://offersapi.bi.group/admin/view`, viewBuilds,{
+      this.$axios.$post(`https://offersapi.bi.group/admin/view`, viewBuilds,{
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }
       }).then(async res => {
         console.log(res)
-        this.buildView = await this.$axios.$get('http://offersapi.bi.group/admin/view', {
+        this.buildView = await this.$axios.$get('https://offersapi.bi.group/admin/view', {
           headers: {
             Authorization: `Basic ${encodedUserPswd}`
           }

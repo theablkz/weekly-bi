@@ -28,7 +28,7 @@ name: "auth",
   methods: {
     authSend(){
       const encodedUserPswd = btoa(`${this.login}:${this.password}`);
-      this.$axios.$get('http://offersapi.bi.group/admin/login', {
+      this.$axios.$get('https://offersapi.bi.group/admin/login', {
         headers: {
           Authorization: `Basic ${encodedUserPswd}`
         }

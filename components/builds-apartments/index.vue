@@ -21,7 +21,7 @@
               <img
                 @error="( e ) => e.target.src = 'https://lamcdn.net/lookatme.ru/post_image-image/sIaRmaFSMfrw8QJIBAa8mA-small.png'"
                 class="apartment-image"
-                :src="`${ name === 'apartments' ? `http://offersapi.bi.group/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
+                :src="`${ name === 'apartments' ? `https://offersapi.bi.group/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
                 :style="{objectFit: name === 'apartments' ? 'contain' : 'cover'}"
                 alt=""
               />
@@ -38,13 +38,13 @@
               <h3 :style="{ color: '#E18438' }">
                 {{ item.discountedPrice || item.price | currencyFormat }}
               </h3>
-              <small> {{item.discountedPrice ? 'за м² со скидкой' : 'за м²'}}</small>
+              <small> {{item.discountedPrice ? 'цена со скидкой' : 'за м²'}}</small>
             </div>
             <div v-if="item.discountedPrice">
               <h3 :style="{ color: '#999999', textDecoration: 'line-through' }">
                 {{ item.price | currencyFormat }}
               </h3>
-              <small>за м² без скидки</small>
+              <small>цена без скидки</small>
             </div>
             <div v-if="item.discountedPrice">
               <h3 :style="{ color: '#345086' }">скидка {{ item.discount.value }}%</h3>

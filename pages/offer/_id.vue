@@ -48,7 +48,7 @@
             @error="( e ) => e.target.src = builds.queue.real_estate.photo"
             draggable="false"
             class="slider-image-id"
-            :src="`http://offersapi.bi.group/img/${builds.schemaImage}`"
+            :src="`https://offersapi.bi.group/img/${builds.schemaImage}`"
             alt=""
             style="background-color: white;"
           />
@@ -66,7 +66,7 @@
           <h1 class="price-discount" :style="{ color: '#E18438' }">
             {{ builds.discountedPrice || builds.price | currencyFormat(builds.flatType) }}
           </h1>
-          <h4 class="price" v-if="builds.discountedPrice">{{ builds.price | currencyFormat }}</h4>
+          <h4 class="price" v-if="builds.discountedPrice">{{ builds.price | currencyFormat(builds.flatType) }}</h4>
 
           <div class="weekly-content-description">
             <a target="_blank" class="link-build" :href="builds.queue.real_estate.website">
@@ -297,7 +297,7 @@ export default {
     const id = app.context.route.params.id
 
     const buildData = await app.$axios.$get(
-      `http://offersapi.bi.group/api/solo/${id}`
+      `https://offersapi.bi.group/api/solo/${id}`
     )
     return {
       builds: buildData,
