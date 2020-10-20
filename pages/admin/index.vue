@@ -36,28 +36,9 @@
         <label for="discountDate">Действует до<input v-model="discountDate" id="discountDate" type="date"></label>
         <button>send form</button>
       </form>
-      <div class="discounts-delete-box">
-        <h3>имя жк</h3>
-        <h3>для...</h3>
-        <h3>скидка</h3>
-      </div>
-      <div v-for="item in discounts" class="discounts-delete-box">
-        <p>{{buildsName.find(build => build.guid === item.guid) ? buildsName.find(build => build.guid === item.guid).name : ''}}</p>
-        <div>
-          <p v-for="offer in item.types">{{offer}}</p>
-        </div>
-        <p>{{item.value}}%</p>
-        <button @click="sendDeleteDiscount(item.id)" class="delete-button">удалить</button>
-      </div>
     </div>
     <div class="grid-col_1-6">
-
-    </div>
-    <div class="grid-col_6-11">
-
-
       <div class="views-table-box">
-
         <div class="views-table">
           <p>name</p>
           <p>flat</p>
@@ -98,14 +79,40 @@
       }" style="background-color: #8fc030">добавить отметку на всех</button>
 
     </div>
+    <div class="grid-col_6-11">
+      <div class="discounts-delete-box">
+        <h3>имя жк</h3>
+        <h3>для...</h3>
+        <h3>скидка</h3>
+      </div>
+      <div v-for="item in discounts" class="discounts-delete-box">
+        <p>{{buildsName.find(build => build.guid === item.guid) ? buildsName.find(build => build.guid === item.guid).name : ''}}</p>
+        <div>
+          <p v-for="offer in item.types">{{offer}}</p>
+        </div>
+        <p>{{item.value}}%</p>
+        <div>
+          <button @click="sendDeleteDiscount(item.id)" class="delete-button">удалить</button>
+          <button @click="updateDiscount(item)" class="">редактировать</button>
+        </div>
+      </div>
+    </div>
+
+    <update-discount v-if="updateModal" :updateData="updateData" :buildsName="buildsName"  @updateDiscount="updateDiscountSubmit"/>
   </div>
 </template>
 
 <script>
+import UpdateDiscount from '~/components/admin/updateDiscount'
 export default {
+  components: { UpdateDiscount },
   scrollToTop: true,
   middleware: 'auth',
-name: "index",
+  name: "index",
+  data: () => ({
+    updateData: {},
+    updateModal: false
+  }),
 
   async asyncData({ app }) {
     const encodedUserPswd = app.$cookies.get('token')
@@ -229,6 +236,31 @@ name: "index",
       if (!files.length)
         return;
       this.file = [...files]
+    },
+    updateDiscount(item){
+      this.updateModal = true
+      this.updateData = item
+    },
+    updateDiscountSubmit(){
+      const noId = ({ id, ...rest }) => rest
+      const DeleteId = this.updateData.id
+      this.updateData.value = parseInt(this.updateData.value)
+      const form = noId(this.updateData)
+      const encodedUserPswd = this.$cookies.get('token')
+      this.$axios.$post('https://offersapi.bi.group/admin/discount', form, {
+        headers: {
+          Authorization: `Basic ${encodedUserPswd}`
+        }
+      }).then(async res => {
+        console.log(res)
+        const discounts = await this.$axios.$get('https://offersapi.bi.group/api/discount').then(res => res).catch(() => [])
+        this.sendDeleteDiscount(DeleteId)
+        this.discounts = discounts
+      }).catch(err => {
+        console.log(err)
+      })
+      this.updateModal = false
+
     }
   }
 }
