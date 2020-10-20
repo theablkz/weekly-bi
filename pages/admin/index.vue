@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div style="max-width: 140rem" class="grid">
 
     <div class="grid-col_1-6">
       <h2>Недельная акция</h2>
@@ -84,6 +84,7 @@
         <h3>имя жк</h3>
         <h3>для...</h3>
         <h3>скидка</h3>
+        <h3>срок до</h3>
       </div>
       <div v-for="item in discounts" class="discounts-delete-box">
         <p>{{buildsName.find(build => build.guid === item.guid) ? buildsName.find(build => build.guid === item.guid).name : ''}}</p>
@@ -91,6 +92,7 @@
           <p v-for="offer in item.types">{{offer}}</p>
         </div>
         <p>{{item.value}}%</p>
+        <p>{{item.date}}</p>
         <div>
           <button @click="sendDeleteDiscount(item.id)" class="delete-button">удалить</button>
           <button @click="updateDiscount(item)" class="">редактировать</button>
@@ -98,7 +100,7 @@
       </div>
     </div>
 
-    <update-discount v-if="updateModal" :updateData="updateData" :buildsName="buildsName"  @updateDiscount="updateDiscountSubmit"/>
+    <update-discount v-if="updateModal" :updateData="updateData" :buildsName="buildsName" @close="updateModal = false"  @updateDiscount="updateDiscountSubmit"/>
   </div>
 </template>
 
@@ -269,7 +271,7 @@ export default {
 <style lang="scss" scoped>
 .discounts-delete-box{
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   margin-bottom: .8rem;
 }

@@ -18,7 +18,11 @@
         </label>
         <label for="discountValue">Значение скидки<input v-model="updateData.value" id="discountValue" type="text"></label>
         <label for="discountDate">Действует до<input v-model="updateData.date" id="discountDate" type="date"></label>
-        <button>редактировать</button>
+        <div class="indent_bottom-h3">
+
+        </div>
+        <button class="indent_bottom-h2">редактировать</button>
+        <button @click="$emit('close')" style="background-color: #e63b12;">отмена</button>
       </form>
     </div>
   </div>
