@@ -80,6 +80,7 @@
 
     </div>
     <div class="grid-col_6-11">
+      <button @click="updateModalDate = true">отредактировать все даты</button>
       <div class="discounts-delete-box">
         <h3>имя жк</h3>
         <h3>для...</h3>
@@ -101,19 +102,22 @@
     </div>
 
     <update-discount v-if="updateModal" :updateData="updateData" :buildsName="buildsName" @close="updateModal = false"  @updateDiscount="updateDiscountSubmit"/>
+    <update-discount-date v-if="updateModalDate" @close="updateModalDate = false" @updateDiscountDate="updateDiscountDate" />
   </div>
 </template>
 
 <script>
 import UpdateDiscount from '~/components/admin/updateDiscount'
+import UpdateDiscountDate from '~/components/admin/updateDiscountDate'
 export default {
-  components: { UpdateDiscount },
+  components: { UpdateDiscountDate, UpdateDiscount },
   scrollToTop: true,
   middleware: 'auth',
   name: "index",
   data: () => ({
     updateData: {},
-    updateModal: false
+    updateModal: false,
+    updateModalDate: false
   }),
 
   async asyncData({ app }) {
@@ -242,6 +246,34 @@ export default {
     updateDiscount(item){
       this.updateModal = true
       this.updateData = item
+    },
+    updateDiscountDate(date){
+      const noId = ({ id, ...rest }) => rest
+      console.log('update date all', date)
+      console.log('aaa', this.discounts)
+      this.updateModalDate = false
+      const encodedUserPswd = this.$cookies.get('token')
+      this.discounts.forEach(async item => {
+        item.date = date
+        await this.$axios.$delete(`https://offersapi.bi.group/admin/discount/${item.id}`, {
+          headers: {
+            Authorization: `Basic ${encodedUserPswd}`
+          }
+        }).then(async () => {
+          await this.$axios.$post('https://offersapi.bi.group/admin/discount', noId(item), {
+            headers: {
+              Authorization: `Basic ${encodedUserPswd}`
+            }
+          }).then(() => {
+            console.log('iter')
+          }).catch(err => {
+            console.log(err)
+          })
+        }).catch(err => {
+          console.log(err)
+        })
+      })
+      console.log('finish')
     },
     updateDiscountSubmit(){
       const noId = ({ id, ...rest }) => rest
