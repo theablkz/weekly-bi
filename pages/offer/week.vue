@@ -227,7 +227,7 @@ export default {
     // const discounts = await app.$axios.$get('http://185.125.46.99:8080/api/discount').then(res => res).catch(() => [])
 
     const buildData = await app.$axios
-      .$get(`http://bilandings.ru:8080/api/offer`)
+      .$get(`https://offersapi.bi.group/api/offer`)
       .then((res) => res[0])
     return {
       builds: buildData,
