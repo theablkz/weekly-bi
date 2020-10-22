@@ -48,7 +48,7 @@
             @error="( e ) => e.target.src = builds.queue.real_estate.photo"
             draggable="false"
             class="slider-image-id"
-            :src="`https://offersapi.bi.group/img/${builds.schemaImage}`"
+            :src="imageBox(builds)"
             alt=""
             style="background-color: white;"
           />
@@ -320,6 +320,17 @@ export default {
     },
     whatsappLinkText(){
       return `Здравствуйте! Меня интересует специальное предложение на ${this.builds.queue.name} в ЖК ${ this.builds.queue.real_estate.name }`
+    }
+  },
+  methods: {
+    imageBox(item){
+      if(item.id === '8e6dfa1d-ba85-11e9-a831-00155d10652c'){
+        return require('~/assets/a56f887ca701fc2fb3dca20a3ebf1af4.png')
+      }
+      if(item.id === '7f91193d-f15e-11e8-80d7-00155da7893d'){
+        return require('~/assets/3b5ccd8206639b454b10836aeb270043.png')
+      }
+      return `https://offersapi.bi.group/img/${item.schemaImage}`
     }
   },
   filters: {

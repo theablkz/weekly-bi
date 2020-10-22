@@ -21,7 +21,7 @@
               <img
                 @error="( e ) => e.target.src = 'https://lamcdn.net/lookatme.ru/post_image-image/sIaRmaFSMfrw8QJIBAa8mA-small.png'"
                 class="apartment-image"
-                :src="`${ name === 'apartments' ? `https://offersapi.bi.group/img/${item.schemaImage}` : item.queue.real_estate.photo }`"
+                :src="boxImage(item)"
                 :style="{objectFit: name === 'apartments' ? 'contain' : 'cover'}"
                 alt=""
               />
@@ -97,7 +97,6 @@ export default {
       }
     },
     discountDate(date){
-      console.log(date)
       return new Intl.DateTimeFormat('ru', {
         day: 'numeric',
         month: 'long'
@@ -113,6 +112,15 @@ export default {
     },
   },
   methods: {
+    boxImage(item){
+      if(item.id === '8e6dfa1d-ba85-11e9-a831-00155d10652c'){
+        return require('~/assets/a56f887ca701fc2fb3dca20a3ebf1af4.png')
+      }
+      if(item.id === '7f91193d-f15e-11e8-80d7-00155da7893d'){
+        return require('~/assets/3b5ccd8206639b454b10836aeb270043.png')
+      }
+      return `${ this.name === 'apartments' ? `https://offersapi.bi.group/img/${item.schemaImage}` : item.queue.real_estate.photo }`
+    },
     async getDefaultImg(link){
       return await new Promise((resolve, reject) => {
         let img = new Image()
