@@ -276,9 +276,7 @@ import Viewer from 'v-viewer'
 import Vue from 'vue'
 import SendModal from '~/components/send-modal'
 Vue.use(Viewer)
-const formatterCurrency = new Intl.NumberFormat('ru', {
-  maximumSignificantDigits: 3,
-})
+const formatterCurrency = new Intl.NumberFormat('ru', )
 export default {
   scrollToTop: true,
   name: 'offer-id',
