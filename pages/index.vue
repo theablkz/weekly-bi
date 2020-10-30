@@ -1,7 +1,9 @@
 <template>
-  <div class="container">
+  <div class="container" :class="{
+    'background-none': !builds.offerOfTheWeek.name || !builds.offerOfTheWeek.description
+  }">
     <loading v-if="loading" />
-    <weekly :builds="builds.offerOfTheWeek" class="block-indent" />
+    <weekly v-if="builds.offerOfTheWeek.name || builds.offerOfTheWeek.description" :builds="builds.offerOfTheWeek" class="block-indent" />
     <filter-builds :builds="builds" class="block-indent" />
     <slick-car class="block-indent" :otherBuilds="sliderOtherBuilds" />
   </div>
@@ -170,6 +172,10 @@ export default {
   }
   @media (max-width: 400px) {
     background-size: 30rem, 36rem, auto;
+  }
+  &.background-none{
+    background-image: none;
+    margin-top: 3.2rem;
   }
 }
 .block-indent {
