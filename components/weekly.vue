@@ -27,6 +27,7 @@
 
         </VueSlickCarousel>
       </client-only>
+      <p style="font-size: 1.6rem; margin-right: 0; margin-top: 1.6rem; text-align: center;">Скидка распространяется не на все квартиры жилого комплекса</p>
     </div>
     <div class="grid-col_8-11">
       <div class="weekly-content">
