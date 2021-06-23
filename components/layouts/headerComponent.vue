@@ -2,7 +2,10 @@
   <div class="header-component-container">
     <div class="header-component">
     <div class="header-component__main">
-      <nuxt-link class="logo-link" to="/"><img class="logo" src="~assets/image/icons/logo.svg" alt="bi group" /></nuxt-link>
+      <div class='logo-container'>
+        <nuxt-link class="logo-link" to="/"><img class="logo" src="~assets/image/icons/logo.svg" alt="bi group" /></nuxt-link>
+        <nuxt-link class="logo-link" to="/"><img class="logo" src="~assets/image/icons/nova-logo.png" alt="bi group" /></nuxt-link>
+      </div>
       <div class="contacts">
         <a href="tel:360">
           <div class="call-phone">
@@ -48,6 +51,11 @@
 .header-component-container{
 background: #FFFFFF;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+}
+.logo-container{
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 2.2rem;
 }
 .header-component {
   padding: 0.5rem 0;

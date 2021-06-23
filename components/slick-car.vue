@@ -1,27 +1,27 @@
 <template>
   <div>
-    <div class="grid">
-      <div class="grid-col_1-11">
-        <h2 class="title">Другие предложения компании Bi group</h2>
-      </div>
-    </div>
-    <div class="bottom-slider">
-      <client-only>
-        <VueSlickCarousel v-bind="settings">
-          <a v-for="item in otherBuilds" :href="item.link" target="_blank" :key="item.id">
-            <div class="apartments-apartment-carusel" >
-              <div class="apartments-box">
-                <div class="apartment-image-box">
-                  <img class="apartment-image" :src="item.schemaImage" alt="" />
-                </div>
-                <h3 class="apartments-title">{{ item.buildName }}</h3>
+<!--    <div class="grid">-->
+<!--      <div class="grid-col_1-11">-->
+<!--        <h2 class="title">Другие предложения компании Bi group</h2>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="bottom-slider">-->
+<!--      <client-only>-->
+<!--        <VueSlickCarousel v-bind="settings">-->
+<!--          <a v-for="item in otherBuilds" :href="item.link" target="_blank" :key="item.id">-->
+<!--            <div class="apartments-apartment-carusel" >-->
+<!--              <div class="apartments-box">-->
+<!--                <div class="apartment-image-box">-->
+<!--                  <img class="apartment-image" :src="item.schemaImage" alt="" />-->
+<!--                </div>-->
+<!--                <h3 class="apartments-title">{{ item.buildName }}</h3>-->
 
-              </div>
-            </div>
-          </a>
-        </VueSlickCarousel>
-      </client-only>
-    </div>
+<!--              </div>-->
+<!--            </div>-->
+<!--          </a>-->
+<!--        </VueSlickCarousel>-->
+<!--      </client-only>-->
+<!--    </div>-->
     <div class="grid">
       <div class="grid-col_1-11">
         <whatsapp />

@@ -16,7 +16,7 @@
       </div>
       <div class="apartments">
         <div class="apartments-apartment" v-for="item in limitedView">
-          <nuxt-link class="offer-link" :to="`/offer/${item.id}`">
+          <nuxt-link class="offer-link" :to="`/offer/${item.guid}`">
             <div class="apartment-image-box">
               <img
                 @error="( e ) => e.target.src = 'https://lamcdn.net/lookatme.ru/post_image-image/sIaRmaFSMfrw8QJIBAa8mA-small.png'"
@@ -30,15 +30,15 @@
                 <p style="color: #4F4F4F;">{{leftCountsText(item.flatType)}}</p>
               </div>
             </div>
-            <h3 class="apartments-title">{{ item.queue.name }}</h3>
+            <h3 class="apartments-title">{{ item.name }}{{item.minSquare ? `, от ${item.minSquare}м²` : ''}}</h3>
           </nuxt-link>
-          <p class="apartments-address">{{ item.queue.address }}</p>
+          <p class="apartments-address">{{ item.address }}</p>
           <div class="price-description">
             <div>
               <h3 :style="{ color: '#E18438' }">
-                {{ item.discountedPrice || item.price | currencyFormat }}
+                {{ item.endPrice || item.startPrice | currencyFormat }}
               </h3>
-              <small> {{item.discountedPrice ? 'цена со скидкой' : 'за м²'}}</small>
+              <small> {{item.discountedPrice ? 'за м² со скидкой' : 'за м²'}}</small>
             </div>
             <div v-if="item.discountedPrice">
               <h3 :style="{ color: '#999999', textDecoration: 'line-through' }">
@@ -113,13 +113,14 @@ export default {
   },
   methods: {
     boxImage(item){
-      if(item.id === '8e6dfa1d-ba85-11e9-a831-00155d10652c'){
-        return require('~/assets/a56f887ca701fc2fb3dca20a3ebf1af4.png')
-      }
-      if(item.id === '7f91193d-f15e-11e8-80d7-00155da7893d'){
-        return require('~/assets/3b5ccd8206639b454b10836aeb270043.png')
-      }
-      return `${ this.name === 'apartments' ? `https://offersapi.bi.group/img/${item.schemaImage}` : item.queue.real_estate.photo }`
+      return item.photo
+      // if(item.id === '8e6dfa1d-ba85-11e9-a831-00155d10652c'){
+      //   return require('~/assets/a56f887ca701fc2fb3dca20a3ebf1af4.png')
+      // }
+      // if(item.id === '7f91193d-f15e-11e8-80d7-00155da7893d'){
+      //   return require('~/assets/3b5ccd8206639b454b10836aeb270043.png')
+      // }
+      // return `${ this.name === 'apartments' ? `https://offersapi.bi.group/img/${item.schemaImage}` : item.photo }`
     },
     async getDefaultImg(link){
       return await new Promise((resolve, reject) => {
@@ -151,7 +152,8 @@ export default {
         parking: `Паркингов  осталось`,
         storage: `Кладовок осталось`,
       }
-      return titleText[type]
+      return 'Помещений осталось'
+      // return titleText[type]
     }
   },
 }
@@ -209,7 +211,7 @@ export default {
       border-radius: 8px;
       .apartment-image {
         width: 100%;
-        height: 100%;
+        //height: 100%;
         object-fit: contain;
         border-radius: 8px;
       }

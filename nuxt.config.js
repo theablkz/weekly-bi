@@ -1,7 +1,8 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   server: {
-    host: '0.0.0.0'
+    host: '0.0.0.0',
+   port: 3010
   },
   head: {
     title: 'Приобретайте недвижимость выгодно!',

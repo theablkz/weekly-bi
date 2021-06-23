@@ -16,48 +16,83 @@
             <option v-for="item in buildings" :value="item">{{ item }}</option>
           </select>
         </label>
-        <div>
-          <p class="label-title">количество комнат</p>
-          <div class="room-count-box">
-            <button
-              @click="rooms === 1 ? (rooms = 0) : (rooms = 1)"
-              :class="{ 'room-count-box__button--active': 1 === rooms }"
-              class="room-count-box__button"
-            >
-              1
-            </button>
-            <button
-              @click="rooms === 2 ? (rooms = 0) : (rooms = 2)"
-              :class="{ 'room-count-box__button--active': 2 === rooms }"
-              class="room-count-box__button"
-            >
-              2
-            </button>
-            <button
-              @click="rooms === 3 ? (rooms = 0) : (rooms = 3)"
-              :class="{ 'room-count-box__button--active': 3 === rooms }"
-              class="room-count-box__button"
-            >
-              3
-            </button>
-            <button
-              @click="rooms = null"
-              :class="{ 'room-count-box__button--active': null === rooms }"
-              class="room-count-box__button"
-            >
-              4+
-            </button>
-          </div>
-        </div>
         <label class="price-label">
           <p class="label-title">Стоимость со скидкой</p>
           <input v-model="price" class="price-input" type="tel" />
           <p class="at">до</p>
           <p class="valuta">₸</p>
         </label>
-        <h3 class="project-counts">
-          Кол-во объектов: {{ projectsCount.length }}
-        </h3>
+        <label>
+          <p class="label-title">Район</p>
+          <select v-model="street" name="">
+            <option :value="null">Все районы</option>
+            <option v-for="item in streets" :value="item">{{ item }}</option>
+          </select>
+        </label>
+        <label>
+          <p class="label-title">Класс жк</p>
+          <select v-model="classBuild" name="">
+            <option :value="null">Все классы</option>
+            <option v-for="item in classBuilds" :value="item">{{ item }}</option>
+          </select>
+        </label>
+
+        <div class='square-inputs'>
+          <label class="price-label">
+            <p class="label-title">Площадь</p>
+            <input v-model="price" class="price-input" type="tel" />
+            <p class="at">от</p>
+            <p class="valuta">м²</p>
+          </label>
+          <label class="price-label">
+            <p class="label-title"></p>
+            <input v-model="price" class="price-input" type="tel" />
+            <p class="at">до</p>
+            <p class="valuta">м²</p>
+          </label>
+        </div>
+<!--        <div>-->
+<!--          <p class="label-title">количество комнат</p>-->
+<!--          <div class="room-count-box">-->
+<!--            <button-->
+<!--              @click="rooms === 1 ? (rooms = 0) : (rooms = 1)"-->
+<!--              :class="{ 'room-count-box__button&#45;&#45;active': 1 === rooms }"-->
+<!--              class="room-count-box__button"-->
+<!--            >-->
+<!--              1-->
+<!--            </button>-->
+<!--            <button-->
+<!--              @click="rooms === 2 ? (rooms = 0) : (rooms = 2)"-->
+<!--              :class="{ 'room-count-box__button&#45;&#45;active': 2 === rooms }"-->
+<!--              class="room-count-box__button"-->
+<!--            >-->
+<!--              2-->
+<!--            </button>-->
+<!--            <button-->
+<!--              @click="rooms === 3 ? (rooms = 0) : (rooms = 3)"-->
+<!--              :class="{ 'room-count-box__button&#45;&#45;active': 3 === rooms }"-->
+<!--              class="room-count-box__button"-->
+<!--            >-->
+<!--              3-->
+<!--            </button>-->
+<!--            <button-->
+<!--              @click="rooms = null"-->
+<!--              :class="{ 'room-count-box__button&#45;&#45;active': null === rooms }"-->
+<!--              class="room-count-box__button"-->
+<!--            >-->
+<!--              4+-->
+<!--            </button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <label class="price-label">-->
+<!--          <p class="label-title">Стоимость со скидкой</p>-->
+<!--          <input v-model="price" class="price-input" type="tel" />-->
+<!--          <p class="at">до</p>-->
+<!--          <p class="valuta">₸</p>-->
+<!--        </label>-->
+<!--        <h3 class="project-counts">-->
+<!--          Кол-во объектов: {{ projectsCount.length }}-->
+<!--        </h3>-->
       </div>
     </div>
     <div class="desktop_none">
@@ -174,8 +209,10 @@ export default {
       city: null,
       builds: null,
       rooms: 0,
+      street: null,
       price: null,
       projectsCount: [],
+      classBuild: null
     }
   },
   watch: {
@@ -212,7 +249,7 @@ export default {
     cities() {
       const cities = [
         ...new Set(
-          this.apartments.offers.map((item) => item.queue.real_estate.city)
+          this.apartments.offers.map((item) => item.city)
         ),
       ]
       return cities
@@ -221,18 +258,32 @@ export default {
       return [
         ...new Set(
           this.apartments.offers
-            .filter((item) => this.city ? item.queue.real_estate.city === this.city : true)
-            .map((item) => item.queue.real_estate.name)
+            .filter((item) => this.city ? item.city === this.city : true)
+            .map((item) => item.name)
         ),
       ]
     },
+    streets() {
+      return [
+        ...new Set(
+          this.apartments.offers.map((item) => item.rayon).filter(item => !!item)
+        ),
+      ]
+    },
+    classBuilds() {
+      return [
+        ...new Set(
+          this.apartments.offers.map((item) => item.class).filter(item => !!item)
+        ),
+      ]
+    }
   },
   methods: {
     filtering() {
       const fill = this.apartments.offers.filter(
         (item) =>
-          ( this.city ? item.queue.real_estate.city === this.city : true ) &&
-          (this.builds ? this.builds === item.queue.real_estate.name : true)
+          ( this.city ? item.city === this.city : true ) &&
+          (this.builds ? this.builds === item.name : true)
       )
       const room = fill.filter((item) => {
         if (this.rooms === 0) {
@@ -244,11 +295,13 @@ export default {
         }
       })
       const price = room.filter((item) => {
-        if (this.price) {
-          return item.price <= +this.price
-        } else {
+        if (!this.price) {
           return true
         }
+        if (item.startPrice) {
+          return false
+        }
+        return item.endPrice ? item.endPrice <= +this.price : item.startPrice <= +this.price
       })
       this.projectsCount = price
       this.$emit('filtered', price)
@@ -257,7 +310,7 @@ export default {
 
   created() {
     const createdFilter = this.apartments.offers.filter(
-      (item) => this.city ? item.queue.real_estate.city === this.city : true
+      (item) => this.city ? item.city === this.city : true
     )
     this.projectsCount = createdFilter
     this.$emit('filtered', createdFilter)
@@ -266,6 +319,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.square-inputs{
+  display: flex;
+  align-items: flex-end;
+  &:first-child{
+    margin-right: 1.6rem;
+  }
+}
 .label-title {
   font-weight: 500;
   font-size: 13px;
@@ -276,7 +337,7 @@ export default {
   align-items: flex-end;
   flex-wrap: wrap;
   justify-content: space-between;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 1.6rem;
   @media (max-width: 768px) {
     display: grid;

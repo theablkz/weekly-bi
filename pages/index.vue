@@ -1,9 +1,10 @@
 <template>
   <div class="container" :class="{
-    'background-none': !builds.offerOfTheWeek.name || !builds.offerOfTheWeek.description
+    // 'background-none': !builds.offerOfTheWeek.name || !builds.offerOfTheWeek.description
   }">
     <loading v-if="loading" />
-    <weekly v-if="builds.offerOfTheWeek.name || builds.offerOfTheWeek.description" :builds="builds.offerOfTheWeek" class="block-indent" />
+
+    <weekly class="block-indent" />
     <filter-builds :builds="builds" class="block-indent" />
     <slick-car class="block-indent" :otherBuilds="sliderOtherBuilds" />
   </div>
@@ -26,77 +27,77 @@ export default {
   }),
   async asyncData({ app }) {
       const {apartments, offices, weekly, storages, parkings} = await axios.all([
-        app.$axios.$get('https://offersapi.bi.group/api/flats'),
-        app.$axios.$get('https://offersapi.bi.group/api/offices'),
-        app.$axios.$get('https://offersapi.bi.group/api/offer'),
-        app.$axios.$get('https://offersapi.bi.group/api/storages'),
-        app.$axios.$get('https://offersapi.bi.group/api/parkings')
+        app.$axios.$get('https://admin-api.bi.group/blocks'),
+        // app.$axios.$get('https://offersapi.bi.group/api/offices'),
+        // app.$axios.$get('https://offersapi.bi.group/api/offer'),
+        // app.$axios.$get('https://offersapi.bi.group/api/storages'),
+        // app.$axios.$get('https://offersapi.bi.group/api/parkings')
         ]).then(axios.spread((...responses) => {
-
+        console.log(responses)
         return {
           apartments: responses[0],
-          offices: responses[1],
-          weekly: responses[2][0],
-          storages: responses[3],
-          parkings: responses[4]
+          // offices: responses[1],
+          // weekly: responses[2][0],
+          // storages: responses[3],
+          // parkings: responses[4]
         }
       }))
     const builds = {
-      offerOfTheWeek: weekly,
+      offerOfTheWeek: [],
       allOffers: {
 
       },
     }
     if(apartments){
       builds.allOffers.apartments =  {
-        name: 'Квартиры',
-        offers: apartments,
+        name: 'Продажа',
+        offers: apartments.blocks,
       }
     }
-    if(offices){
-      builds.allOffers.offices =  {
-        name: 'Офисы',
-        offers: offices,
-      }
-    }
-    if(parkings){
-      let buildsNames = [
-        ...new Set(
-          parkings
-            .map((item) => item.queue.real_estate.name)
-        ),
-      ]
-      let newParkings = []
-      buildsNames.forEach(item => {
-        let storagesByName = parkings.filter(name => name.queue.real_estate.name === item)
-        let minStorage = storagesByName.find(fMin => fMin.price === Math.min(...storagesByName.map(item => item.price)))
-        minStorage.count = storagesByName.reduce((a,b) => a+b.count, 0)
-        newParkings = [...newParkings, minStorage]
-      })
-      builds.allOffers.parkings =  {
-        name: 'Паркинги',
-        offers: newParkings
-      }
-    }
-    if(storages){
-      let buildsNames = [
-        ...new Set(
-          storages
-            .map((item) => item.queue.real_estate.name)
-        ),
-      ]
-      let newStorages = []
-      buildsNames.forEach(item => {
-        let storagesByName = storages.filter(name => name.queue.real_estate.name === item)
-        let minStorage = storagesByName.find(fMin => fMin.price === Math.min(...storagesByName.map(item => item.price)))
-        minStorage.count = storagesByName.reduce((a,b) => a+b.count, 0)
-        newStorages = [...newStorages, minStorage]
-      })
-      builds.allOffers.storages =  {
-        name: 'Кладовые',
-        offers: newStorages
-      }
-    }
+    // if(offices){
+    //   builds.allOffers.offices =  {
+    //     name: 'Офисы',
+    //     offers: offices,
+    //   }
+    // }
+    // if(parkings){
+    //   let buildsNames = [
+    //     ...new Set(
+    //       parkings
+    //         .map((item) => item.queue.real_estate.name)
+    //     ),
+    //   ]
+    //   let newParkings = []
+    //   buildsNames.forEach(item => {
+    //     let storagesByName = parkings.filter(name => name.queue.real_estate.name === item)
+    //     let minStorage = storagesByName.find(fMin => fMin.price === Math.min(...storagesByName.map(item => item.price)))
+    //     minStorage.count = storagesByName.reduce((a,b) => a+b.count, 0)
+    //     newParkings = [...newParkings, minStorage]
+    //   })
+    //   builds.allOffers.parkings =  {
+    //     name: 'Паркинги',
+    //     offers: newParkings
+    //   }
+    // }
+    // if(storages){
+    //   let buildsNames = [
+    //     ...new Set(
+    //       storages
+    //         .map((item) => item.queue.real_estate.name)
+    //     ),
+    //   ]
+    //   let newStorages = []
+    //   buildsNames.forEach(item => {
+    //     let storagesByName = storages.filter(name => name.queue.real_estate.name === item)
+    //     let minStorage = storagesByName.find(fMin => fMin.price === Math.min(...storagesByName.map(item => item.price)))
+    //     minStorage.count = storagesByName.reduce((a,b) => a+b.count, 0)
+    //     newStorages = [...newStorages, minStorage]
+    //   })
+    //   builds.allOffers.storages =  {
+    //     name: 'Кладовые',
+    //     offers: newStorages
+    //   }
+    // }
     const sliderOtherBuilds = [
       {
         id: '1',
@@ -155,9 +156,9 @@ export default {
 
 <style lang="scss">
 .container {
-  background-image: url('~assets/image/bg.svg'), url('~assets/image/bg2.svg'),
-    url('~assets/image/bg3.svg'), url('~assets/image/bg4.svg'),
-    url('~assets/image/bg5.svg'), url('~assets/image/bg6.svg');
+  background-image:
+
+   url('~assets/image/bg6.svg');
   background-size: auto, 100rem 62rem, auto;
   background-position: top right, top left, top center, 100% 79rem, 0% 135rem, 100% 100%;
   background-repeat: no-repeat;
